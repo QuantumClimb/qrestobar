@@ -1,0 +1,423 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════
+   QUANTUM CLIMB CENTRAL SEMANTIC THEME SYSTEM — CSS Custom Properties
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root,
+html[data-theme="dark"],
+html.dark {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg-primary:          #050506;
+  --bg-secondary:        #08080A;
+  --bg-card:             #0A0A0D;
+  --bg-elevated:         #101014;
+
+  /* Typography */
+  --text-primary:        #F5F5F7;
+  --text-secondary:      #B8BBC3;
+  --text-muted:          #777B86;
+
+  /* Borders */
+  --border-default:      #27272F;
+  --border-strong:       #3A3A44;
+
+  /* Purple Accents */
+  --accent-primary:      #8B5CF6;
+  --accent-hover:        #A855F7;
+  --accent-surface:      rgba(139, 92, 246, 0.12);
+
+  /* Primary Button */
+  --button-primary-bg:     #E2E4E8;
+  --button-primary-text:   #09090B;
+  --button-primary-border: #F5F5F7;
+  --button-hover-bg:       #7C3AED;
+  --button-hover-text:     #FFFFFF;
+  --button-hover-border:   #A855F7;
+
+  /* Inputs & Forms */
+  --input-bg:            #09090C;
+  --input-text:          #F5F5F7;
+  --input-border:        #303038;
+  --input-placeholder:   #717580;
+  --input-focus-border:  #8B5CF6;
+  --input-focus-ring:    rgba(139, 92, 246, 0.16);
+
+  /* Overlays & Headers */
+  --shadow-color:        rgba(0, 0, 0, 0.70);
+  --overlay-color:       rgba(5, 5, 6, 0.72);
+  --header-bg:           rgba(5, 5, 6, 0.85);
+  --header-bg-scrolled:  rgba(5, 5, 6, 0.97);
+  --mobile-menu-bg:      rgba(5, 5, 6, 0.97);
+  --logo-text-color:     #F5F5F7;
+
+  /* Calendar / Time input icon */
+  --calendar-icon-filter: invert(1);
+  --card-image-gradient:  rgba(10, 10, 13, 0.95);
+
+  /* Legacy QC token bridging */
+  --qc-base:             var(--bg-primary);
+  --qc-surface:          var(--bg-secondary);
+  --qc-card:             var(--bg-card);
+  --qc-elevated:         var(--bg-elevated);
+  --qc-primary:          var(--text-primary);
+  --qc-secondary:        var(--text-secondary);
+  --qc-body:             var(--text-secondary);
+  --qc-muted:            var(--text-muted);
+  --qc-purple:           var(--accent-primary);
+  --qc-violet:           var(--accent-hover);
+  --qc-electric:         #C026FF;
+  --qc-border:           var(--border-default);
+  --qc-border-strong:    var(--border-strong);
+  --qc-border-purple:    rgba(168, 85, 247, 0.50);
+  --qc-focus:            var(--accent-hover);
+}
+
+html[data-theme="light"],
+html.light {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg-primary:          #F4F4F6;
+  --bg-secondary:        #ECEDEF;
+  --bg-card:             #FFFFFF;
+  --bg-elevated:         #F8F8FA;
+
+  /* Typography */
+  --text-primary:        #111114;
+  --text-secondary:      #454852;
+  --text-muted:          #6D717C;
+
+  /* Borders */
+  --border-default:      #D7D9DF;
+  --border-strong:       #B8BBC4;
+
+  /* Purple Accents */
+  --accent-primary:      #6D28D9;
+  --accent-hover:        #7C3AED;
+  --accent-surface:      rgba(109, 40, 217, 0.09);
+
+  /* Primary Button */
+  --button-primary-bg:     #17171B;
+  --button-primary-text:   #FFFFFF;
+  --button-primary-border: #17171B;
+  --button-hover-bg:       #7C3AED;
+  --button-hover-text:     #FFFFFF;
+  --button-hover-border:   #A855F7;
+
+  /* Inputs & Forms */
+  --input-bg:            #FFFFFF;
+  --input-text:          #151519;
+  --input-border:        #CACDD4;
+  --input-placeholder:   #777B85;
+  --input-focus-border:  #8B5CF6;
+  --input-focus-ring:    rgba(139, 92, 246, 0.16);
+
+  /* Overlays & Headers */
+  --shadow-color:        rgba(0, 0, 0, 0.06);
+  --overlay-color:       rgba(244, 244, 246, 0.75);
+  --header-bg:           rgba(244, 244, 246, 0.88);
+  --header-bg-scrolled:  rgba(244, 244, 246, 0.97);
+  --mobile-menu-bg:      rgba(244, 244, 246, 0.98);
+  --logo-text-color:     #111114;
+
+  /* Calendar / Time input icon */
+  --calendar-icon-filter: none;
+  --card-image-gradient:  rgba(255, 255, 255, 0.95);
+
+  /* Legacy QC token bridging */
+  --qc-base:             var(--bg-primary);
+  --qc-surface:          var(--bg-secondary);
+  --qc-card:             var(--bg-card);
+  --qc-elevated:         var(--bg-elevated);
+  --qc-primary:          var(--text-primary);
+  --qc-secondary:        var(--text-secondary);
+  --qc-body:             var(--text-secondary);
+  --qc-muted:            var(--text-muted);
+  --qc-purple:           var(--accent-primary);
+  --qc-violet:           var(--accent-hover);
+  --qc-electric:         #7C3AED;
+  --qc-border:           var(--border-default);
+  --qc-border-strong:    var(--border-strong);
+  --qc-border-purple:    rgba(109, 40, 217, 0.35);
+  --qc-focus:            var(--accent-primary);
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: var(--accent-surface);
+    color: var(--text-primary);
+  }
+
+  /* ── Headings → Space Grotesk ─────────────────────────────────── */
+  h1, h2, h3, h4, h5, h6,
+  .font-display, .font-serif-heading {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  /* ── Classic Serif Typography (For Logo) ─────────────────────── */
+  .font-serif, .logo-serif {
+    font-family: 'Cinzel', Georgia, 'Times New Roman', serif;
+    letter-spacing: 0.22em;
+  }
+
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
+  h3 { font-size: clamp(1.125rem, 2.5vw, 1.75rem); }
+
+  /* ── Scrollbar ───────────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 3px;
+    border: 1px solid var(--accent-surface);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+
+  /* ── Form Controls Base ──────────────────────────────────────── */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+  select,
+  textarea {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--input-border);
+    border-radius: 3px;
+    font-family: 'Inter', system-ui, sans-serif;
+    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.2s, color 0.2s;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--input-placeholder);
+    opacity: 1;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 3px var(--input-focus-ring);
+  }
+
+  /* Date & Time Picker icon contrast */
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: var(--calendar-icon-filter);
+    opacity: 0.75;
+    transition: opacity 0.15s;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator:hover,
+  input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COMPONENT LAYER
+   ═══════════════════════════════════════════════════════════════════ */
+@layer components {
+
+  /* ── QC Card ──────────────────────────────────────────────────── */
+  .qc-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  }
+  .qc-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px var(--shadow-color);
+  }
+
+  /* Legacy alias — maps old luxury-card to QC card */
+  .luxury-card,
+  .luxury-card-glow {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s, background-color 0.2s;
+  }
+  .luxury-card:hover,
+  .luxury-card-glow:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 16px var(--shadow-color);
+  }
+
+  /* ── Divider ──────────────────────────────────────────────────── */
+  .gold-divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, var(--accent-surface), transparent);
+  }
+
+  /* ── QC Label (IBM Plex Mono metadata) ───────────────────────── */
+  .qc-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .qc-label-purple {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+  }
+
+  /* ── PRIMARY BUTTON ───────────────────────────────────────────── */
+  .btn-gold,
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 3px;
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    border: 1px solid var(--button-primary-border);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-gold:hover,
+  .btn-primary:hover {
+    background-color: var(--button-hover-bg);
+    border-color: var(--button-hover-border);
+    color: var(--button-hover-text);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.28);
+  }
+  .btn-gold:active,
+  .btn-primary:active  { transform: scale(0.98); }
+  .btn-gold:focus-visible,
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 3px;
+  }
+  .btn-gold:disabled,
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* ── SECONDARY BUTTON ────────────────────────────────────────── */
+  .btn-gold-outline,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 3px;
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-gold-outline:hover,
+  .btn-secondary:hover {
+    background-color: var(--accent-surface);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+  .btn-gold-outline:active,
+  .btn-secondary:active  { transform: scale(0.98); }
+  .btn-gold-outline:focus-visible,
+  .btn-secondary:focus-visible {
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 3px;
+  }
+  .btn-gold-outline:disabled,
+  .btn-secondary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* ── Ghost text button ───────────────────────────────────────── */
+  .btn-ghost-ivory {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.25rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.15s, background-color 0.15s;
+  }
+  .btn-ghost-ivory:hover {
+    color: var(--text-primary);
+    background-color: var(--accent-surface);
+  }
+
+  /* ── Section container ───────────────────────────────────────── */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════ */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+/* Reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

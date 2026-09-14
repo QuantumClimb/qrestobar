@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050506" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Q-RESTOBAR | Modern Malaysian Dining in Kuala Lumpur</title>
+    <meta name="title" content="Q-RESTOBAR | Modern Malaysian Dining in Kuala Lumpur" />
+    <meta name="description" content="Discover modern Malaysian dining, signature cocktails, special events and effortless table reservations at Q-RESTOBAR in Kuala Lumpur." />
+    <meta name="keywords" content="Q-RESTOBAR, Malaysian restaurant Kuala Lumpur, Bukit Bintang dining, modern Malaysian cuisine, cocktail bar KL, fine dining KL, satay, beef rendang, laksa, table reservations KL" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://q-restobar.com/" />
+    <meta property="og:title" content="Q-RESTOBAR | Modern Malaysian Dining in Kuala Lumpur" />
+    <meta property="og:description" content="Discover modern Malaysian dining, signature cocktails, special events and effortless table reservations at Q-RESTOBAR in Kuala Lumpur." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Q-RESTOBAR | Modern Malaysian Dining in Kuala Lumpur" />
+    <meta property="twitter:description" content="Discover modern Malaysian dining, signature cocktails, special events and effortless table reservations at Q-RESTOBAR in Kuala Lumpur." />
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" />
+
+    <!-- Quantum Climb Font Stack: Space Grotesk · Inter · IBM Plex Mono · Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Anti-Flash Theme Initializer (Pre-Hydration) -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme = saved;
+          if (!theme || (theme !== 'dark' && theme !== 'light')) {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          }
+          var metaTheme = document.querySelector('meta[name="theme-color"]');
+          if (metaTheme) {
+            metaTheme.setAttribute('content', theme === 'dark' ? '#050506' : '#F4F4F6');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-qc-base text-qc-primary font-body antialiased overflow-x-hidden min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
