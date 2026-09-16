@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
+import { SiteThemeProvider } from './context/SiteThemeContext';
 import { ToastProvider } from './context/ToastContext';
 import { DataProvider } from './context/DataContext';
 import { AuthProvider } from './context/AuthContext';
@@ -38,10 +39,11 @@ const PublicLayout: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <ToastProvider>
-        <DataProvider>
-          <AuthProvider>
-            <BrowserRouter>
+      <SiteThemeProvider>
+        <ToastProvider>
+          <DataProvider>
+            <AuthProvider>
+              <BrowserRouter>
               <ScrollToTop />
               <Routes>
                 {/* Public Customer Routes */}
@@ -70,7 +72,8 @@ export const App: React.FC = () => {
           </AuthProvider>
         </DataProvider>
       </ToastProvider>
-    </ThemeProvider>
+    </SiteThemeProvider>
+  </ThemeProvider>
   );
 };
 

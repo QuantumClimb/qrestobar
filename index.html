@@ -34,6 +34,7 @@
     <script>
       (function() {
         try {
+          // 1. Existing Light / Dark Mode Pre-Hydration (ThemeContext)
           var saved = localStorage.getItem('theme');
           var theme = saved;
           if (!theme || (theme !== 'dark' && theme !== 'light')) {
@@ -51,6 +52,12 @@
           if (metaTheme) {
             metaTheme.setAttribute('content', theme === 'dark' ? '#050506' : '#F4F4F6');
           }
+
+          // 2. Site-Theme Engine Pre-Hydration (SiteThemeContext)
+          var storedSiteTheme = localStorage.getItem('qresto_site_theme_id_v1');
+          // In this release, only 'original' is runtime-available; all others safely resolve to 'original'
+          var siteTheme = (storedSiteTheme === 'original') ? 'original' : 'original';
+          document.documentElement.setAttribute('data-site-theme', siteTheme);
         } catch (e) {}
       })();
     </script>
