@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Edit2, Eye, EyeOff } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { Promotion } from '../../types/promotion';
@@ -19,7 +19,8 @@ export const AdminPromotions: React.FC = () => {
       schedule: promo.schedule,
       badge: promo.badge,
       pricingHighlights: promo.pricingHighlights || '',
-      ctaText: promo.ctaText
+      ctaText: promo.ctaText,
+      imagePosition: promo.imagePosition || 'center'
     });
   };
 
@@ -60,6 +61,7 @@ export const AdminPromotions: React.FC = () => {
                   src={promo.imageUrl}
                   alt={promo.title}
                   className="w-full h-full object-cover"
+                  style={{ objectPosition: promo.imagePosition || 'center' }}
                 />
               </div>
 

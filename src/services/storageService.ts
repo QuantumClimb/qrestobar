@@ -8,11 +8,11 @@ import { Reservation } from '../types/reservation';
 import { RestaurantSettings } from '../types/settings';
 
 const STORAGE_KEYS = {
-  MENU: 'qresto_menu_items_v8',
-  PROMOTIONS: 'qresto_promotions_v8',
-  RESERVATIONS: 'qresto_reservations_v8',
-  SETTINGS: 'qresto_settings_v8',
-  IS_INITIALIZED: 'qresto_initialized_v8',
+  MENU: 'qresto_menu_items_v9',
+  PROMOTIONS: 'qresto_promotions_v9',
+  RESERVATIONS: 'qresto_reservations_v9',
+  SETTINGS: 'qresto_settings_v9',
+  IS_INITIALIZED: 'qresto_initialized_v9',
 };
 
 export const storageService = {
@@ -68,7 +68,15 @@ export const storageService = {
     try {
       this.init();
       const data = localStorage.getItem(STORAGE_KEYS.PROMOTIONS);
-      return data ? JSON.parse(data) : INITIAL_PROMOTIONS;
+      if (!data) return INITIAL_PROMOTIONS;
+      const parsed = JSON.parse(data) as Promotion[];
+      return parsed.map((item) => {
+        const initial = INITIAL_PROMOTIONS.find((p) => p.id === item.id);
+        return {
+          ...item,
+          imagePosition: item.imagePosition || initial?.imagePosition || 'center'
+        };
+      });
     } catch {
       return INITIAL_PROMOTIONS;
     }

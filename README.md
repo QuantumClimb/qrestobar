@@ -71,9 +71,17 @@
 
 ## 4. Admin CMS Instructions (`/admin`)
 
-The Admin CMS dashboard is intentionally decoupled from the public navigation for operational privacy.
+> [!WARNING]
+> **TEMPORARY DEMO AUTHENTICATION NOTICE:**  
+> The current passcode (`pass1234`) and client-side password gate (`/admin/login`) are designed strictly for client demonstration and showcase purposes.  
+> **VITE environment variables are included in the client-side JavaScript bundle and are NOT secure secrets.**  
+> This temporary demo gate must be removed prior to public production deployment and replaced with **Supabase Auth** (`supabase.auth.signInWithPassword`), role-based access control (RBAC), and PostgreSQL Row Level Security (RLS). Do NOT store real customer credentials or sensitive customer data behind this temporary demo gate.
 
-- **Access URL:** Navigate directly to `http://localhost:3000/admin` (or `/admin` on your deployed domain).
+- **Access URL:**
+  - Login Gate: `http://localhost:3000/admin/login` (or `/admin/login` on your deployed domain)
+  - Dashboard: `http://localhost:3000/admin/dashboard` (Protected route; unauthenticated visits automatically redirect to `/admin/login`)
+- **Temporary Demo Password:** `pass1234`
+- **Session Duration:** 2 hours per session, automatically cleared when the browser tab closes (`sessionStorage`).
 - **Default Mode:** Runs in **LocalStorage Demo Mode** by default (`VITE_DEMO_MODE=true`). Any dishes added, prices modified, campaigns scheduled, or reservations accepted persist immediately within your browser.
 - **Factory Reset:** If you wish to restore original demo dishes and sample bookings, click **"Reset Demo"** in the top navigation bar or **"Reset Everything"** in Settings.
 

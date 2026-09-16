@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu as MenuIcon, X, Calendar, Phone, Zap } from 'lucide-react';
+import { Menu as MenuIcon, X, Calendar, Phone, Zap, Lock } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -55,7 +55,7 @@ export const Header: React.FC = () => {
       )}
 
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${isScrolled ? 'py-3 border-b' : 'py-5'}`}
+        className={`sticky top-0 z-40 transition-all duration-300 ${isScrolled ? 'py-3 border-b' : 'py-4 lg:py-5'}`}
         style={{
           backgroundColor: isScrolled ? 'var(--header-bg-scrolled)' : 'var(--header-bg)',
           backdropFilter: 'blur(16px)',
@@ -68,7 +68,7 @@ export const Header: React.FC = () => {
             {/* Classic Serif Text Logo */}
             <Link
               to="/"
-              className="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded py-1 px-1.5"
+              className="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded py-1 px-1.5 shrink-0"
               aria-label="Q - RESTOBAR Homepage"
             >
               <span
@@ -79,20 +79,20 @@ export const Header: React.FC = () => {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-5 lg:gap-7" aria-label="Main Navigation">
+            {/* Desktop Primary Navigation (Home, Menu, Experiences, Offers & Events, About, Contact) */}
+            <nav className="hidden lg:flex items-center gap-3.5 xl:gap-6 2xl:gap-7" aria-label="Main Navigation">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
-                  className={({ isActive }) => `text-xs uppercase tracking-[0.14em] font-medium font-display transition-colors relative py-1 ${isActive ? 'text-qc-primary font-semibold' : 'text-qc-body hover:text-qc-primary'}`}
+                  className={({ isActive }) => `text-xs uppercase tracking-[0.14em] font-medium font-display transition-colors relative py-1 whitespace-nowrap ${isActive ? 'text-qc-primary font-semibold' : 'text-qc-body hover:text-qc-primary'}`}
                 >
                   {({ isActive }) => (
                     <span className="flex items-center gap-1.5">
                       <span>{link.name}</span>
                       {link.badge && (
                         <span
-                          className="text-[9px] uppercase tracking-wider font-bold px-1.5 rounded"
+                          className="text-[9px] uppercase font-bold tracking-wider px-1.5 rounded"
                           style={{
                             background: 'var(--accent-surface)',
                             color: 'var(--accent-primary)',
@@ -116,27 +116,71 @@ export const Header: React.FC = () => {
               ))}
             </nav>
 
-            {/* Desktop Right Actions (Phone + Theme Toggle + Reserve Button) */}
-            <div className="hidden md:flex items-center gap-3 lg:gap-4">
+            {/* Desktop Utility Actions (Separated from Primary Navigation) */}
+            <div
+              className="hidden lg:flex items-center gap-2.5 xl:gap-3.5 shrink-0"
+              style={{
+                marginLeft: '28px',
+                paddingLeft: '20px',
+                borderLeft: '1px solid var(--border-default)',
+              }}
+            >
+              {/* CMS Demo Access Button */}
+              <Link
+                to="/admin/login"
+                className="inline-flex items-center justify-center whitespace-nowrap uppercase font-display font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+                style={{
+                  minWidth: '92px',
+                  height: '42px',
+                  paddingLeft: '16px',
+                  paddingRight: '16px',
+                  fontSize: '11px',
+                  letterSpacing: '0.08em',
+                  backgroundColor: 'transparent',
+                  color: 'var(--text-primary)',
+                  border: '1px solid var(--border-strong)',
+                  borderRadius: '4px',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                  e.currentTarget.style.backgroundColor = 'var(--accent-surface)';
+                  e.currentTarget.style.color = '#FFFFFF';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--border-strong)';
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+                title="CMS Demo & Staff Access Gate"
+              >
+                <span>CMS DEMO</span>
+              </Link>
+
+              {/* Telephone */}
               <a
                 href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`}
-                className="p-2 text-xs flex items-center gap-1.5 transition-colors text-qc-body hover:text-qc-primary"
+                className="p-2 text-xs flex items-center gap-1.5 transition-colors text-qc-body hover:text-qc-primary whitespace-nowrap"
                 title={`Call ${settings.phone}`}
               >
-                <Phone className="w-3.5 h-3.5 text-qc-muted" />
-                <span className="hidden lg:inline">{settings.phone}</span>
+                <Phone className="w-3.5 h-3.5 text-qc-muted shrink-0" />
+                <span className="hidden 2xl:inline">{settings.phone}</span>
               </a>
 
+              {/* Theme Toggle */}
               <ThemeToggle />
 
-              <Link to="/reservations" className="btn-gold text-xs px-5 py-2.5 flex items-center gap-2">
+              {/* Reserve a Table CTA */}
+              <Link
+                to="/reservations"
+                className="btn-gold text-xs px-4 xl:px-5 flex items-center gap-2 whitespace-nowrap h-[42px]"
+              >
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Reserve a Table</span>
               </Link>
             </div>
 
             {/* Mobile Actions (Theme Toggle + Quick Reserve + Hamburger) */}
-            <div className="flex md:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-2">
               <ThemeToggle />
 
               <Link to="/reservations" className="btn-gold px-3.5 py-2 text-[11px] flex items-center gap-1.5">
@@ -175,12 +219,13 @@ export const Header: React.FC = () => {
               <p className="text-sm text-qc-body">Bukit Bintang, Kuala Lumpur</p>
             </div>
 
-            <nav className="flex flex-col gap-5" aria-label="Mobile Navigation">
+            {/* Primary Mobile Navigation */}
+            <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
-                  className={({ isActive }) => `text-lg tracking-wider uppercase font-display font-semibold transition-colors flex items-center justify-center gap-2 ${isActive ? 'text-qc-primary' : 'text-qc-secondary hover:text-qc-primary'}`}
+                  className={({ isActive }) => `text-base tracking-wider uppercase font-display font-semibold transition-colors flex items-center justify-center gap-2 ${isActive ? 'text-qc-primary' : 'text-qc-secondary hover:text-qc-primary'}`}
                 >
                   <span>{link.name}</span>
                   {link.badge && (
@@ -200,8 +245,8 @@ export const Header: React.FC = () => {
             </nav>
 
             {/* Mobile Drawer Theme Toggle & Action Buttons */}
-            <div className="pt-4 flex flex-col gap-3 max-w-xs mx-auto w-full">
-              <div className="flex items-center justify-center gap-2 pb-2">
+            <div className="pt-2 flex flex-col gap-3 max-w-xs mx-auto w-full">
+              <div className="flex items-center justify-center gap-2 pb-1">
                 <ThemeToggle showLabel={true} className="w-full" />
               </div>
 
@@ -214,9 +259,21 @@ export const Header: React.FC = () => {
                 <span>Call {settings.phone}</span>
               </a>
             </div>
+
+            {/* Separate Staff Access Section */}
+            <div className="pt-4 border-t border-border-default/60 max-w-xs mx-auto w-full space-y-2">
+              <p className="text-[10px] uppercase tracking-widest font-mono text-qc-muted">Staff Access</p>
+              <Link
+                to="/admin/login"
+                className="w-full py-2.5 px-4 rounded-[4px] border border-border-strong bg-transparent hover:border-purple-500 hover:bg-purple-600/10 text-qc-primary text-xs font-display font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+              >
+                <Lock className="w-3.5 h-3.5 text-purple-400" />
+                <span>CMS DEMO</span>
+              </Link>
+            </div>
           </div>
 
-          <div className="text-center pt-8 text-xs text-qc-muted" style={{ borderTop: '1px solid var(--border-default)' }}>
+          <div className="text-center pt-6 text-xs text-qc-muted space-y-1" style={{ borderTop: '1px solid var(--border-default)' }}>
             <p className="text-qc-secondary font-medium mb-1">{settings.openingHoursDisplay}</p>
             {(settings.addressLine1 || settings.city) && (
               <p>{[settings.addressLine1, settings.city].filter(Boolean).join(', ')}</p>

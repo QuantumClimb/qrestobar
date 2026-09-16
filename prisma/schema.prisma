@@ -1,0 +1,153 @@
+// Prisma Schema for Q-RESTOBAR
+// Database: PostgreSQL on Supabase
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum ReservationStatus {
+  new
+  contacted
+  confirmed
+  seated
+  completed
+  cancelled
+
+  @@map("reservation_status_enum")
+}
+
+enum SeatingPreference {
+  indoor
+  outdoor
+  chefs_table @map("chefs-table")
+
+  @@map("seating_preference_enum")
+}
+
+enum OccasionType {
+  casual
+  birthday
+  anniversary
+  business
+  date_night @map("date-night")
+  celebration
+  other
+
+  @@map("occasion_type_enum")
+}
+
+model MenuCategory {
+  id           String     @id @db.VarChar(50)
+  label        String     @db.VarChar(100)
+  description  String?    @db.Text
+  displayOrder Int        @default(0) @map("display_order")
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime   @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  items        MenuItem[]
+
+  @@map("menu_categories")
+}
+
+model MenuItem {
+  id                    String       @id @default(uuid()) @db.VarChar(100)
+  name                  String       @db.VarChar(150)
+  categoryId            String       @map("category_id") @db.VarChar(50)
+  category              MenuCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  price                 Decimal      @db.Decimal(10, 2)
+  description           String       @db.Text
+  imageUrl              String       @map("image_url") @db.Text
+  spicyLevel            Int          @default(0) @map("spicy_level") @db.SmallInt
+  isVegetarian          Boolean      @default(false) @map("is_vegetarian")
+  isChefsPick           Boolean      @default(false) @map("is_chefs_pick")
+  isAvailable           Boolean      @default(true) @map("is_available")
+  allergens             String[]     @default([])
+  pairingRecommendation String?      @map("pairing_recommendation") @db.Text
+  createdAt             DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt             DateTime     @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@index([categoryId], map: "idx_menu_items_category")
+  @@index([isAvailable], map: "idx_menu_items_available")
+  @@index([isChefsPick], map: "idx_menu_items_chefs_pick")
+  @@map("menu_items")
+}
+
+model Promotion {
+  id                String   @id @default(uuid()) @db.VarChar(100)
+  title             String   @db.VarChar(150)
+  slug              String   @unique @db.VarChar(100)
+  tagline           String   @db.VarChar(255)
+  description       String   @db.Text
+  schedule          String   @db.VarChar(150)
+  timeframe         String   @db.VarChar(50)
+  imageUrl          String   @map("image_url") @db.Text
+  imagePosition     String   @default("center") @map("image_position") @db.VarChar(50)
+  badge             String   @db.VarChar(50)
+  terms             String[] @default([])
+  pricingHighlights String?  @map("pricing_highlights") @db.VarChar(100)
+  ctaText           String   @default("Reserve Now") @map("cta_text") @db.VarChar(50)
+  isActive          Boolean  @default(true) @map("is_active")
+  priority          Int      @default(0)
+  createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt         DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@index([isActive], map: "idx_promotions_active")
+  @@map("promotions")
+}
+
+model RestaurantSettings {
+  id                     String   @id @default(uuid()) @db.VarChar(100)
+  name                   String   @default("Q-RESTOBAR") @db.VarChar(100)
+  secondaryName          String   @default("KUALA LUMPUR") @map("secondary_name") @db.VarChar(100)
+  tagline                String   @db.VarChar(255)
+  secondaryTagline       String?  @map("secondary_tagline") @db.VarChar(255)
+  locationArea           String   @default("") @map("location_area") @db.VarChar(150)
+  addressLine1           String   @default("") @map("address_line1") @db.VarChar(255)
+  addressLine2           String?  @map("address_line2") @db.VarChar(255)
+  city                   String   @default("") @db.VarChar(100)
+  postcode               String   @default("") @db.VarChar(20)
+  phone                  String   @db.VarChar(50)
+  whatsapp               String   @db.VarChar(50)
+  email                  String   @db.VarChar(150)
+  openingHoursDisplay    String   @map("opening_hours_display") @db.VarChar(255)
+  openingHoursWeekday    String   @map("opening_hours_weekday") @db.VarChar(255)
+  openingHoursWeekend    String   @map("opening_hours_weekend") @db.VarChar(255)
+  dressCode              String   @map("dress_code") @db.VarChar(255)
+  announcementBarText    String?  @map("announcement_bar_text") @db.Text
+  announcementBarActive  Boolean  @default(true) @map("announcement_bar_active")
+  googleMapsEmbedUrl     String?  @map("google_maps_embed_url") @db.Text
+  instagramUrl           String?  @map("instagram_url") @db.Text
+  facebookUrl            String?  @map("facebook_url") @db.Text
+  tiktokUrl              String?  @map("tiktok_url") @db.Text
+  updatedAt              DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("restaurant_settings")
+}
+
+model Reservation {
+  id                String            @id @default(uuid()) @db.VarChar(100)
+  referenceNumber   String            @unique @map("reference_number") @db.VarChar(20)
+  fullName          String            @map("full_name") @db.VarChar(150)
+  email             String            @db.VarChar(255)
+  phone             String            @db.VarChar(50)
+  date              DateTime          @db.Date
+  time              String            @db.VarChar(10)
+  guestCount        Int               @map("guest_count") @db.SmallInt
+  seatingPreference SeatingPreference @default(indoor) @map("seating_preference")
+  occasion          OccasionType      @default(casual)
+  specialRequests   String?           @map("special_requests") @db.Text
+  consent           Boolean           @default(true)
+  status            ReservationStatus @default(new)
+  createdAt         DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt         DateTime          @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@index([date], map: "idx_reservations_date")
+  @@index([status], map: "idx_reservations_status")
+  @@index([referenceNumber], map: "idx_reservations_reference")
+  @@map("reservations")
+}

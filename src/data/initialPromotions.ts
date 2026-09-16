@@ -10,6 +10,7 @@ export const INITIAL_PROMOTIONS: Promotion[] = [
     schedule: 'Every Saturday & Sunday, 11:30 AM to 3:30 PM',
     timeframe: 'Saturdays & Sundays',
     imageUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80',
+    imagePosition: 'center',
     badge: 'Weekend Special',
     terms: [
       'Advance reservation recommended',
@@ -30,6 +31,7 @@ export const INITIAL_PROMOTIONS: Promotion[] = [
     schedule: 'Every Thursday, 8:00 PM to 12:00 AM',
     timeframe: 'Thursday Evenings',
     imageUrl: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1000&q=80',
+    imagePosition: 'center',
     badge: 'Popular Night',
     terms: [
       'Up to 3 complimentary cocktails per lady with food order',
@@ -49,6 +51,7 @@ export const INITIAL_PROMOTIONS: Promotion[] = [
     schedule: 'Every Saturday, 9:30 PM till late',
     timeframe: 'Saturday Nights',
     imageUrl: '/images/DJLivemusic.png',
+    imagePosition: 'center top',
     badge: 'Nightlife',
     terms: [
       'Smart casual dress code strictly enforced after 9:00 PM',
@@ -68,6 +71,7 @@ export const INITIAL_PROMOTIONS: Promotion[] = [
     schedule: 'Available daily upon reservation',
     timeframe: 'Daily',
     imageUrl: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1000&q=80',
+    imagePosition: 'center',
     badge: 'Celebrations',
     terms: [
       'Advance notice of at least 48 hours required for custom menu printing',
@@ -87,6 +91,7 @@ export const INITIAL_PROMOTIONS: Promotion[] = [
     schedule: 'Available Monday to Friday for Lunch and Dinner',
     timeframe: 'Weekdays',
     imageUrl: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1000&q=80',
+    imagePosition: 'center',
     badge: 'Executive',
     terms: [
       'Dedicated event coordinator assigned to your booking',
@@ -106,6 +111,7 @@ export const INITIAL_PROMOTIONS: Promotion[] = [
     schedule: 'Available on selected weekdays and Sundays',
     timeframe: 'Custom Booking',
     imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80',
+    imagePosition: 'center',
     badge: 'Exclusive Buyout',
     terms: [
       'Minimum 2 weeks advance lead time',

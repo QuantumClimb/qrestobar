@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook, Lock } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { useToast } from '../../context/ToastContext';
 import { Modal } from './Modal';
@@ -120,6 +120,21 @@ export const Footer: React.FC = () => {
                   </Link>
                 </li>
               ))}
+
+              {/* Separated CMS Demo & Staff Login Access Link */}
+              <li className="pt-3 border-t border-border-default/40 mt-3">
+                <Link
+                  to="/admin/login"
+                  className="group inline-flex items-center gap-2 transition-colors text-qc-body hover:text-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded py-0.5"
+                  title="CMS Demo & Staff Access Gate"
+                >
+                  <Lock className="w-3.5 h-3.5 text-purple-400 group-hover:text-purple-300 transition-colors shrink-0" />
+                  <span className="font-medium text-xs">CMS Demo</span>
+                  <span className="text-[9px] uppercase font-mono tracking-wider px-1.5 py-0.5 rounded bg-purple-950/40 text-purple-300 border border-purple-600/30">
+                    Staff Login
+                  </span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -229,6 +244,12 @@ export const Footer: React.FC = () => {
             >
               Terms of Service
             </button>
+            <Link
+              to="/admin/login"
+              className="underline transition-colors hover:text-purple-500"
+            >
+              Staff Login
+            </Link>
           </div>
           <div className="flex items-center gap-2">
             <span>Concept Website by </span>

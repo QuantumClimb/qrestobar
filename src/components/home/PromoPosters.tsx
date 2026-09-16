@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight, Share2, Sparkles, CheckCircle2 } from 'lucide-react';
 import { useData } from '../../context/DataContext';
@@ -58,14 +58,15 @@ export const PromoPosters: React.FC = () => {
           {activePromos.map((promo) => (
             <div
               key={promo.id}
-              className="luxury-card-glow group overflow-hidden flex flex-col justify-between border border-border-base hover:border-purple-600/50 rounded-sm transition-all duration-300 shadow-xl"
+              className="luxury-card-glow group overflow-hidden flex flex-col justify-between border border-border-base hover:border-purple-600/50 rounded-sm transition-all duration-300 shadow-xl h-full"
             >
               {/* Poster Image */}
-              <div className="relative h-64 sm:h-72 overflow-hidden bg-qc-base">
+              <div className="offer-media-container">
                 <img
                   src={promo.imageUrl}
                   alt={promo.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-90"
+                  className="offer-media-image group-hover:scale-105 transition-transform duration-700 brightness-90"
+                  style={{ objectPosition: promo.imagePosition || 'center' }}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/30 to-transparent" />
@@ -128,13 +129,14 @@ export const PromoPosters: React.FC = () => {
           maxWidth="2xl"
         >
           <div className="space-y-5">
-            <div className="h-64 sm:h-72 rounded-sm overflow-hidden border border-border-base relative">
+            <div className="offer-media-container rounded-sm border border-border-base">
               <img
                 src={selectedPromo.imageUrl}
                 alt={selectedPromo.title}
-                className="w-full h-full object-cover"
+                className="offer-media-image"
+                style={{ objectPosition: selectedPromo.imagePosition || 'center' }}
               />
-              <div className="absolute bottom-3 left-3 bg-qc-surface/90 border border-purple-600/40 px-3 py-1 text-xs text-qc-secondary font-semibold uppercase tracking-wider rounded-sm">
+              <div className="absolute bottom-3 left-3 bg-qc-surface/90 border border-purple-600/40 px-3 py-1 text-xs text-qc-secondary font-semibold uppercase tracking-wider rounded-sm backdrop-blur-sm">
                 {selectedPromo.pricingHighlights || 'Exclusive Dining Experience'}
               </div>
             </div>

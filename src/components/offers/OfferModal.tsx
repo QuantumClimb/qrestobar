@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, CheckCircle2, Share2 } from 'lucide-react';
 import { Promotion } from '../../types/promotion';
@@ -26,11 +26,12 @@ export const OfferModal: React.FC<OfferModalProps> = ({
       maxWidth="2xl"
     >
       <div className="space-y-5">
-        <div className="relative h-64 sm:h-72 rounded-sm overflow-hidden border border-border-base bg-qc-base">
+        <div className="offer-media-container rounded-sm border border-border-base">
           <img
             src={promo.imageUrl}
             alt={promo.title}
-            className="w-full h-full object-cover"
+            className="offer-media-image"
+            style={{ objectPosition: promo.imagePosition || 'center' }}
           />
           <div className="absolute top-4 left-4">
             <span className="px-3 py-1 bg-qc-surface text-qc-secondary border border-purple-600/40 text-xs font-bold uppercase tracking-wider rounded-sm shadow-md">

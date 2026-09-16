@@ -1,33 +1,36 @@
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+
 /**
  * Supabase Client Configuration & Adapter Layer
  * 
- * Note: By default, this demo application runs in self-contained LocalStorage mode
- * when VITE_DEMO_MODE=true or when VITE_SUPABASE_URL is not set.
- * 
- * To connect to a live Supabase project:
- * 1. Create a Supabase project at https://supabase.com
- * 2. Run the SQL migrations from `supabase/schema.sql` in the SQL editor.
- * 3. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.
- * 4. Set VITE_DEMO_MODE=false.
- * 
- * SECURITY NOTICE:
- * Never expose the Supabase `service_role` secret key in the frontend client.
- * Use the public `anon` key only, backed by PostgreSQL Row Level Security (RLS).
+ * Automatically connects to your Supabase project when VITE_SUPABASE_URL and
+ * VITE_SUPABASE_ANON_KEY are present. Falls back cleanly to LocalStorage demo mode
+ * if credentials are not configured or if in demo mode.
  */
 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const envDemo = import.meta.env.VITE_DEMO_MODE;
+
 export const isDemoMode = (): boolean => {
-  const envDemo = import.meta.env.VITE_DEMO_MODE;
-  const hasUrl = Boolean(import.meta.env.VITE_SUPABASE_URL);
-  const hasKey = Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY);
-  
-  if (envDemo === 'false' && hasUrl && hasKey) {
+  if (envDemo === 'false' && Boolean(supabaseUrl) && Boolean(supabaseAnonKey)) {
     return false;
   }
   return true;
 };
 
 export const SUPABASE_CONFIG = {
-  url: import.meta.env.VITE_SUPABASE_URL || '',
-  anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || '',
+  url: supabaseUrl,
+  anonKey: supabaseAnonKey,
   isDemo: isDemoMode(),
 };
+
+// Create and export the Supabase Client instance
+export const supabase: SupabaseClient | null = (supabaseUrl && supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+      },
+    })
+  : null;

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, Calendar, Share2, ArrowRight } from 'lucide-react';
 import { Promotion } from '../../types/promotion';
@@ -15,13 +15,14 @@ export const OfferCard: React.FC<OfferCardProps> = ({
   onShareWhatsApp
 }) => {
   return (
-    <div className="luxury-card-glow group overflow-hidden flex flex-col justify-between border border-border-base hover:border-purple-600/50 rounded-sm transition-all duration-300 shadow-2xl">
+    <div className="luxury-card-glow group overflow-hidden flex flex-col justify-between border border-border-base hover:border-purple-600/50 rounded-sm transition-all duration-300 shadow-2xl h-full">
       {/* Poster Image Container */}
-      <div className="relative h-64 sm:h-72 overflow-hidden bg-qc-base">
+      <div className="offer-media-container">
         <img
           src={promo.imageUrl}
           alt={promo.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-90"
+          className="offer-media-image group-hover:scale-105 transition-transform duration-700 brightness-90"
+          style={{ objectPosition: promo.imagePosition || 'center' }}
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/30 to-transparent" />

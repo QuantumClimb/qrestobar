@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { ToastProvider } from './context/ToastContext';
 import { DataProvider } from './context/DataContext';
+import { AuthProvider } from './context/AuthContext';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
 import { ScrollToTop } from './components/common/ScrollToTop';
@@ -16,7 +17,9 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { ExperiencesPage } from './pages/ExperiencesPage';
 import { AdminPage } from './pages/AdminPage';
+import { AdminLoginPage } from './pages/AdminLoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ProtectedAdminRoute } from './components/admin/ProtectedAdminRoute';
 
 // Public Layout with Header, Footer, and Floating WhatsApp Concierge
 const PublicLayout: React.FC = () => {
@@ -37,25 +40,34 @@ export const App: React.FC = () => {
     <ThemeProvider>
       <ToastProvider>
         <DataProvider>
-          <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              {/* Public Customer Routes */}
-              <Route element={<PublicLayout />}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/menu" element={<MenuPage />} />
-                <Route path="/reservations" element={<ReservationsPage />} />
-                <Route path="/experiences" element={<ExperiencesPage />} />
-                <Route path="/offers" element={<OffersPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Route>
+          <AuthProvider>
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                {/* Public Customer Routes */}
+                <Route element={<PublicLayout />}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/menu" element={<MenuPage />} />
+                  <Route path="/reservations" element={<ReservationsPage />} />
+                  <Route path="/experiences" element={<ExperiencesPage />} />
+                  <Route path="/offers" element={<OffersPage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Route>
 
-              {/* Hidden Admin CMS Route */}
-              <Route path="/admin" element={<AdminPage />} />
-            </Routes>
-          </BrowserRouter>
+                {/* Admin Authentication Gate */}
+                <Route path="/admin/login" element={<AdminLoginPage />} />
+
+                {/* Protected Admin CMS Routes */}
+                <Route path="/admin" element={<ProtectedAdminRoute />}>
+                  <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                  <Route path="dashboard" element={<AdminPage />} />
+                  <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </AuthProvider>
         </DataProvider>
       </ToastProvider>
     </ThemeProvider>
