@@ -1,22 +1,26 @@
-import { SiteThemeDefinition } from './types';
+import { SiteThemeId, SiteThemeDefinition } from './types';
 import { originalThemePreset } from './presets/original';
+import { midnightEmberThemePreset } from './presets/midnightEmber';
 
 /**
  * Runtime Theme Registry
  * 
  * Only themes with verified, complete runtime implementation are registered here.
- * For Milestone 2, only 'original' is runtime available.
  */
-export const RUNTIME_THEME_REGISTRY: Record<'original', SiteThemeDefinition> = {
-  original: originalThemePreset,
+export const RUNTIME_THEME_REGISTRY: Partial<Record<SiteThemeId, SiteThemeDefinition>> = {
+  'original': originalThemePreset,
+  'midnight-ember': midnightEmberThemePreset,
 };
 
 /**
  * Checks if a theme is fully implemented and available for runtime activation.
  */
-export const isRuntimeThemeAvailable = (themeId: string | null | undefined): themeId is 'original' => {
+export const isRuntimeThemeAvailable = (
+  themeId: string | null | undefined
+): themeId is 'original' | 'midnight-ember' => {
   if (!themeId) return false;
-  return themeId === 'original' && Boolean(RUNTIME_THEME_REGISTRY.original?.metadata.available);
+  const match = RUNTIME_THEME_REGISTRY[themeId as SiteThemeId];
+  return Boolean(match && match.metadata.available);
 };
 
 /**
@@ -25,7 +29,8 @@ export const isRuntimeThemeAvailable = (themeId: string | null | undefined): the
  */
 export const getRuntimeThemeDefinition = (themeId: string | null | undefined): SiteThemeDefinition => {
   if (themeId && isRuntimeThemeAvailable(themeId)) {
-    return RUNTIME_THEME_REGISTRY[themeId];
+    const found = RUNTIME_THEME_REGISTRY[themeId];
+    if (found) return found;
   }
-  return RUNTIME_THEME_REGISTRY.original;
+  return RUNTIME_THEME_REGISTRY['original']!;
 };

@@ -9,8 +9,17 @@ import { ExperienceTeaser } from '../components/home/ExperienceTeaser';
 import { DrinksSection } from '../components/home/DrinksSection';
 import { TestimonialsSection } from '../components/home/TestimonialsSection';
 import { ReservationCTA } from '../components/home/ReservationCTA';
+import { useSiteTheme } from '../context/SiteThemeContext';
+import { MidnightEmberHome } from '../themes/components/midnightEmber/MidnightEmberHome';
 
 export const HomePage: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: render theme-specific homepage for Midnight Ember
+  if (effectiveThemeId === 'midnight-ember') {
+    return <MidnightEmberHome />;
+  }
+
   return (
     <div className="space-y-0">
       <HeroSection />

@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MIDNIGHT EMBER THEME STYLES
+   Strictly scoped beneath html[data-site-theme="midnight-ember"]
+   ═══════════════════════════════════════════════════════════════════ */
+
+html[data-site-theme="midnight-ember"] {
+  color-scheme: dark;
+}
+
+html[data-site-theme="midnight-ember"] body {
+  background-color: #101010;
+  color: #F5EFE6;
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+/* ── Typography Scoping for Midnight Ember ───────────────────────── */
+html[data-site-theme="midnight-ember"] h1,
+html[data-site-theme="midnight-ember"] h2,
+html[data-site-theme="midnight-ember"] h3,
+html[data-site-theme="midnight-ember"] h4,
+html[data-site-theme="midnight-ember"] .midnight-ember-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+html[data-site-theme="midnight-ember"] .midnight-ember-subheading {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+}
+
+/* ── Ember Glass Card ────────────────────────────────────────────── */
+html[data-site-theme="midnight-ember"] .me-card,
+.midnight-ember-card {
+  background: rgba(26, 22, 19, 0.85);
+  border: 1px solid rgba(216, 170, 91, 0.22);
+  border-radius: 4px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.85);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-site-theme="midnight-ember"] .me-card:hover,
+.midnight-ember-card:hover {
+  border-color: rgba(216, 102, 44, 0.60);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px -8px rgba(216, 102, 44, 0.25);
+}
+
+/* ── Midnight Ember Buttons ──────────────────────────────────────── */
+.me-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  border-radius: 2px;
+  background: #D8662C;
+  color: #FFFFFF;
+  border: 1px solid #E47B3D;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(216, 102, 44, 0.35);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.me-btn-primary:hover {
+  background: #E47B3D;
+  border-color: #D8AA5B;
+  color: #FFFFFF;
+  box-shadow: 0 6px 22px rgba(216, 102, 44, 0.55);
+  transform: translateY(-1px);
+}
+
+.me-btn-primary:active {
+  transform: translateY(1px);
+}
+
+.me-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  border-radius: 2px;
+  background: rgba(20, 17, 15, 0.60);
+  color: #F5EFE6;
+  border: 1px solid rgba(216, 170, 91, 0.45);
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.me-btn-outline:hover {
+  background: rgba(216, 102, 44, 0.15);
+  border-color: #D8662C;
+  color: #D8AA5B;
+  box-shadow: 0 0 20px rgba(216, 170, 91, 0.25);
+  transform: translateY(-1px);
+}
+
+.me-btn-outline:active {
+  transform: translateY(1px);
+}
+
+/* ── Ember Gold Divider ──────────────────────────────────────────── */
+.me-divider-gold {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(216, 170, 91, 0.45) 50%, transparent 100%);
+}
+
+.me-divider-ember {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(216, 102, 44, 0.60) 50%, transparent 100%);
+}
+
+/* ── Subtle Ember Shimmer ────────────────────────────────────────── */
+@keyframes emberGlow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.me-glow-pulse {
+  animation: emberGlow 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .me-glow-pulse {
+    animation: none;
+  }
+}
+
+/* ── Hero Statistics Responsive Grid ─────────────────────────────── */
+.me-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 1rem;
+  width: 100%;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid rgba(216, 170, 91, 0.20);
+}
+
+@media (min-width: 768px) {
+  .me-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem 2rem;
+  }
+}
+
+.me-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.me-stat-value {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  color: #D8AA5B;
+  font-size: 1.125rem;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.35rem;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .me-stat-value {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .me-stat-value {
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+  }
+}
+
+.me-stat-label {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: #94877A;
+  line-height: 1.35;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+@media (min-width: 640px) {
+  .me-stat-label {
+    font-size: 0.70rem;
+    letter-spacing: 0.12em;
+  }
+}

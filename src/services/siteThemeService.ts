@@ -18,8 +18,9 @@ export const siteThemeService = {
       const stored = localStorage.getItem(SITE_THEME_STORAGE_KEY);
       if (!stored) return 'original';
       
-      if (isRuntimeThemeAvailable(stored)) {
-        return stored;
+      // In Milestone 3A, only 'original' is allowed as persistent published theme
+      if (stored === 'original') {
+        return 'original';
       }
       return 'original';
     } catch {
@@ -29,7 +30,7 @@ export const siteThemeService = {
 
   /**
    * Persists the active SiteThemeId to LocalStorage.
-   * Only stores themes that are confirmed to be runtime-available.
+   * Only stores themes that have valid publication entitlement (currently only 'original').
    */
   storeSiteThemeId(themeId: SiteThemeId): { success: boolean; error?: string } {
     if (typeof window === 'undefined') {
@@ -40,6 +41,14 @@ export const siteThemeService = {
       return {
         success: false,
         error: `Theme "${themeId}" is not currently available for runtime activation.`
+      };
+    }
+
+    // Safety gate: Premium themes cannot be published without entitlement support
+    if (themeId !== 'original') {
+      return {
+        success: false,
+        error: 'premium-access-required'
       };
     }
 

@@ -2,9 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu as MenuIcon, X, Calendar, Phone, Zap, Lock } from 'lucide-react';
 import { useData } from '../../context/DataContext';
+import { useSiteTheme } from '../../context/SiteThemeContext';
+import { MidnightEmberHeader } from '../../themes/components/midnightEmber/MidnightEmberHeader';
 import { ThemeToggle } from './ThemeToggle';
 
 export const Header: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: render theme-specific header for Midnight Ember
+  if (effectiveThemeId === 'midnight-ember') {
+    return <MidnightEmberHeader />;
+  }
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { settings } = useData();

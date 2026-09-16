@@ -30,10 +30,10 @@ export const THEME_CATALOG: Record<SiteThemeId, ThemeMetadata> = {
     access: 'premium',
     colorModePolicy: 'fixed-dark',
     previewImage: '/images/themes/midnight-ember.png',
-    available: false,
-    accentColor: '#F59E0B',
-    secondaryAccent: '#D97706',
-    tags: ['Speakeasy', 'Amber Glow', 'Intimate'],
+    available: true,
+    accentColor: '#D8662C',
+    secondaryAccent: '#D8AA5B',
+    tags: ['Speakeasy', 'Charcoal & Amber', 'Intimate'],
     badge: 'Premium'
   },
   'heritage-spice': {

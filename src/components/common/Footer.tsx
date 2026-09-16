@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook, Lock } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { useToast } from '../../context/ToastContext';
+import { useSiteTheme } from '../../context/SiteThemeContext';
+import { MidnightEmberFooter } from '../../themes/components/midnightEmber/MidnightEmberFooter';
 import { Modal } from './Modal';
 
 export const Footer: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: render theme-specific footer for Midnight Ember
+  if (effectiveThemeId === 'midnight-ember') {
+    return <MidnightEmberFooter />;
+  }
+
   const { settings } = useData();
   const { showToast } = useToast();
   const [newsletterEmail, setNewsletterEmail] = useState('');

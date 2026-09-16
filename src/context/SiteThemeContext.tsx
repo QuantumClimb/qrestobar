@@ -20,12 +20,29 @@ export interface SiteThemeContextType {
 
 const SiteThemeContext = createContext<SiteThemeContextType | undefined>(undefined);
 
+const getInitialPreviewTheme = (): SiteThemeId | null => {
+  if (typeof window === 'undefined') return null;
+  // Development Preview URL parameter support (Strictly enabled in DEV mode only)
+  if (import.meta.env.DEV) {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const urlPreview = params.get('siteThemePreview');
+      if (urlPreview && isRuntimeThemeAvailable(urlPreview)) {
+        return urlPreview;
+      }
+    } catch {}
+  }
+  return null;
+};
+
 export const SiteThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { theme: colorMode } = useTheme();
   const [activeThemeId, setActiveThemeId] = useState<SiteThemeId>(() => {
     return siteThemeService.getStoredSiteThemeId();
   });
-  const [previewThemeId, setPreviewThemeId] = useState<SiteThemeId | null>(null);
+  const [previewThemeId, setPreviewThemeId] = useState<SiteThemeId | null>(() => {
+    return getInitialPreviewTheme();
+  });
 
   const effectiveThemeId: SiteThemeId = previewThemeId || activeThemeId;
 
@@ -62,6 +79,14 @@ export const SiteThemeProvider: React.FC<{ children: ReactNode }> = ({ children 
       return {
         success: false,
         error: `Theme "${themeId}" cannot be published because its runtime implementation is not yet available.`
+      };
+    }
+
+    // Safety gate: Premium themes cannot be published without entitlement support
+    if (themeId !== 'original') {
+      return {
+        success: false,
+        error: 'premium-access-required'
       };
     }
 
