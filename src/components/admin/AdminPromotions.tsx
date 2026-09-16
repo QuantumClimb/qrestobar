@@ -3,6 +3,7 @@ import { Edit2, Eye, EyeOff } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { Promotion } from '../../types/promotion';
 import { Modal } from '../common/Modal';
+import { ImageUploadField } from './ImageUploadField';
 
 export const AdminPromotions: React.FC = () => {
   const { promotions, updatePromotion, togglePromotionActive } = useData();
@@ -20,6 +21,7 @@ export const AdminPromotions: React.FC = () => {
       badge: promo.badge,
       pricingHighlights: promo.pricingHighlights || '',
       ctaText: promo.ctaText,
+      imageUrl: promo.imageUrl,
       imagePosition: promo.imagePosition || 'center'
     });
   };
@@ -190,6 +192,14 @@ export const AdminPromotions: React.FC = () => {
                 className="w-full bg-qc-base border border-border-strong px-3 py-2 text-qc-primary rounded-sm focus:border-purple-500 focus:outline-none"
               />
             </div>
+
+            <ImageUploadField
+              value={formData.imageUrl || ''}
+              onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+              label="Promotional Poster / Banner"
+              helperText="Upload event poster image or choose from existing presets."
+            />
+
 
             <div className="pt-3 border-t border-border-base flex items-center justify-end gap-3">
               <button

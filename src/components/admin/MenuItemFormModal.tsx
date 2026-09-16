@@ -1,9 +1,10 @@
-﻿import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { MenuItem, MenuCategoryType, MENU_CATEGORIES } from '../../types/menu';
 import { Modal } from '../common/Modal';
+import { ImageUploadField } from './ImageUploadField';
 
 const menuItemSchema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -20,7 +21,7 @@ const menuItemSchema = z.object({
   ] as const),
   price: z.coerce.number().min(1, 'Price must be greater than 0'),
   description: z.string().min(5, 'Description is required'),
-  imageUrl: z.string().url('Please enter a valid image URL'),
+  imageUrl: z.string().min(1, 'Please select or upload an image'),
   spicyLevel: z.coerce.number().min(0).max(3),
   isVegetarian: z.boolean(),
   isChefsPick: z.boolean(),
@@ -47,6 +48,7 @@ export const MenuItemFormModal: React.FC<MenuItemFormModalProps> = ({
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors }
   } = useForm<FormData>({
@@ -87,7 +89,7 @@ export const MenuItemFormModal: React.FC<MenuItemFormModalProps> = ({
         category: 'signatures',
         price: 38,
         description: '',
-        imageUrl: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
+        imageUrl: '/images/Lethu_steak.jpg',
         spicyLevel: 1,
         isVegetarian: false,
         isChefsPick: false,
@@ -191,19 +193,21 @@ export const MenuItemFormModal: React.FC<MenuItemFormModalProps> = ({
           </div>
         </div>
 
-        {/* Row 3: Image URL */}
-        <div>
-          <label className="block text-qc-body uppercase font-medium mb-1">
-            Image URL (Unsplash or direct asset) *
-          </label>
-          <input
-            type="url"
-            {...register('imageUrl')}
-            placeholder="https://images.unsplash.com/..."
-            className="w-full bg-qc-base border border-border-strong px-3 py-2 text-qc-primary rounded-sm focus:border-purple-500 focus:outline-none"
-          />
-          {errors.imageUrl && <p className="text-red-400 mt-0.5">{errors.imageUrl.message}</p>}
-        </div>
+        {/* Row 3: Image Upload / Gallery Picker */}
+        <Controller
+          control={control}
+          name="imageUrl"
+          render={({ field }) => (
+            <ImageUploadField
+              value={field.value}
+              onChange={field.onChange}
+              label="Dish / Beverage Image"
+              helperText="Upload a high-res photo from your device, pick from restaurant gallery, or paste a URL."
+            />
+          )}
+        />
+        {errors.imageUrl && <p className="text-red-400 mt-0.5">{errors.imageUrl.message}</p>}
+
 
         {/* Row 4: Description */}
         <div>
