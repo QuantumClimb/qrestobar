@@ -1,22 +1,33 @@
 import { SiteThemeId } from './types';
+import { isRuntimeThemeAvailable } from './runtimeThemeRegistry';
 
 /**
- * Helper to preserve site theme preview query parameters in DEV mode only.
- * In production or for the 'original' theme, returns clean URLs or preserves non-theme params.
+ * Generic helper to preserve site theme preview query parameters in DEV mode only.
+ * In production or for the 'original' theme, returns clean URLs while preserving existing query params and hashes.
  */
-export function withSiteThemePreview(path: string, effectiveThemeId?: SiteThemeId | string): string {
+export function withSiteThemePreview(
+  path: string,
+  effectiveThemeId?: SiteThemeId | string | null
+): string {
   // If not in DEV or if theme is original / unspecified, return path unchanged
   if (!import.meta.env.DEV || !effectiveThemeId || effectiveThemeId === 'original') {
     return path;
   }
 
-  // Parse path and existing query parameters
-  const [basePath, search] = path.split('?');
+  // Validate that the theme is an available runtime theme
+  if (!isRuntimeThemeAvailable(effectiveThemeId)) {
+    return path;
+  }
+
+  // Preserve hash fragment if present (e.g. /menu#starters)
+  const [urlWithoutHash, hash] = path.split('#');
+  const [basePath, search] = urlWithoutHash.split('?');
   const params = new URLSearchParams(search || '');
 
   // Inject preview parameter
   params.set('siteThemePreview', effectiveThemeId);
 
   const queryString = params.toString();
-  return queryString ? `${basePath}?${queryString}` : basePath;
+  const resPath = queryString ? `${basePath}?${queryString}` : basePath;
+  return hash ? `${resPath}#${hash}` : resPath;
 }

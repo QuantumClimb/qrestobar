@@ -1,8 +1,23 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Utensils, Home } from 'lucide-react';
+import { useSiteTheme } from '../context/SiteThemeContext';
+
+const MidnightEmberNotFound = React.lazy(
+  () => import('../themes/components/midnightEmber/MidnightEmberNotFound')
+);
 
 export const NotFoundPage: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: Midnight Ember presentation
+  if (effectiveThemeId === 'midnight-ember') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
+        <MidnightEmberNotFound />
+      </React.Suspense>
+    );
+  }
   return (
     <div className="min-h-[75vh] flex items-center justify-center bg-qc-base text-qc-primary px-4 py-20 text-center">
       <div className="max-w-md mx-auto space-y-6">

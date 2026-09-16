@@ -1,9 +1,24 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, UtensilsCrossed, Wine, Music, Users, Calendar } from 'lucide-react';
 import { InteractiveGallery } from '../components/common/InteractiveGallery';
+import { useSiteTheme } from '../context/SiteThemeContext';
+
+const MidnightEmberAbout = React.lazy(
+  () => import('../themes/components/midnightEmber/MidnightEmberAbout')
+);
 
 export const AboutPage: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: Midnight Ember presentation
+  if (effectiveThemeId === 'midnight-ember') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
+        <MidnightEmberAbout />
+      </React.Suspense>
+    );
+  }
   return (
     <div className="min-h-screen bg-qc-base text-qc-primary py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
