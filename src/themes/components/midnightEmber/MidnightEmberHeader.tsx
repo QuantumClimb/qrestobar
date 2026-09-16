@@ -19,6 +19,13 @@ export const MidnightEmberHeader: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  const getThemedPath = (path: string) => {
+    if (import.meta.env.DEV) {
+      return `${path}?siteThemePreview=midnight-ember`;
+    }
+    return path;
+  };
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
@@ -45,7 +52,7 @@ export const MidnightEmberHeader: React.FC = () => {
             <Flame className="w-3.5 h-3.5 text-[#D8662C] shrink-0" />
             <span className="font-light">{settings.announcementBarText}</span>
             <Link
-              to="/reservations"
+              to={getThemedPath('/reservations')}
               className="font-bold underline ml-1 text-[#D8AA5B] hover:text-[#E47B3D] transition-colors hidden sm:inline"
             >
               Book Now
@@ -66,7 +73,7 @@ export const MidnightEmberHeader: React.FC = () => {
           <div className="flex items-center justify-between">
             {/* Brand Logo */}
             <Link
-              to="/"
+              to={getThemedPath('/')}
               className="group flex flex-col focus:outline-none rounded py-1 px-1.5 shrink-0"
               aria-label="Q - RESTOBAR Homepage"
             >
@@ -83,7 +90,7 @@ export const MidnightEmberHeader: React.FC = () => {
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
-                  to={link.path}
+                  to={getThemedPath(link.path)}
                   className={({ isActive }) =>
                     `text-xs uppercase tracking-[0.18em] font-medium transition-all relative py-1 whitespace-nowrap ${
                       isActive
@@ -112,7 +119,7 @@ export const MidnightEmberHeader: React.FC = () => {
             {/* Right Action */}
             <div className="hidden lg:flex items-center gap-4">
               <Link
-                to="/reservations"
+                to={getThemedPath('/reservations')}
                 className="me-btn-primary text-xs px-5 py-2.5 flex items-center gap-2"
               >
                 <Calendar className="w-3.5 h-3.5" />
@@ -123,7 +130,7 @@ export const MidnightEmberHeader: React.FC = () => {
             {/* Mobile Hamburger Button */}
             <div className="flex items-center gap-2 lg:hidden">
               <Link
-                to="/reservations"
+                to={getThemedPath('/reservations')}
                 className="me-btn-primary text-[11px] px-3.5 py-2 flex items-center gap-1.5 mr-1"
               >
                 <span>Book</span>
@@ -147,7 +154,7 @@ export const MidnightEmberHeader: React.FC = () => {
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
-                  to={link.path}
+                  to={getThemedPath(link.path)}
                   className={({ isActive }) =>
                     `block px-4 py-3 rounded text-sm uppercase tracking-[0.16em] font-medium transition-colors ${
                       isActive
@@ -170,7 +177,7 @@ export const MidnightEmberHeader: React.FC = () => {
 
             <div className="pt-4 border-t border-[#D8AA5B]/20">
               <Link
-                to="/reservations"
+                to={getThemedPath('/reservations')}
                 className="me-btn-primary w-full py-3.5 text-xs flex items-center justify-center gap-2"
               >
                 <Calendar className="w-4 h-4" />

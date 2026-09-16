@@ -26,6 +26,13 @@ export const MidnightEmberFooter: React.FC = () => {
     setNewsletterEmail('');
   };
 
+  const getThemedPath = (path: string) => {
+    if (import.meta.env.DEV) {
+      return `${path}?siteThemePreview=midnight-ember`;
+    }
+    return path;
+  };
+
   return (
     <footer className="bg-[#0D0B0A] text-[#F5EFE6] pt-20 pb-12 border-t border-[#D8AA5B]/25 relative overflow-hidden">
       {/* Subtle background glow */}
@@ -36,7 +43,7 @@ export const MidnightEmberFooter: React.FC = () => {
           
           {/* Column 1: Brand Identity */}
           <div className="space-y-5">
-            <Link to="/" className="inline-block focus:outline-none">
+            <Link to={getThemedPath('/')} className="inline-block focus:outline-none">
               <span className="font-serif text-2xl font-bold tracking-[0.24em] text-[#F5EFE6] select-none">
                 Q - RESTOBAR
               </span>
@@ -84,7 +91,7 @@ export const MidnightEmberFooter: React.FC = () => {
               ].map((item) => (
                 <li key={item.to}>
                   <Link
-                    to={item.to}
+                    to={getThemedPath(item.to)}
                     className="text-[#CFC3B5] hover:text-[#D8AA5B] transition-colors flex items-center gap-1.5"
                   >
                     <span>{item.label}</span>

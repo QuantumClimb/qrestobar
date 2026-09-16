@@ -2,12 +2,28 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Utensils, Calendar, Sparkles } from 'lucide-react';
 import { useData } from '../context/DataContext';
+import { useSiteTheme } from '../context/SiteThemeContext';
 import { MenuFilterBar } from '../components/menu/MenuFilterBar';
 import { MenuItemCard } from '../components/menu/MenuItemCard';
 import { MenuDetailModal } from '../components/menu/MenuDetailModal';
 import { MenuItem } from '../types/menu';
 
+const MidnightEmberMenu = React.lazy(
+  () => import('../themes/components/midnightEmber/MidnightEmberMenu')
+);
+
 export const MenuPage: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: Midnight Ember presentation
+  if (effectiveThemeId === 'midnight-ember') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
+        <MidnightEmberMenu />
+      </React.Suspense>
+    );
+  }
+
   const { menuItems, isLoading } = useData();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');

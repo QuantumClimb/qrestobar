@@ -1,11 +1,27 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Calendar, Clock, Phone, ShieldCheck, MessageSquare } from 'lucide-react';
 import { ReservationForm } from '../components/reservations/ReservationForm';
 import { ReservationSuccessModal } from '../components/reservations/ReservationSuccessModal';
 import { Reservation } from '../types/reservation';
 import { useData } from '../context/DataContext';
+import { useSiteTheme } from '../context/SiteThemeContext';
+
+const MidnightEmberReservations = React.lazy(
+  () => import('../themes/components/midnightEmber/MidnightEmberReservations')
+);
 
 export const ReservationsPage: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: Midnight Ember presentation
+  if (effectiveThemeId === 'midnight-ember') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
+        <MidnightEmberReservations />
+      </React.Suspense>
+    );
+  }
+
   const { settings } = useData();
   const [confirmedReservation, setConfirmedReservation] = useState<Reservation | null>(null);
 

@@ -217,3 +217,70 @@ html[data-site-theme="midnight-ember"] .me-card:hover,
     letter-spacing: 0.12em;
   }
 }
+
+/* ── Scoped Form & Modal Adaptation for Midnight Ember ─────────────── */
+html[data-site-theme="midnight-ember"] input:not([type="checkbox"]),
+html[data-site-theme="midnight-ember"] select,
+html[data-site-theme="midnight-ember"] textarea {
+  background-color: #1A1613 !important;
+  color: #F5EFE6 !important;
+  border-color: rgba(216, 170, 91, 0.30) !important;
+}
+
+html[data-site-theme="midnight-ember"] input:focus,
+html[data-site-theme="midnight-ember"] select:focus,
+html[data-site-theme="midnight-ember"] textarea:focus {
+  border-color: #D8662C !important;
+  box-shadow: 0 0 0 1px #D8662C !important;
+  outline: none !important;
+}
+
+html[data-site-theme="midnight-ember"] input::placeholder,
+html[data-site-theme="midnight-ember"] textarea::placeholder {
+  color: #88796B !important;
+}
+
+html[data-site-theme="midnight-ember"] .btn-gold {
+  background: #D8662C !important;
+  color: #FFFFFF !important;
+  border: 1px solid #E47B3D !important;
+  box-shadow: 0 4px 14px rgba(216, 102, 44, 0.35) !important;
+}
+
+html[data-site-theme="midnight-ember"] .btn-gold:hover {
+  background: #E47B3D !important;
+  border-color: #D8AA5B !important;
+  box-shadow: 0 6px 22px rgba(216, 102, 44, 0.55) !important;
+}
+
+html[data-site-theme="midnight-ember"] .text-purple-500 {
+  color: #D8AA5B !important;
+}
+
+html[data-site-theme="midnight-ember"] .border-purple-600\/60,
+html[data-site-theme="midnight-ember"] .border-purple-600\/30 {
+  border-color: rgba(216, 170, 91, 0.35) !important;
+}
+
+/* Modal scoped styling */
+html[data-site-theme="midnight-ember"] .bg-qc-surface {
+  background-color: #14110F !important;
+}
+
+html[data-site-theme="midnight-ember"] .text-qc-primary {
+  color: #F5EFE6 !important;
+}
+
+html[data-site-theme="midnight-ember"] .text-qc-body {
+  color: #CFC3B5 !important;
+}
+
+html[data-site-theme="midnight-ember"] .text-qc-secondary {
+  color: #D8AA5B !important;
+}
+
+html[data-site-theme="midnight-ember"] .border-border-base,
+html[data-site-theme="midnight-ember"] .border-border-strong {
+  border-color: rgba(216, 170, 91, 0.22) !important;
+}
+
