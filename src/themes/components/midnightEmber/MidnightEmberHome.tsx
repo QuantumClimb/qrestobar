@@ -13,6 +13,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useData } from '../../../context/DataContext';
+import { withSiteThemePreview } from '../../themePreviewNavigation';
 
 export const MidnightEmberHome: React.FC = () => {
   const { menuItems, promotions, settings } = useData();
@@ -75,7 +76,7 @@ export const MidnightEmberHome: React.FC = () => {
           {/* CTA Buttons */}
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="/reservations"
+              to={withSiteThemePreview('/reservations', 'midnight-ember')}
               className="me-btn-primary w-full sm:w-auto px-8 py-4 text-xs font-bold tracking-[0.18em] flex items-center justify-center gap-2.5"
             >
               <Calendar className="w-4 h-4" />
@@ -83,7 +84,7 @@ export const MidnightEmberHome: React.FC = () => {
             </Link>
 
             <Link
-              to="/menu"
+              to={withSiteThemePreview('/menu', 'midnight-ember')}
               className="me-btn-outline w-full sm:w-auto px-8 py-4 text-xs font-bold tracking-[0.18em] flex items-center justify-center gap-2.5"
             >
               <Utensils className="w-4 h-4" />
@@ -186,7 +187,7 @@ export const MidnightEmberHome: React.FC = () => {
           {/* Full Menu Link CTA */}
           <div className="text-center pt-4">
             <Link
-              to="/menu"
+              to={withSiteThemePreview('/menu', 'midnight-ember')}
               className="me-btn-outline px-8 py-3.5 text-xs font-semibold tracking-widest inline-flex items-center gap-2"
             >
               <span>View Full Digital Menu</span>
@@ -230,7 +231,7 @@ export const MidnightEmberHome: React.FC = () => {
 
                 <div className="pt-2 flex items-center gap-4">
                   <Link
-                    to="/reservations"
+                    to={withSiteThemePreview('/reservations', 'midnight-ember')}
                     className="me-btn-primary px-6 py-3 text-xs font-bold tracking-widest flex items-center gap-2"
                   >
                     <span>Reserve For Event</span>
@@ -238,7 +239,7 @@ export const MidnightEmberHome: React.FC = () => {
                   </Link>
 
                   <Link
-                    to="/offers"
+                    to={withSiteThemePreview('/offers', 'midnight-ember')}
                     className="text-xs text-[#CFC3B5] hover:text-[#D8AA5B] font-semibold tracking-wider uppercase underline ml-2"
                   >
                     All Offers &rarr;
@@ -309,7 +310,7 @@ export const MidnightEmberHome: React.FC = () => {
 
               <div className="pt-4">
                 <Link
-                  to="/about"
+                  to={withSiteThemePreview('/about', 'midnight-ember')}
                   className="me-btn-outline px-6 py-3 text-xs font-semibold tracking-widest inline-flex items-center gap-2"
                 >
                   <span>Read Full Heritage Story</span>
@@ -340,7 +341,7 @@ export const MidnightEmberHome: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link
-              to="/reservations"
+              to={withSiteThemePreview('/reservations', 'midnight-ember')}
               className="me-btn-primary w-full sm:w-auto px-8 py-4 text-xs font-bold tracking-widest flex items-center justify-center gap-2"
             >
               <Calendar className="w-4 h-4" />

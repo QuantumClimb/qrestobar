@@ -5,6 +5,43 @@
 
 html[data-site-theme="midnight-ember"] {
   color-scheme: dark;
+
+  /* Experience Accent Tokens */
+  --experience-accent-primary: #D8662C;
+  --experience-accent-secondary: #D8AA5B;
+  --experience-accent-deep: #8B3A18;
+  --experience-accent-surface: rgba(216, 102, 44, 0.16);
+  --experience-accent-glow: rgba(216, 102, 44, 0.32);
+  --experience-pointer-highlight: #F5EFE6;
+
+  /* Golden Perk Wheel Palette (Ember Warm Hues) */
+  --wheel-color-1: #8B3A18; /* Deep Ember */
+  --wheel-color-2: #1A1613; /* Dark Charcoal */
+  --wheel-color-3: #D8662C; /* Burnt Orange */
+  --wheel-color-4: #241D18; /* Rich Smoked Timber */
+  --wheel-color-5: #D8AA5B; /* Ember Gold */
+  --wheel-color-6: #B45309; /* Warm Terracotta */
+
+  --wheel-ring-primary: rgba(216, 102, 44, 0.60);
+  --wheel-ring-secondary: rgba(216, 170, 91, 0.35);
+  --wheel-border-color: rgba(216, 170, 91, 0.45);
+  --wheel-pointer-color: #D8662C;
+  --wheel-hub-gradient: linear-gradient(135deg, #D8AA5B 0%, #D8662C 50%, #8B3A18 100%);
+  --wheel-hub-shadow: 0 10px 25px -5px rgba(216, 102, 44, 0.50);
+
+  --experience-card-border: rgba(216, 170, 91, 0.45);
+  --experience-banner-border: rgba(216, 102, 44, 0.50);
+  --experience-badge-border: rgba(216, 170, 91, 0.35);
+  --experience-border-active: #D8662C;
+  --experience-box-border: rgba(216, 170, 91, 0.35);
+
+  --experience-icon-1: #D8AA5B;
+  --experience-icon-2: #D8662C;
+  --experience-icon-3: #D8AA5B;
+
+  --experience-low-text: #D8AA5B;
+  --experience-low-bg: rgba(26, 22, 19, 0.95);
+  --experience-low-border: rgba(216, 170, 91, 0.45);
 }
 
 html[data-site-theme="midnight-ember"] body {
@@ -283,4 +320,63 @@ html[data-site-theme="midnight-ember"] .border-border-base,
 html[data-site-theme="midnight-ember"] .border-border-strong {
   border-color: rgba(216, 170, 91, 0.22) !important;
 }
+
+html[data-site-theme="midnight-ember"] .bg-qc-base {
+  background-color: #101010 !important;
+}
+
+html[data-site-theme="midnight-ember"] .bg-qc-elevated {
+  background-color: #1A1613 !important;
+}
+
+html[data-site-theme="midnight-ember"] .btn-gold-outline {
+  background: rgba(20, 17, 15, 0.60) !important;
+  color: #F5EFE6 !important;
+  border: 1px solid rgba(216, 170, 91, 0.45) !important;
+  box-shadow: none !important;
+}
+
+html[data-site-theme="midnight-ember"] .btn-gold-outline:hover {
+  background: rgba(216, 102, 44, 0.15) !important;
+  border-color: #D8662C !important;
+  color: #D8AA5B !important;
+}
+
+html[data-site-theme="midnight-ember"] .btn-ghost-ivory {
+  background: #1A1613 !important;
+  color: #F5EFE6 !important;
+  border-color: rgba(216, 170, 91, 0.30) !important;
+}
+
+html[data-site-theme="midnight-ember"] .btn-ghost-ivory:hover {
+  background: rgba(216, 102, 44, 0.20) !important;
+  color: #D8AA5B !important;
+  border-color: #D8662C !important;
+}
+
+html[data-site-theme="midnight-ember"] .text-purple-400,
+html[data-site-theme="midnight-ember"] .text-purple-300 {
+  color: #D8AA5B !important;
+}
+
+html[data-site-theme="midnight-ember"] .bg-purple-600 {
+  background-color: #D8662C !important;
+}
+
+html[data-site-theme="midnight-ember"] .bg-purple-600\/10,
+html[data-site-theme="midnight-ember"] .bg-purple-600\/20,
+html[data-site-theme="midnight-ember"] .bg-purple-500\/20 {
+  background-color: rgba(216, 102, 44, 0.15) !important;
+}
+
+html[data-site-theme="midnight-ember"] .border-purple-600,
+html[data-site-theme="midnight-ember"] .border-purple-500,
+html[data-site-theme="midnight-ember"] .border-purple-600\/40,
+html[data-site-theme="midnight-ember"] .border-purple-600\/50,
+html[data-site-theme="midnight-ember"] .border-purple-600\/80,
+html[data-site-theme="midnight-ember"] .border-purple-500\/40,
+html[data-site-theme="midnight-ember"] .border-purple-500\/20 {
+  border-color: rgba(216, 170, 91, 0.35) !important;
+}
+
 

@@ -15,6 +15,7 @@ import { useData } from '../../../context/DataContext';
 import { MenuItem, MENU_CATEGORIES } from '../../../types/menu';
 import { MidnightEmberPageHero } from './MidnightEmberPageHero';
 import { Modal } from '../../../components/common/Modal';
+import { withSiteThemePreview } from '../../themePreviewNavigation';
 
 export const MidnightEmberMenu: React.FC = () => {
   const { menuItems, isLoading } = useData();
@@ -26,9 +27,7 @@ export const MidnightEmberMenu: React.FC = () => {
   const [isChefsPickOnly, setIsChefsPickOnly] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
-  const getThemedReservationLink = () => {
-    return import.meta.env.DEV ? '/reservations?siteThemePreview=midnight-ember' : '/reservations';
-  };
+  const getThemedReservationLink = () => withSiteThemePreview('/reservations', 'midnight-ember');
 
   // Filtered menu items calculation
   const filteredItems = useMemo(() => {

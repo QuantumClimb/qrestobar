@@ -20,7 +20,7 @@ const PRIZES: Prize[] = [
     name: 'Complimentary Lychee Rose Martini',
     shortName: 'Free Martini',
     value: 'RM40 Value',
-    color: '#6D28D9',
+    color: 'var(--wheel-color-1, #6D28D9)',
     textColor: '#F5F5F7',
     icon: '🍸',
     terms: 'Valid with any food order for dinner service.'
@@ -30,7 +30,7 @@ const PRIZES: Prize[] = [
     name: 'Complimentary Pandan Crème Brûlée',
     shortName: 'Free Dessert',
     value: 'RM24 Value',
-    color: '#2E1065',
+    color: 'var(--wheel-color-2, #2E1065)',
     textColor: '#F5F5F7',
     icon: '🍮',
     terms: 'Valid for table bookings of 2 guests and above.'
@@ -40,7 +40,7 @@ const PRIZES: Prize[] = [
     name: 'Charred Chicken Satay (6 Skewers)',
     shortName: 'Free Satay',
     value: 'RM32 Value',
-    color: '#7C3AED',
+    color: 'var(--wheel-color-3, #7C3AED)',
     textColor: '#FFFFFF',
     icon: '🍢',
     terms: 'Freshly grilled over charcoal. Valid for dinner bookings.'
@@ -50,7 +50,7 @@ const PRIZES: Prize[] = [
     name: '15% Off Chef’s Tasting Menu',
     shortName: '15% Off Tasting',
     value: 'VIP Perk',
-    color: '#1E1B2E',
+    color: 'var(--wheel-color-4, #1E1B2E)',
     textColor: '#EDE9FE',
     icon: '👑',
     terms: 'Applicable to multi-course degustation menus.'
@@ -60,7 +60,7 @@ const PRIZES: Prize[] = [
     name: 'Complimentary Calamansi Spritz',
     shortName: 'Free Spritz',
     value: 'RM36 Value',
-    color: '#8B5CF6',
+    color: 'var(--wheel-color-5, #8B5CF6)',
     textColor: '#FFFFFF',
     icon: '🍹',
     terms: 'Refreshing artisanal gin cocktail.'
@@ -70,7 +70,7 @@ const PRIZES: Prize[] = [
     name: 'RM30 Dining Welcome Credit',
     shortName: 'RM30 Credit',
     value: 'Direct Credit',
-    color: '#3B2D54',
+    color: 'var(--wheel-color-6, #3B2D54)',
     textColor: '#F5F5F7',
     icon: '✨',
     terms: 'Valid with minimum spend of RM120 on dine-in.'
@@ -146,26 +146,39 @@ export const GoldenPerkWheel: React.FC = () => {
   return (
     <div className="bg-qc-surface border border-border-base rounded-sm p-6 sm:p-10 shadow-xl relative overflow-hidden transition-colors">
       {/* Background radial glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div
+        className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none"
+        style={{ backgroundColor: 'var(--experience-accent-glow, rgba(147, 51, 234, 0.1))' }}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         {/* Left Column: Wheel Interface */}
         <div className="lg:col-span-6 flex flex-col items-center justify-center">
           <div className="relative w-72 h-72 sm:w-88 sm:h-88 flex items-center justify-center">
-            {/* Outer purple decorative ring */}
-            <div className="absolute inset-0 rounded-full border-4 border-purple-600/40 shadow-xl pointer-events-none" />
-            <div className="absolute -inset-3 rounded-full border border-purple-500/20 pointer-events-none" />
+            {/* Outer decorative rings */}
+            <div
+              className="absolute inset-0 rounded-full border-4 shadow-xl pointer-events-none"
+              style={{ borderColor: 'var(--wheel-ring-primary, rgba(147, 51, 234, 0.4))' }}
+            />
+            <div
+              className="absolute -inset-3 rounded-full border pointer-events-none"
+              style={{ borderColor: 'var(--wheel-ring-secondary, rgba(168, 85, 247, 0.2))' }}
+            />
 
             {/* Pointer arrow at top */}
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 w-8 h-8 flex items-center justify-center">
-              <div className="w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[22px] border-t-purple-500 drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)] animate-bounce" />
+              <div
+                className="w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[22px] drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)] animate-bounce"
+                style={{ borderTopColor: 'var(--wheel-pointer-color, #A855F7)' }}
+              />
             </div>
 
             {/* Spinning Wheel */}
             <div
               ref={wheelRef}
-              className="w-full h-full rounded-full overflow-hidden relative shadow-inner border-2 border-purple-600/50"
+              className="w-full h-full rounded-full overflow-hidden relative shadow-inner border-2"
               style={{
+                borderColor: 'var(--wheel-border-color, rgba(147, 51, 234, 0.5))',
                 transform: `rotate(${rotation}deg)`,
                 transition: isSpinning ? 'transform 4.5s cubic-bezier(0.15, 0.9, 0.25, 1)' : 'none'
               }}
@@ -209,9 +222,13 @@ export const GoldenPerkWheel: React.FC = () => {
             <button
               onClick={handleSpin}
               disabled={isSpinning}
-              className={`absolute z-20 w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 via-purple-600 to-purple-800 text-white font-display font-bold text-xs uppercase tracking-wider shadow-2xl flex flex-col items-center justify-center border-4 border-border-base active:scale-95 transition-all ${
-                isSpinning ? 'opacity-80 cursor-not-allowed' : 'hover:scale-105 hover:shadow-purple-500/50'
+              className={`absolute z-20 w-20 h-20 rounded-full text-white font-display font-bold text-xs uppercase tracking-wider shadow-2xl flex flex-col items-center justify-center border-4 border-border-base active:scale-95 transition-all ${
+                isSpinning ? 'opacity-80 cursor-not-allowed' : 'hover:scale-105'
               }`}
+              style={{
+                background: 'var(--wheel-hub-gradient, linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #6B21A8 100%))',
+                boxShadow: isSpinning ? undefined : 'var(--wheel-hub-shadow, 0 10px 25px -5px rgba(147, 51, 234, 0.5))'
+              }}
               aria-label="Spin the perk wheel"
             >
               {isSpinning ? (
@@ -247,13 +264,25 @@ export const GoldenPerkWheel: React.FC = () => {
 
           {/* Winning Card or Placeholder State */}
           {wonPrize && voucherCode ? (
-            <div className="bg-qc-base border-2 border-purple-600/60 p-6 rounded-sm space-y-5 animate-slide-up shadow-lg relative overflow-hidden">
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-purple-500/20 rounded-full blur-xl" />
+            <div
+              className="bg-qc-base border-2 p-6 rounded-sm space-y-5 animate-slide-up shadow-lg relative overflow-hidden"
+              style={{ borderColor: 'var(--experience-card-border, rgba(147, 51, 234, 0.6))' }}
+            >
+              <div
+                className="absolute -top-6 -right-6 w-24 h-24 rounded-full blur-xl"
+                style={{ backgroundColor: 'var(--experience-accent-glow, rgba(168, 85, 247, 0.2))' }}
+              />
 
               <div className="flex items-start gap-4">
                 <div className="text-3xl">{wonPrize.icon}</div>
                 <div className="space-y-1">
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-purple-500 bg-purple-600/10 px-2 py-0.5 rounded">
+                  <span
+                    className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded"
+                    style={{
+                      color: 'var(--experience-accent-primary, #A855F7)',
+                      backgroundColor: 'var(--experience-accent-surface, rgba(147, 51, 234, 0.1))'
+                    }}
+                  >
                     Unlocked Treat ({wonPrize.value})
                   </span>
                   <h4 className="text-xl font-display font-bold text-qc-primary">

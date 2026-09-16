@@ -59,7 +59,7 @@ export const LiveAvailabilityTicker: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-border-base pb-6">
         <div>
           <div className="inline-flex items-center gap-2 text-purple-500 text-xs font-semibold uppercase tracking-widest mb-1">
-            <Zap className="w-3.5 h-3.5 text-purple-400 fill-purple-400" />
+            <Zap className="w-3.5 h-3.5" style={{ color: 'var(--experience-accent-secondary, #C084FC)', fill: 'var(--experience-accent-secondary, #C084FC)' }} />
             <span>Tonight’s Live Seating &amp; Flash Urgency Engine</span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-display font-bold text-qc-primary">
@@ -71,8 +71,17 @@ export const LiveAvailabilityTicker: React.FC = () => {
         </div>
 
         {/* Live Flash Perk Countdown Box */}
-        <div className="bg-qc-surface/80 border border-purple-600/40 p-4 rounded-sm shrink-0 flex items-center gap-4 shadow-sm">
-          <div className="w-10 h-10 rounded-full bg-purple-600/20 flex items-center justify-center text-purple-500 shrink-0">
+        <div
+          className="bg-qc-surface/80 border p-4 rounded-sm shrink-0 flex items-center gap-4 shadow-sm"
+          style={{ borderColor: 'var(--experience-box-border, rgba(147, 51, 234, 0.4))' }}
+        >
+          <div
+            className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+            style={{
+              backgroundColor: 'var(--experience-accent-surface, rgba(147, 51, 234, 0.2))',
+              color: 'var(--experience-accent-primary, #A855F7)'
+            }}
+          >
             <Clock className="w-5 h-5 animate-pulse" />
           </div>
           <div>
@@ -85,7 +94,10 @@ export const LiveAvailabilityTicker: React.FC = () => {
             <p className="text-xs text-qc-primary font-medium mt-0.5">
               Free Truffle Brioche Bites on bookings within:
             </p>
-            <p className="font-mono text-sm font-bold text-purple-500">
+            <p
+              className="font-mono text-sm font-bold"
+              style={{ color: 'var(--experience-accent-primary, #A855F7)' }}
+            >
               {String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')} mins
             </p>
           </div>
@@ -122,7 +134,14 @@ export const LiveAvailabilityTicker: React.FC = () => {
                       <span>Only 1 Table!</span>
                     </span>
                   ) : isLow ? (
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-purple-300 bg-purple-950/80 border border-purple-500/40 px-2 py-0.5 rounded">
+                    <span
+                      className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded border"
+                      style={{
+                        color: 'var(--experience-low-text, #D8B4FE)',
+                        backgroundColor: 'var(--experience-low-bg, rgba(59, 7, 100, 0.8))',
+                        borderColor: 'var(--experience-low-border, rgba(168, 85, 247, 0.4))'
+                      }}
+                    >
                       {slot.tablesLeft} Tables Left
                     </span>
                   ) : (

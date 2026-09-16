@@ -4,6 +4,7 @@ import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook, Lock } from 'luc
 import { useData } from '../../../context/DataContext';
 import { useToast } from '../../../context/ToastContext';
 import { Modal } from '../../../components/common/Modal';
+import { withSiteThemePreview } from '../../themePreviewNavigation';
 
 export const MidnightEmberFooter: React.FC = () => {
   const { settings } = useData();
@@ -26,12 +27,7 @@ export const MidnightEmberFooter: React.FC = () => {
     setNewsletterEmail('');
   };
 
-  const getThemedPath = (path: string) => {
-    if (import.meta.env.DEV) {
-      return `${path}?siteThemePreview=midnight-ember`;
-    }
-    return path;
-  };
+  const getThemedPath = (path: string) => withSiteThemePreview(path, 'midnight-ember');
 
   return (
     <footer className="bg-[#0D0B0A] text-[#F5EFE6] pt-20 pb-12 border-t border-[#D8AA5B]/25 relative overflow-hidden">

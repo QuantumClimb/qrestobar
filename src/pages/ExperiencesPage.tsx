@@ -5,10 +5,26 @@ import { GoldenPerkWheel } from '../components/experiences/GoldenPerkWheel';
 import { FlavorMatchmaker } from '../components/experiences/FlavorMatchmaker';
 import { LiveAvailabilityTicker } from '../components/experiences/LiveAvailabilityTicker';
 import { ZoneVibePicker } from '../components/experiences/ZoneVibePicker';
+import { useSiteTheme } from '../context/SiteThemeContext';
+
+const MidnightEmberExperiences = React.lazy(
+  () => import('../themes/components/midnightEmber/MidnightEmberExperiences')
+);
 
 type ExperienceTab = 'wheel' | 'sommelier' | 'availability' | 'zones';
 
 export const ExperiencesPage: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: Midnight Ember presentation
+  if (effectiveThemeId === 'midnight-ember') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
+        <MidnightEmberExperiences />
+      </React.Suspense>
+    );
+  }
+
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<ExperienceTab>('wheel');
 

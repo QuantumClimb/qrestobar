@@ -6,8 +6,24 @@ import { OfferCard } from '../components/offers/OfferCard';
 import { OfferModal } from '../components/offers/OfferModal';
 import { Promotion } from '../types/promotion';
 import { useToast } from '../context/ToastContext';
+import { useSiteTheme } from '../context/SiteThemeContext';
+
+const MidnightEmberOffers = React.lazy(
+  () => import('../themes/components/midnightEmber/MidnightEmberOffers')
+);
 
 export const OffersPage: React.FC = () => {
+  const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: Midnight Ember presentation
+  if (effectiveThemeId === 'midnight-ember') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
+        <MidnightEmberOffers />
+      </React.Suspense>
+    );
+  }
+
   const { promotions } = useData();
   const { showToast } = useToast();
   const [selectedPromo, setSelectedPromo] = useState<Promotion | null>(null);

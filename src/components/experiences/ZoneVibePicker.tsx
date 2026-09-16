@@ -126,12 +126,21 @@ export const ZoneVibePicker: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-qc-card via-qc-card/40 to-transparent" />
-                <span className="absolute top-2 left-2 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-qc-base/90 text-purple-500 border border-purple-600/30">
+                <span
+                  className="absolute top-2 left-2 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-qc-base/90 border"
+                  style={{
+                    color: 'var(--experience-accent-primary, #A855F7)',
+                    borderColor: 'var(--experience-badge-border, rgba(147, 51, 234, 0.3))'
+                  }}
+                >
                   {zone.badge}
                 </span>
 
                 {isSelected && (
-                  <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center">
+                  <div
+                    className="absolute top-2 right-2 w-6 h-6 rounded-full text-white flex items-center justify-center"
+                    style={{ backgroundColor: 'var(--experience-accent-primary, #9333EA)' }}
+                  >
                     <Check className="w-3.5 h-3.5 stroke-[3]" />
                   </div>
                 )}
@@ -239,7 +248,10 @@ export const ZoneVibePicker: React.FC = () => {
                 <ul className="space-y-1 text-xs text-qc-body font-light">
                   {selectedZone.features.map((feat, i) => (
                     <li key={i} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: 'var(--experience-accent-primary, #A855F7)' }}
+                      />
                       <span>{feat}</span>
                     </li>
                   ))}

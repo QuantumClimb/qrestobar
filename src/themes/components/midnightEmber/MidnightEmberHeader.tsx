@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu as MenuIcon, X, Calendar, Flame } from 'lucide-react';
 import { useData } from '../../../context/DataContext';
+import { withSiteThemePreview } from '../../themePreviewNavigation';
 
 export const MidnightEmberHeader: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,12 +20,7 @@ export const MidnightEmberHeader: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const getThemedPath = (path: string) => {
-    if (import.meta.env.DEV) {
-      return `${path}?siteThemePreview=midnight-ember`;
-    }
-    return path;
-  };
+  const getThemedPath = (path: string) => withSiteThemePreview(path, 'midnight-ember');
 
   const navLinks = [
     { name: 'Home', path: '/' },

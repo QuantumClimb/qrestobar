@@ -34,9 +34,9 @@ interface PairedExperience {
 }
 
 const OCCASIONS: OccasionOption[] = [
-  { id: 'romantic', label: 'Romantic Date Night', sublabel: 'Intimate ambiance, candlelit flavors', icon: <Heart className="w-5 h-5 text-purple-400" /> },
-  { id: 'business', label: 'Executive Dinner', sublabel: 'Impress clients with prime cuts & fine wine', icon: <Briefcase className="w-5 h-5 text-purple-500" /> },
-  { id: 'weekend', label: 'Weekend Social & Vibes', sublabel: 'Lively atmosphere, sharable tapas & DJ beats', icon: <PartyPopper className="w-5 h-5 text-purple-400" /> },
+  { id: 'romantic', label: 'Romantic Date Night', sublabel: 'Intimate ambiance, candlelit flavors', icon: <Heart className="w-5 h-5" style={{ color: 'var(--experience-icon-1, #C084FC)' }} /> },
+  { id: 'business', label: 'Executive Dinner', sublabel: 'Impress clients with prime cuts & fine wine', icon: <Briefcase className="w-5 h-5" style={{ color: 'var(--experience-icon-2, #A855F7)' }} /> },
+  { id: 'weekend', label: 'Weekend Social & Vibes', sublabel: 'Lively atmosphere, sharable tapas & DJ beats', icon: <PartyPopper className="w-5 h-5" style={{ color: 'var(--experience-icon-3, #C084FC)' }} /> },
   { id: 'celebration', label: 'Birthday or Milestone', sublabel: 'Sparkler finishes & bespoke feast', icon: <Cake className="w-5 h-5 text-emerald-400" /> },
 ];
 
@@ -232,11 +232,14 @@ export const FlavorMatchmaker: React.FC = () => {
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center font-display text-xs font-bold transition-all ${
                     currentStep === step
-                      ? 'bg-purple-600 text-white ring-4 ring-purple-500/20'
+                      ? 'text-white ring-4 ring-purple-500/20'
                       : currentStep > step
                       ? 'bg-emerald-600 text-white'
                       : 'bg-qc-elevated text-qc-body'
                   }`}
+                  style={{
+                    backgroundColor: currentStep === step ? 'var(--experience-accent-primary, #9333EA)' : undefined
+                  }}
                 >
                   {currentStep > step ? <Check className="w-4 h-4" /> : step}
                 </div>
@@ -392,8 +395,14 @@ export const FlavorMatchmaker: React.FC = () => {
         /* MATCH RESULT SHOWCASE */
         <div className="space-y-8 animate-slide-up">
           {/* Result Banner */}
-          <div className="bg-qc-base border-2 border-purple-600/50 p-6 sm:p-8 rounded-sm relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+          <div
+            className="bg-qc-base border-2 p-6 sm:p-8 rounded-sm relative overflow-hidden"
+            style={{ borderColor: 'var(--experience-banner-border, rgba(147, 51, 234, 0.5))' }}
+          >
+            <div
+              className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl pointer-events-none"
+              style={{ backgroundColor: 'var(--experience-accent-glow, rgba(147, 51, 234, 0.1))' }}
+            />
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div className="space-y-2">
