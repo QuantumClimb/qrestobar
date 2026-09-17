@@ -14,6 +14,9 @@ const MidnightEmberMenu = React.lazy(
 const HeritageSpiceMenu = React.lazy(
   () => import('../themes/components/heritageSpice/HeritageSpiceMenu')
 );
+const BotanicalBistroMenu = React.lazy(
+  () => import('../themes/components/botanicalBistro/BotanicalBistroMenu')
+);
 
 export const MenuPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
@@ -32,6 +35,15 @@ export const MenuPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#2B080E]" />}>
         <HeritageSpiceMenu />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Botanical Bistro presentation
+  if (effectiveThemeId === 'botanical-bistro') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#F4F1E8]" />}>
+        <BotanicalBistroMenu />
       </React.Suspense>
     );
   }

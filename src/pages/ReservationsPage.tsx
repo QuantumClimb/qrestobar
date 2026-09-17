@@ -12,6 +12,9 @@ const MidnightEmberReservations = React.lazy(
 const HeritageSpiceReservations = React.lazy(
   () => import('../themes/components/heritageSpice/HeritageSpiceReservations')
 );
+const BotanicalBistroReservations = React.lazy(
+  () => import('../themes/components/botanicalBistro/BotanicalBistroReservations')
+);
 
 export const ReservationsPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
@@ -30,6 +33,15 @@ export const ReservationsPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#2B080E]" />}>
         <HeritageSpiceReservations />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Botanical Bistro presentation
+  if (effectiveThemeId === 'botanical-bistro') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#F4F1E8]" />}>
+        <BotanicalBistroReservations />
       </React.Suspense>
     );
   }

@@ -169,3 +169,52 @@ html[data-site-theme="botanical-bistro"] *:focus-visible {
   outline: 2px solid #3F6B4F;
   outline-offset: 2px;
 }
+
+/* Reservation Form Scoped Styles for Botanical Bistro */
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper input:not([type="checkbox"]),
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper select,
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper textarea {
+  background-color: #F4F1E8;
+  color: #24352A;
+  border-color: rgba(63, 107, 79, 0.35);
+}
+
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper input:not([type="checkbox"]):focus,
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper select:focus,
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper textarea:focus {
+  border-color: #3F6B4F;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(63, 107, 79, 0.15);
+}
+
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper label {
+  color: #3F6B4F;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper h3 {
+  color: #3F6B4F;
+  border-bottom-color: rgba(63, 107, 79, 0.2);
+}
+
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper button[type="submit"] {
+  background-color: #3F6B4F;
+  color: #FFFFFF;
+  border: 1px solid #3F6B4F;
+  border-radius: 4px;
+  letter-spacing: 0.12em;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper button[type="submit"]:hover {
+  background-color: #2F533C;
+  border-color: #2F533C;
+  box-shadow: 0 4px 14px rgba(47, 83, 60, 0.3);
+}
+
+html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper div.p-4.bg-qc-surface {
+  background-color: rgba(63, 107, 79, 0.05);
+  border-color: rgba(63, 107, 79, 0.2);
+}
+
