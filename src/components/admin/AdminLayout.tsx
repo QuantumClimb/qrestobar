@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Calendar, 
   Utensils, 
   Sparkles, 
+  Palette,
   Settings, 
   ExternalLink, 
   ShieldCheck, 
@@ -18,13 +19,26 @@ import { AdminStats } from './AdminStats';
 import { AdminReservations } from './AdminReservations';
 import { AdminMenu } from './AdminMenu';
 import { AdminPromotions } from './AdminPromotions';
+import { AdminThemeStudio } from './AdminThemeStudio';
 import { AdminSettings } from './AdminSettings';
 import { useData } from '../../context/DataContext';
 import { useAuth } from '../../context/AuthContext';
 import { ThemeToggle } from '../common/ThemeToggle';
 
+const VALID_TABS = ['overview', 'reservations', 'menu', 'promotions', 'theme-studio', 'settings'] as const;
+type AdminTab = typeof VALID_TABS[number];
+
 export const AdminLayout: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'reservations' | 'menu' | 'promotions' | 'settings'>('overview');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawTab = searchParams.get('tab');
+  const activeTab: AdminTab = (rawTab && (VALID_TABS as readonly string[]).includes(rawTab))
+    ? (rawTab as AdminTab)
+    : 'overview';
+
+  const setActiveTab = (tab: AdminTab) => {
+    setSearchParams({ tab });
+  };
+
   const { resetDemoData } = useData();
   const { logout, userEmail, isDemoMode } = useAuth();
   const navigate = useNavigate();
@@ -39,6 +53,7 @@ export const AdminLayout: React.FC = () => {
     { id: 'reservations', label: 'Reservations', icon: Calendar },
     { id: 'menu', label: 'Menu & Pricing', icon: Utensils },
     { id: 'promotions', label: 'Offers & Events', icon: Sparkles },
+    { id: 'theme-studio', label: 'Theme Studio', icon: Palette },
     { id: 'settings', label: 'Restaurant Settings', icon: Settings },
   ] as const;
 
@@ -165,9 +180,11 @@ export const AdminLayout: React.FC = () => {
           {activeTab === 'reservations' && <AdminReservations />}
           {activeTab === 'menu' && <AdminMenu />}
           {activeTab === 'promotions' && <AdminPromotions />}
+          {activeTab === 'theme-studio' && <AdminThemeStudio />}
           {activeTab === 'settings' && <AdminSettings />}
         </div>
       </div>
     </div>
   );
 };
+

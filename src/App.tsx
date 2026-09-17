@@ -9,6 +9,7 @@ import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { WhatsAppButton } from './components/common/WhatsAppButton';
+import { ThemePreviewToolbar } from './components/common/ThemePreviewToolbar';
 
 import { HomePage } from './pages/HomePage';
 import { MenuPage } from './pages/MenuPage';
@@ -31,6 +32,7 @@ const PublicLayout: React.FC = () => {
         <Outlet />
       </main>
       <WhatsAppButton />
+      <ThemePreviewToolbar />
       <Footer />
     </div>
   );
@@ -63,9 +65,9 @@ export const App: React.FC = () => {
 
                 {/* Protected Admin CMS Routes */}
                 <Route path="/admin" element={<ProtectedAdminRoute />}>
-                  <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                  <Route index element={<AdminPage />} />
                   <Route path="dashboard" element={<AdminPage />} />
-                  <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+                  <Route path="*" element={<Navigate to="/admin" replace />} />
                 </Route>
               </Routes>
             </BrowserRouter>
