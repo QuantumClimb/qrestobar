@@ -11,6 +11,9 @@ import { MenuItem } from '../types/menu';
 const MidnightEmberMenu = React.lazy(
   () => import('../themes/components/midnightEmber/MidnightEmberMenu')
 );
+const HeritageSpiceMenu = React.lazy(
+  () => import('../themes/components/heritageSpice/HeritageSpiceMenu')
+);
 
 export const MenuPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
@@ -20,6 +23,15 @@ export const MenuPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
         <MidnightEmberMenu />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Heritage Spice presentation
+  if (effectiveThemeId === 'heritage-spice') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#2B080E]" />}>
+        <HeritageSpiceMenu />
       </React.Suspense>
     );
   }

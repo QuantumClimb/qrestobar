@@ -209,3 +209,76 @@ html[data-site-theme="heritage-spice"] .hs-font-body {
   border: 1px solid rgba(198, 154, 75, 0.20);
   pointer-events: none;
 }
+
+/* Scoped Reservation Form Styling for Heritage Spice */
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper form h3 {
+  color: #C69A4B;
+  border-bottom-color: rgba(198, 154, 75, 0.25);
+  font-family: "Lato", system-ui, sans-serif;
+  letter-spacing: 0.16em;
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper form h3 svg {
+  color: #E89532;
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper label {
+  color: #F8EAD2;
+  font-family: "Lato", system-ui, sans-serif;
+  letter-spacing: 0.08em;
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper input[type="text"],
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper input[type="email"],
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper input[type="tel"],
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper input[type="date"],
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper select,
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper textarea {
+  background-color: #2B080E;
+  color: #FFF4DF;
+  border-color: rgba(198, 154, 75, 0.40);
+  border-radius: 2px;
+  font-family: "Lato", system-ui, sans-serif;
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper input::placeholder,
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper textarea::placeholder {
+  color: #80665A;
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper input:focus,
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper select:focus,
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper textarea:focus {
+  border-color: #E89532;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(232, 149, 50, 0.25);
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper select option {
+  background-color: #2B080E;
+  color: #FFF4DF;
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper .btn-gold {
+  background: #C69A4B;
+  color: #2B080E;
+  border: 1px solid #DDB86C;
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(198, 154, 75, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: "Lato", system-ui, sans-serif;
+  letter-spacing: 0.16em;
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper .btn-gold:hover {
+  background: #E89532;
+  color: #FFFFFF;
+  border-color: #E89532;
+  box-shadow: 0 6px 20px rgba(232, 149, 50, 0.40);
+  transform: translateY(-1px);
+}
+
+html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper input[type="checkbox"] {
+  accent-color: #C69A4B;
+}
+
