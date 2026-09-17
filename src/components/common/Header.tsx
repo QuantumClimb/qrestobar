@@ -71,21 +71,21 @@ export const Header: React.FC = () => {
     <>
       {settings.announcementBarActive && settings.announcementBarText && (
         <div
-          className="text-xs py-1.5 px-4 text-center tracking-wider relative z-50 transition-colors"
+          className="text-xs py-1.5 px-3 sm:px-4 text-center tracking-wider relative z-50 transition-colors w-full max-w-full box-border min-w-0 overflow-hidden"
           style={{
             background: 'linear-gradient(90deg, #17002B 0%, #4B00B5 50%, #25005C 100%)',
             borderBottom: '1px solid rgba(129, 76, 255, 0.40)',
             boxShadow: '0 2px 14px rgba(91, 33, 255, 0.16)',
           }}
         >
-          <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+          <div className="max-w-7xl mx-auto flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap text-center min-w-0 w-full">
             <Zap className="w-3 h-3 text-purple-400 shrink-0" />
-            <span className="font-light" style={{ color: '#F5F5F7' }}>
+            <span className="font-light text-[11px] sm:text-xs" style={{ color: '#F5F5F7' }}>
               {settings.announcementBarText}
             </span>
             <Link
               to="/reservations"
-              className="font-semibold underline ml-1 hidden sm:inline"
+              className="font-semibold underline ml-1 hidden sm:inline text-[11px] sm:text-xs whitespace-nowrap"
               style={{ color: '#C084FC' }}
             >
               Book Now
@@ -95,7 +95,7 @@ export const Header: React.FC = () => {
       )}
 
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${isScrolled ? 'py-3 border-b' : 'py-4 lg:py-5'}`}
+        className={`sticky top-0 z-40 transition-all duration-300 w-full max-w-full box-border min-w-0 overflow-x-clip ${isScrolled ? 'py-3 border-b' : 'py-3.5 lg:py-5'}`}
         style={{
           backgroundColor: isScrolled ? 'var(--header-bg-scrolled)' : 'var(--header-bg)',
           backdropFilter: 'blur(16px)',
@@ -103,23 +103,23 @@ export const Header: React.FC = () => {
           borderColor: isScrolled ? 'var(--border-default)' : 'transparent',
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full max-w-full box-border min-w-0">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-4 min-w-0 w-full box-border">
             {/* Classic Serif Text Logo */}
             <Link
               to="/"
-              className="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded py-1 px-1.5 shrink-0"
+              className="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded py-1 px-1 min-w-0 shrink max-w-[55%] sm:max-w-none"
               aria-label="Q - RESTOBAR Homepage"
             >
               <span
-                className="font-serif text-lg sm:text-xl font-semibold tracking-[0.22em] select-none transition-colors duration-200"
+                className="font-serif text-base sm:text-xl font-semibold tracking-[0.12em] sm:tracking-[0.22em] select-none transition-colors duration-200 truncate block"
                 style={{ color: 'var(--logo-text-color)' }}
               >
                 Q - RESTOBAR
               </span>
             </Link>
 
-            {/* Desktop Primary Navigation (Home, Menu, Experiences, Offers & Events, About, Contact) */}
+            {/* Desktop Primary Navigation */}
             <nav className="hidden lg:flex items-center gap-3.5 xl:gap-6 2xl:gap-7" aria-label="Main Navigation">
               {navLinks.map((link) => (
                 <NavLink
@@ -156,7 +156,7 @@ export const Header: React.FC = () => {
               ))}
             </nav>
 
-            {/* Desktop Utility Actions (Separated from Primary Navigation) */}
+            {/* Desktop Utility Actions */}
             <div
               className="hidden lg:flex items-center gap-2.5 xl:gap-3.5 shrink-0"
               style={{
@@ -220,17 +220,21 @@ export const Header: React.FC = () => {
             </div>
 
             {/* Mobile Actions (Theme Toggle + Quick Reserve + Hamburger) */}
-            <div className="flex lg:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 ml-auto shrink-0">
               <ThemeToggle />
 
-              <Link to="/reservations" className="btn-gold px-3.5 py-2 text-[11px] flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5" />
-                <span>Reserve</span>
+              <Link
+                to="/reservations"
+                className="btn-gold px-2.5 sm:px-3.5 py-1.5 text-[11px] flex items-center gap-1.5 whitespace-nowrap shrink-0 min-h-[44px] justify-center"
+                title="Reserve a Table"
+              >
+                <Calendar className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden min-[360px]:inline">RESERVE</span>
               </Link>
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 transition-colors text-qc-secondary hover:text-qc-primary min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 transition-colors text-qc-secondary hover:text-qc-primary w-[44px] h-[44px] shrink-0 flex items-center justify-center cursor-pointer"
                 aria-label={mobileMenuOpen ? 'Close Navigation' : 'Open Navigation'}
                 aria-expanded={mobileMenuOpen}
               >
@@ -244,7 +248,7 @@ export const Header: React.FC = () => {
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 md:hidden animate-fade-in flex flex-col justify-between pt-24 pb-8 px-6 overflow-y-auto transition-colors"
+          className="fixed inset-x-0 top-full z-40 lg:hidden animate-fade-in flex flex-col justify-between pt-6 pb-8 px-5 overflow-y-auto max-h-[calc(100vh-70px)] w-full max-w-full box-border shadow-2xl transition-colors"
           style={{
             backgroundColor: 'var(--mobile-menu-bg)',
             backdropFilter: 'blur(20px)',

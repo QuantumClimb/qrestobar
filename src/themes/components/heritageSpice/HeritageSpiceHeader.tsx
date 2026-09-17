@@ -60,24 +60,24 @@ export const HeritageSpiceHeader: React.FC = () => {
 
       {/* Main Heritage Spice Sticky Header */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+        className={`sticky top-0 z-40 transition-all duration-300 w-full max-w-full box-border min-w-0 overflow-x-clip ${
           isScrolled
             ? 'py-3.5 bg-[#2B080E]/95 backdrop-blur-md border-b border-[#C69A4B]/30 shadow-2xl'
             : 'py-4 xl:py-5 bg-gradient-to-b from-[#2B080E]/95 to-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full max-w-full box-border min-w-0">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-4 min-w-0 w-full box-border">
             {/* Brand Logo */}
             <Link
               to={getThemedPath('/')}
-              className="group flex flex-col focus:outline-none rounded py-1 px-1.5 shrink-0"
+              className="group flex flex-col focus:outline-none rounded py-1 px-1 min-w-0 shrink max-w-[55%] sm:max-w-none"
               aria-label="Q - RESTOBAR Homepage"
             >
-              <span className="font-serif text-lg sm:text-xl xl:text-2xl font-semibold tracking-[0.24em] text-[#FFF4DF] group-hover:text-[#C69A4B] transition-colors select-none">
+              <span className="font-serif text-base sm:text-xl xl:text-2xl font-semibold tracking-[0.14em] sm:tracking-[0.24em] text-[#FFF4DF] group-hover:text-[#C69A4B] transition-colors select-none truncate block">
                 Q - RESTOBAR
               </span>
-              <span className="text-[9px] tracking-[0.30em] text-[#E89532] font-semibold uppercase -mt-0.5 font-sans">
+              <span className="text-[8px] sm:text-[9px] tracking-[0.20em] sm:tracking-[0.30em] text-[#E89532] font-semibold uppercase -mt-0.5 font-sans truncate block">
                 Kuala Lumpur
               </span>
             </Link>
@@ -137,18 +137,19 @@ export const HeritageSpiceHeader: React.FC = () => {
             </div>
 
             {/* Mobile Header Controls (Quick Reserve + Hamburger) */}
-            <div className="flex items-center gap-2 xl:hidden">
+            <div className="flex items-center gap-1.5 sm:gap-2 xl:hidden ml-auto shrink-0">
               <Link
                 to={getThemedPath('/reservations')}
-                className="hs-btn-primary text-[11px] px-3.5 py-1.5 flex items-center gap-1.5 whitespace-nowrap"
+                className="hs-btn-primary text-[11px] px-2.5 sm:px-3.5 py-1.5 flex items-center gap-1.5 whitespace-nowrap shrink-0 min-h-[44px] justify-center"
+                title="Reserve a Table"
               >
-                <Calendar className="w-3 h-3 shrink-0" />
-                <span>Reserve</span>
+                <Calendar className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden min-[360px]:inline">RESERVE</span>
               </Link>
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-[#F8EAD2] hover:text-[#FFF4DF] border border-[#C69A4B]/40 rounded bg-[#371018]/80 focus:outline-none min-w-[42px] min-h-[42px] flex items-center justify-center"
+                className="p-2 text-[#F8EAD2] hover:text-[#FFF4DF] border border-[#C69A4B]/40 rounded bg-[#371018]/80 focus:outline-none w-[44px] h-[44px] shrink-0 flex items-center justify-center cursor-pointer"
                 aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
                 aria-expanded={mobileMenuOpen}
               >

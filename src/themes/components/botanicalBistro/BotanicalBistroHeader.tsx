@@ -78,24 +78,24 @@ export const BotanicalBistroHeader: React.FC = () => {
 
       {/* Main Botanical Bistro Sticky Header */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+        className={`sticky top-0 z-40 transition-all duration-300 w-full max-w-full box-border min-w-0 overflow-x-clip ${
           isScrolled
             ? 'py-3.5 bg-[#F4F1E8]/95 backdrop-blur-md border-b border-[#3F6B4F]/25 shadow-md'
             : 'py-4 xl:py-5 bg-gradient-to-b from-[#F4F1E8]/95 via-[#F4F1E8]/80 to-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full max-w-full box-border min-w-0">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-4 min-w-0 w-full box-border">
             {/* Brand Logo */}
             <Link
               to={getThemedPath('/')}
-              className="group flex flex-col focus:outline-none rounded py-1 px-1.5 shrink-0"
+              className="group flex flex-col focus:outline-none rounded py-1 px-1 min-w-0 shrink max-w-[55%] sm:max-w-none"
               aria-label="Q - RESTOBAR Homepage"
             >
-              <span className="bb-font-display text-xl sm:text-2xl xl:text-3xl font-bold tracking-[0.20em] text-[#24352A] group-hover:text-[#3F6B4F] transition-colors select-none">
+              <span className="bb-font-display text-base sm:text-2xl xl:text-3xl font-bold tracking-[0.12em] sm:tracking-[0.20em] text-[#24352A] group-hover:text-[#3F6B4F] transition-colors select-none truncate block">
                 Q - RESTOBAR
               </span>
-              <span className="text-[9px] tracking-[0.30em] text-[#3F6B4F] font-semibold uppercase -mt-1 font-sans">
+              <span className="text-[8px] sm:text-[9px] tracking-[0.20em] sm:tracking-[0.30em] text-[#3F6B4F] font-semibold uppercase -mt-0.5 sm:-mt-1 font-sans truncate block">
                 Kuala Lumpur
               </span>
             </Link>
@@ -152,18 +152,19 @@ export const BotanicalBistroHeader: React.FC = () => {
             </div>
 
             {/* Mobile Hamburger Button */}
-            <div className="flex items-center gap-2 xl:hidden">
+            <div className="flex items-center gap-1.5 sm:gap-2 xl:hidden ml-auto shrink-0">
               <Link
                 to={getThemedPath('/reservations')}
-                className="bb-btn-primary px-3 py-2 text-[11px] font-bold mr-1 sm:mr-2 flex items-center gap-1.5"
+                className="bb-btn-primary px-2.5 sm:px-3 py-2 text-[11px] font-bold flex items-center gap-1.5 shrink-0 min-h-[44px] justify-center"
+                title="Reserve a Table"
               >
-                <Calendar className="w-3.5 h-3.5" />
-                <span>Reserve</span>
+                <Calendar className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden min-[360px]:inline">RESERVE</span>
               </Link>
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-xs border border-[#3F6B4F]/30 bg-[#FCFAF4] text-[#24352A] hover:text-[#3F6B4F] hover:border-[#3F6B4F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#3F6B4F]"
+                className="p-2 rounded-xs border border-[#3F6B4F]/30 bg-[#FCFAF4] text-[#24352A] hover:text-[#3F6B4F] hover:border-[#3F6B4F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#3F6B4F] w-[44px] h-[44px] shrink-0 flex items-center justify-center cursor-pointer"
                 aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
                 aria-expanded={mobileMenuOpen}
               >

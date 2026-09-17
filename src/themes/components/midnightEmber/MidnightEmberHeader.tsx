@@ -36,19 +36,19 @@ export const MidnightEmberHeader: React.FC = () => {
       {/* Top Announcement Bar */}
       {settings.announcementBarActive && settings.announcementBarText && (
         <div
-          className="text-xs py-2 px-4 text-center tracking-wider relative z-50 transition-colors"
+          className="text-xs py-2 px-3 sm:px-4 text-center tracking-wider relative z-50 transition-colors w-full max-w-full box-border min-w-0 overflow-hidden"
           style={{
             background: 'linear-gradient(90deg, #1A0D06 0%, #7C2D12 50%, #2A1208 100%)',
             borderBottom: '1px solid rgba(216, 170, 91, 0.35)',
             boxShadow: '0 2px 14px rgba(216, 102, 44, 0.20)',
           }}
         >
-          <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap text-[#F5EFE6]">
+          <div className="max-w-7xl mx-auto flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap text-[#F5EFE6] text-center min-w-0 w-full">
             <Flame className="w-3.5 h-3.5 text-[#D8662C] shrink-0" />
-            <span className="font-light">{settings.announcementBarText}</span>
+            <span className="font-light text-[11px] sm:text-xs">{settings.announcementBarText}</span>
             <Link
               to={getThemedPath('/reservations')}
-              className="font-bold underline ml-1 text-[#D8AA5B] hover:text-[#E47B3D] transition-colors hidden sm:inline"
+              className="font-bold underline ml-1 text-[#D8AA5B] hover:text-[#E47B3D] transition-colors hidden sm:inline text-[11px] sm:text-xs whitespace-nowrap"
             >
               Book Now
             </Link>
@@ -58,24 +58,24 @@ export const MidnightEmberHeader: React.FC = () => {
 
       {/* Main Midnight Ember Sticky Header */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+        className={`sticky top-0 z-40 transition-all duration-300 w-full max-w-full box-border min-w-0 overflow-x-clip ${
           isScrolled
             ? 'py-3.5 bg-[#101010]/95 backdrop-blur-md border-b border-[#D8AA5B]/20 shadow-2xl'
             : 'py-4 xl:py-5 bg-gradient-to-b from-[#0A0908]/90 to-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full max-w-full box-border min-w-0">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-4 min-w-0 w-full box-border">
             {/* Brand Logo */}
             <Link
               to={getThemedPath('/')}
-              className="group flex flex-col focus:outline-none rounded py-1 px-1.5 shrink-0"
+              className="group flex flex-col focus:outline-none rounded py-1 px-1 min-w-0 shrink max-w-[55%] sm:max-w-none"
               aria-label="Q - RESTOBAR Homepage"
             >
-              <span className="font-serif text-lg sm:text-xl xl:text-2xl font-semibold tracking-[0.24em] text-[#F5EFE6] group-hover:text-[#D8AA5B] transition-colors select-none">
+              <span className="font-serif text-base sm:text-xl xl:text-2xl font-semibold tracking-[0.14em] sm:tracking-[0.24em] text-[#F5EFE6] group-hover:text-[#D8AA5B] transition-colors select-none truncate block">
                 Q - RESTOBAR
               </span>
-              <span className="text-[9px] tracking-[0.30em] text-[#D8662C] font-semibold uppercase -mt-0.5">
+              <span className="text-[8px] sm:text-[9px] tracking-[0.20em] sm:tracking-[0.30em] text-[#D8662C] font-semibold uppercase -mt-0.5 font-sans truncate block">
                 Kuala Lumpur
               </span>
             </Link>
@@ -135,18 +135,19 @@ export const MidnightEmberHeader: React.FC = () => {
             </div>
 
             {/* Mobile Header Controls (Quick Reserve + Hamburger) */}
-            <div className="flex items-center gap-2 xl:hidden">
+            <div className="flex items-center gap-1.5 sm:gap-2 xl:hidden ml-auto shrink-0">
               <Link
                 to={getThemedPath('/reservations')}
-                className="me-btn-primary text-[11px] px-3.5 py-1.5 flex items-center gap-1.5 whitespace-nowrap"
+                className="me-btn-primary text-[11px] px-2.5 sm:px-3.5 py-1.5 flex items-center gap-1.5 whitespace-nowrap shrink-0 min-h-[44px] justify-center"
+                title="Reserve a Table"
               >
-                <Calendar className="w-3 h-3 shrink-0" />
-                <span>Reserve</span>
+                <Calendar className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden min-[360px]:inline">RESERVE</span>
               </Link>
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-[#CFC3B5] hover:text-[#F5EFE6] border border-[#D8AA5B]/30 rounded bg-[#1A1613]/80 focus:outline-none min-w-[42px] min-h-[42px] flex items-center justify-center"
+                className="p-2 text-[#CFC3B5] hover:text-[#F5EFE6] border border-[#D8AA5B]/30 rounded bg-[#1A1613]/80 focus:outline-none w-[44px] h-[44px] shrink-0 flex items-center justify-center cursor-pointer"
                 aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
                 aria-expanded={mobileMenuOpen}
               >
