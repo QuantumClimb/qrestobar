@@ -85,17 +85,19 @@ export const ReservationsPage: React.FC = () => {
           {/* Right Information & Policy Sidebar */}
           <div className="lg:col-span-4 space-y-6">
             {/* Box 1: Operating Hours */}
-            <div className="bg-qc-surface border border-border-base p-6 rounded-sm space-y-4">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-purple-500 flex items-center gap-2">
-                <Clock className="w-4 h-4 text-purple-500" />
+            <div className="bg-qc-surface border border-border-base p-5 sm:p-6 rounded-sm space-y-3 sm:space-y-4 relative static sm:static z-10 w-full max-w-full min-w-0">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-purple-500 flex items-center gap-2 w-full max-w-full min-w-0">
+                <Clock className="w-4 h-4 text-purple-500 shrink-0" />
                 <span>Operating Hours</span>
               </h3>
 
-              <div className="space-y-2 text-xs text-qc-body font-light">
-                <p className="text-qc-primary font-medium">Daily: 12:00 PM to 12:00 AM</p>
-                <p>• Lunch Service: 12:00 PM to 3:30 PM</p>
-                <p>• Dinner &amp; Lounge: 5:30 PM to 12:00 AM</p>
-                <p className="text-[11px] text-purple-500/90 pt-1">
+              <div className="space-y-2 text-xs text-qc-body font-light w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">
+                <p className="text-qc-primary font-medium text-xs sm:text-sm w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">
+                  Daily, 12:00 PM to 12:00 AM
+                </p>
+                <p className="w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">• Lunch Service: 12:00 PM to 3:30 PM</p>
+                <p className="w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">• Dinner &amp; Lounge: 5:30 PM to 12:00 AM</p>
+                <p className="text-[11px] text-purple-500/90 pt-1 w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">
                   Last kitchen orders 10:30 PM (Sun-Thu) / 11:30 PM (Fri-Sat)
                 </p>
               </div>

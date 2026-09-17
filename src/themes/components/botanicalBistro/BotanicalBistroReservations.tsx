@@ -58,17 +58,19 @@ export const BotanicalBistroReservations: React.FC = () => {
           <div className="lg:col-span-4 space-y-6">
             
             {/* Box 1: Operating Hours */}
-            <div className="bg-[#FCFAF4] border border-[#3F6B4F]/20 p-6 rounded-md shadow-md space-y-4">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#3F6B4F] flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#3F6B4F]" />
+            <div className="bg-[#FCFAF4] border border-[#3F6B4F]/20 p-5 sm:p-6 rounded-md shadow-md space-y-3 sm:space-y-4 relative static sm:static z-10 w-full max-w-full min-w-0">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#3F6B4F] flex items-center gap-2 w-full max-w-full min-w-0">
+                <Clock className="w-4 h-4 text-[#3F6B4F] shrink-0" />
                 <span>Service Hours</span>
               </h3>
 
-              <div className="space-y-2 text-xs text-[#5B7065] font-light leading-relaxed">
-                <p className="text-[#24352A] font-medium">{settings.openingHoursDisplay}</p>
-                <p>• {settings.openingHoursWeekday}</p>
-                <p>• {settings.openingHoursWeekend}</p>
-                <p className="text-[11px] text-[#B86B45] pt-1">
+              <div className="space-y-2 text-xs text-[#5B7065] font-light leading-relaxed w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">
+                <p className="text-[#24352A] font-medium text-xs sm:text-sm w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">
+                  Daily, 12:00 PM to 12:00 AM
+                </p>
+                <p className="w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">• {settings.openingHoursWeekday}</p>
+                <p className="w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">• {settings.openingHoursWeekend}</p>
+                <p className="text-[11px] text-[#B86B45] pt-1 w-full max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">
                   Last kitchen orders 1 hour prior to closing
                 </p>
               </div>

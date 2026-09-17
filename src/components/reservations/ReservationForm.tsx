@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Calendar, Users, MapPin, Gift } from 'lucide-react';
+import { Calendar, Users, MapPin, Gift, Clock } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { Reservation, ReservationFormData } from '../../types/reservation';
 
@@ -116,39 +116,60 @@ export const ReservationForm: React.FC<ReservationFormProps> = ({ onSuccess }) =
       )}
 
       {/* Step 1: Date, Time & Party Size */}
-      <div className="space-y-4">
-        <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-purple-500 border-b border-border-base pb-2 flex items-center gap-2">
-          <Calendar className="w-4 h-4" />
+      <div className="space-y-4 w-full max-w-full min-w-0 relative z-10">
+        <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-purple-500 border-b border-border-base pb-2 flex items-center gap-2 w-full max-w-full min-w-0">
+          <Calendar className="w-4 h-4 shrink-0" />
           <span>1. Dining Schedule &amp; Party</span>
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* Quick Schedule & Opening Hours Info Bar (Single-column on mobile, row on desktop) */}
+        <div className="bg-qc-base/90 border border-border-strong p-3.5 sm:p-4 rounded-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 w-full max-w-full min-w-0 relative z-10 box-border shadow-sm">
+          {/* Opening Hours Block */}
+          <div className="flex items-center gap-2.5 w-full sm:w-auto max-w-full min-w-0 whitespace-normal [overflow-wrap:anywhere]">
+            <Clock className="w-4 h-4 text-purple-400 shrink-0" />
+            <div className="text-xs text-qc-body min-w-0 w-full max-w-full whitespace-normal [overflow-wrap:anywhere]">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-purple-400 block sm:inline mr-1.5">Operating Hours:</span>
+              <span className="text-qc-primary font-medium text-xs whitespace-normal [overflow-wrap:anywhere]">Daily, 12:00 PM to 12:00 AM</span>
+            </div>
+          </div>
+
+          {/* Guest Count Summary Row */}
+          <div className="flex items-center gap-2.5 w-full sm:w-auto max-w-full min-w-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border-base/50 sm:border-l sm:border-border-base/50 sm:pl-4 whitespace-normal">
+            <Users className="w-4 h-4 text-purple-400 shrink-0" />
+            <div className="text-xs text-qc-body min-w-0 w-full max-w-full">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-purple-400 block sm:inline mr-1.5">Default Party:</span>
+              <span className="text-qc-primary font-medium text-xs">2 guests (Table for 2)</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-full min-w-0">
           {/* Date Picker */}
-          <div>
-            <label className="block text-xs text-qc-body uppercase font-medium mb-1.5">
+          <div className="w-full max-w-full min-w-0">
+            <label className="block text-xs text-qc-body uppercase font-medium mb-1.5 whitespace-normal">
               Reservation Date *
             </label>
             <input
               type="date"
               min={todayStr}
               {...register('date')}
-              className={`w-full bg-qc-surface border px-3.5 py-2.5 text-xs text-qc-primary rounded-sm focus:outline-none transition-colors ${
+              className={`w-full max-w-full min-w-0 bg-qc-surface border px-3.5 py-2.5 text-xs text-qc-primary rounded-sm focus:outline-none transition-colors ${
                 errors.date ? 'border-red-500' : 'border-border-strong focus:border-purple-500'
               }`}
             />
             {errors.date && (
-              <p className="mt-1 text-[11px] text-red-400">{errors.date.message}</p>
+              <p className="mt-1 text-[11px] text-red-400 whitespace-normal break-words">{errors.date.message}</p>
             )}
           </div>
 
           {/* Time Slot Picker */}
-          <div>
-            <label className="block text-xs text-qc-body uppercase font-medium mb-1.5">
+          <div className="w-full max-w-full min-w-0">
+            <label className="block text-xs text-qc-body uppercase font-medium mb-1.5 whitespace-normal">
               Dining Time *
             </label>
             <select
               {...register('time')}
-              className={`w-full bg-qc-surface border px-3.5 py-2.5 text-xs text-qc-primary rounded-sm focus:outline-none transition-colors ${
+              className={`w-full max-w-full min-w-0 bg-qc-surface border px-3.5 py-2.5 text-xs text-qc-primary rounded-sm focus:outline-none transition-colors ${
                 errors.time ? 'border-red-500' : 'border-border-strong focus:border-purple-500'
               }`}
             >
@@ -159,18 +180,18 @@ export const ReservationForm: React.FC<ReservationFormProps> = ({ onSuccess }) =
               ))}
             </select>
             {errors.time && (
-              <p className="mt-1 text-[11px] text-red-400">{errors.time.message}</p>
+              <p className="mt-1 text-[11px] text-red-400 whitespace-normal break-words">{errors.time.message}</p>
             )}
           </div>
 
           {/* Guests Count */}
-          <div>
-            <label className="block text-xs text-qc-body uppercase font-medium mb-1.5">
+          <div className="w-full max-w-full min-w-0">
+            <label className="block text-xs text-qc-body uppercase font-medium mb-1.5 whitespace-normal">
               Number of Guests * (1 - 20)
             </label>
             <select
               {...register('guestCount')}
-              className={`w-full bg-qc-surface border px-3.5 py-2.5 text-xs text-qc-primary rounded-sm focus:outline-none transition-colors ${
+              className={`w-full max-w-full min-w-0 bg-qc-surface border px-3.5 py-2.5 text-xs text-qc-primary rounded-sm focus:outline-none transition-colors ${
                 errors.guestCount ? 'border-red-500' : 'border-border-strong focus:border-purple-500'
               }`}
             >
@@ -181,7 +202,7 @@ export const ReservationForm: React.FC<ReservationFormProps> = ({ onSuccess }) =
               ))}
             </select>
             {errors.guestCount && (
-              <p className="mt-1 text-[11px] text-red-400">{errors.guestCount.message}</p>
+              <p className="mt-1 text-[11px] text-red-400 whitespace-normal break-words">{errors.guestCount.message}</p>
             )}
           </div>
         </div>
