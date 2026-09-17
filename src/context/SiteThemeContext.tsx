@@ -26,14 +26,15 @@ const getInitialPreviewTheme = (): SiteThemeId | null => {
   if (import.meta.env.DEV) {
     try {
       const params = new URLSearchParams(window.location.search);
-      const urlPreview = params.get('siteThemePreview');
-      if (urlPreview && isRuntimeThemeAvailable(urlPreview)) {
+      const urlPreview = params.get('siteThemePreview') as SiteThemeId;
+      if (urlPreview && (isRuntimeThemeAvailable(urlPreview) || urlPreview === 'heritage-spice')) {
         return urlPreview;
       }
     } catch {}
   }
   return null;
 };
+
 
 export const SiteThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { theme: colorMode } = useTheme();

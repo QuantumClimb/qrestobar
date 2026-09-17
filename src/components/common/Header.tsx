@@ -6,6 +6,12 @@ import { useSiteTheme } from '../../context/SiteThemeContext';
 import { MidnightEmberHeader } from '../../themes/components/midnightEmber/MidnightEmberHeader';
 import { ThemeToggle } from './ThemeToggle';
 
+const HeritageSpiceHeader = React.lazy(() =>
+  import('../../themes/components/heritageSpice/HeritageSpiceHeader').then((m) => ({
+    default: m.HeritageSpiceHeader,
+  }))
+);
+
 export const Header: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
 
@@ -13,6 +19,16 @@ export const Header: React.FC = () => {
   if (effectiveThemeId === 'midnight-ember') {
     return <MidnightEmberHeader />;
   }
+
+  // Early branch: render theme-specific header for Heritage Spice
+  if (effectiveThemeId === 'heritage-spice') {
+    return (
+      <React.Suspense fallback={<div className="h-20 bg-[#2B080E]" />}>
+        <HeritageSpiceHeader />
+      </React.Suspense>
+    );
+  }
+
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

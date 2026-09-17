@@ -1,0 +1,211 @@
+/**
+ * ============================================================================
+ * HERITAGE SPICE — Visual Styling & Scoped Design System
+ * ============================================================================
+ * 
+ * Aesthetic Character:
+ * - Fixed-warm palette: Royal Deep Maroon (#2B080E, #4A0E18), Antique Gold (#C69A4B),
+ *   Fragrant Saffron (#E89532), Warm Cream (#FFF9EC, #FFF4DF), Soft Ivory (#F8EAD2),
+ *   Dark Terracotta Text (#321B18), and Muted Umber (#80665A).
+ * - Typography: Cormorant Garamond for display headings, Lato for clean body readability.
+ * - Structure: Deep maroon framing for cinematic hero and footer, warm cream for
+ *   editorial menu and story sections.
+ * ============================================================================
+ */
+
+/* Scoped Typography */
+html[data-site-theme="heritage-spice"] .hs-font-display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+html[data-site-theme="heritage-spice"] .hs-font-body {
+  font-family: "Lato", system-ui, -apple-system, sans-serif;
+}
+
+/* Primary Button (Antique Gold -> Saffron Glow) */
+.hs-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lato", system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  background: #C69A4B;
+  color: #2B080E;
+  border: 1px solid #DDB86C;
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(198, 154, 75, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.hs-btn-primary:hover {
+  background: #E89532;
+  color: #FFFFFF;
+  border-color: #E89532;
+  box-shadow: 0 6px 20px rgba(232, 149, 50, 0.40);
+  transform: translateY(-1px);
+}
+
+.hs-btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Outline Button (Maroon/Dark Background) */
+.hs-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lato", system-ui, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  background: transparent;
+  color: #FFF4DF;
+  border: 1px solid rgba(198, 154, 75, 0.50);
+  border-radius: 2px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hs-btn-outline:hover {
+  background: rgba(198, 154, 75, 0.15);
+  color: #C69A4B;
+  border-color: #C69A4B;
+  transform: translateY(-1px);
+}
+
+/* Dark Button (Warm Cream Background) */
+.hs-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lato", system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  background: #2B080E;
+  color: #FFF4DF;
+  border: 1px solid #C69A4B;
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(43, 8, 14, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hs-btn-dark:hover {
+  background: #4A0E18;
+  color: #C69A4B;
+  border-color: #E89532;
+  box-shadow: 0 6px 20px rgba(74, 14, 24, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Decorative Antique Gold Divider */
+.hs-divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(198, 154, 75, 0.70) 50%, transparent 100%);
+  position: relative;
+  margin: 1.5rem auto;
+}
+
+.hs-divider-gold::after {
+  content: '♦';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #C69A4B;
+  font-size: 0.65rem;
+  background: inherit;
+  padding: 0 0.5rem;
+}
+
+/* Stat Cards in Hero */
+.hs-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding-top: 2rem;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .hs-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.hs-stat-card {
+  background: rgba(43, 8, 14, 0.85);
+  border: 1px solid rgba(198, 154, 75, 0.35);
+  padding: 1.25rem 1rem;
+  border-radius: 2px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s ease;
+}
+
+.hs-stat-card:hover {
+  border-color: rgba(232, 149, 50, 0.65);
+}
+
+.hs-stat-value {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #C69A4B;
+  display: block;
+  line-height: 1.1;
+}
+
+.hs-stat-label {
+  font-family: "Lato", system-ui, sans-serif;
+  font-size: 0.70rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #F8EAD2;
+  margin-top: 0.35rem;
+  display: block;
+}
+
+/* Menu Editorial Cards (Warm Cream Mode) */
+.hs-menu-card {
+  background: #FFFDF7;
+  border: 1px solid rgba(198, 154, 75, 0.40);
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(43, 8, 14, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hs-menu-card:hover {
+  transform: translateY(-3px);
+  border-color: #C69A4B;
+  box-shadow: 0 10px 28px rgba(43, 8, 14, 0.12);
+}
+
+/* Story Highlights */
+.hs-story-box {
+  background: #371018;
+  border: 1px solid rgba(198, 154, 75, 0.40);
+  padding: 2rem;
+  border-radius: 2px;
+  position: relative;
+}
+
+.hs-story-box::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(198, 154, 75, 0.20);
+  pointer-events: none;
+}

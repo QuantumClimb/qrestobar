@@ -18,11 +18,13 @@ export const WhatsAppButton: React.FC = () => {
   return (
     <button
       onClick={handleWhatsAppClick}
-      className={`fixed ${previewThemeId ? 'bottom-20 sm:bottom-6' : 'bottom-6'} right-4 sm:right-6 z-40 w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-500 text-qc-primary shadow-2xl flex items-center justify-center border-2 border-purple-600/60 hover:scale-110 active:scale-95 transition-all duration-300 group focus:outline-none focus:ring-4 focus:ring-emerald-500/40`}
+      className={`fixed ${previewThemeId ? 'bottom-28 sm:bottom-24 lg:bottom-6' : 'bottom-6'} right-4 sm:right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-600 hover:bg-emerald-500 text-qc-primary shadow-2xl flex items-center justify-center border-2 border-purple-600/60 hover:scale-110 active:scale-95 transition-all duration-300 group focus:outline-none focus:ring-4 focus:ring-emerald-500/40`}
       aria-label="Chat with Q-RESTOBAR Concierge on WhatsApp"
       title="Chat with Q-RESTOBAR Concierge on WhatsApp"
     >
-      <MessageCircle className="w-7 h-7 text-white" />
+      <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+
+
       
       {/* Tooltip on hover */}
       <span className="absolute right-16 px-3 py-1.5 bg-qc-surface/95 border border-purple-600/40 text-qc-secondary text-xs font-semibold rounded-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-xl backdrop-blur-md">

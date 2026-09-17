@@ -1,41 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook, Lock } from 'lucide-react';
-import { useData } from '../../context/DataContext';
-import { useToast } from '../../context/ToastContext';
-import { useSiteTheme } from '../../context/SiteThemeContext';
-import { MidnightEmberFooter } from '../../themes/components/midnightEmber/MidnightEmberFooter';
-import { Modal } from './Modal';
+import { useData } from '../../../context/DataContext';
+import { useToast } from '../../../context/ToastContext';
+import { withSiteThemePreview } from '../../themePreviewNavigation';
+import { Modal } from '../../../components/common/Modal';
+import '../../styles/heritageSpice.css';
 
-const HeritageSpiceFooter = React.lazy(() =>
-  import('../../themes/components/heritageSpice/HeritageSpiceFooter').then((m) => ({
-    default: m.HeritageSpiceFooter,
-  }))
-);
-
-export const Footer: React.FC = () => {
-  const { effectiveThemeId } = useSiteTheme();
-
-  // Early branch: render theme-specific footer for Midnight Ember
-  if (effectiveThemeId === 'midnight-ember') {
-    return <MidnightEmberFooter />;
-  }
-
-  // Early branch: render theme-specific footer for Heritage Spice
-  if (effectiveThemeId === 'heritage-spice') {
-    return (
-      <React.Suspense fallback={<div className="h-24 bg-[#2B080E]" />}>
-        <HeritageSpiceFooter />
-      </React.Suspense>
-    );
-  }
-
-
+export const HeritageSpiceFooter: React.FC = () => {
   const { settings } = useData();
   const { showToast } = useToast();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   const [termsModalOpen, setTermsModalOpen] = useState(false);
+
+  const getThemedPath = (path: string) => withSiteThemePreview(path, 'heritage-spice');
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,40 +22,43 @@ export const Footer: React.FC = () => {
       showToast({ type: 'error', title: 'Invalid Email', message: 'Please enter a valid email address.' });
       return;
     }
-    showToast({ type: 'success', title: 'Subscribed to The Q-RESTOBAR Gazette', message: 'Thank you for subscribing to our culinary updates and exclusive tasting invitations.' });
+    showToast({
+      type: 'success',
+      title: 'Subscribed to Heritage Culinary Notes',
+      message: 'Thank you for subscribing to our seasonal chef menu previews and private tasting invitations.'
+    });
     setNewsletterEmail('');
   };
 
   const colHeadStyle: React.CSSProperties = {
-    fontFamily: "'IBM Plex Mono', monospace",
-    fontSize: '0.65rem',
-    letterSpacing: '0.10em',
+    fontFamily: "'Lato', system-ui, sans-serif",
+    fontSize: '0.70rem',
+    letterSpacing: '0.18em',
     textTransform: 'uppercase' as const,
-    color: 'var(--text-secondary)',
+    color: '#C69A4B',
     marginBottom: '1.25rem',
     display: 'block',
+    fontWeight: 700,
   };
 
   return (
-    <footer
-      style={{ backgroundColor: 'var(--bg-primary)', borderTop: '1px solid var(--border-default)' }}
-      className="text-qc-primary pt-16 pb-12 relative overflow-hidden transition-colors"
-    >
+    <footer className="bg-[#2B080E] text-[#FFF4DF] pt-16 pb-24 sm:pb-12 relative overflow-hidden border-t border-[#C69A4B]/30 hs-font-body">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
-          {/* Col 1: Brand */}
+          {/* Col 1: Brand & Socials */}
           <div className="space-y-4">
-            <Link to="/" className="inline-block focus:outline-none py-1" aria-label="Q - RESTOBAR Homepage">
-              <span
-                className="font-serif text-xl font-semibold tracking-[0.22em] select-none transition-colors duration-200"
-                style={{ color: 'var(--logo-text-color)' }}
-              >
+            <Link to={getThemedPath('/')} className="inline-block focus:outline-none py-1" aria-label="Q - RESTOBAR Homepage">
+              <span className="font-serif text-xl sm:text-2xl font-semibold tracking-[0.24em] text-[#FFF4DF] select-none">
                 Q - RESTOBAR
               </span>
+              <span className="block text-[9px] tracking-[0.30em] text-[#E89532] font-semibold uppercase -mt-0.5">
+                Kuala Lumpur · Heritage
+              </span>
             </Link>
-            <p className="text-sm leading-relaxed font-light text-qc-body">
-              Modern Malaysian dining reimagined with local soul, contemporary culinary craft, and vibrant nightlife in Bukit Bintang.
+            <p className="text-sm leading-relaxed font-light text-[#F8EAD2]/80">
+              Celebrated Malaysian culinary heritage elevated through artisanal spice craft, slow-simmered rempahs, and contemporary hospitality in Bukit Bintang.
             </p>
             <div className="pt-2 flex items-center gap-3">
               {[
@@ -90,20 +72,7 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded flex items-center justify-center transition-all"
-                  style={{
-                    backgroundColor: 'var(--bg-card)',
-                    border: '1px solid var(--border-default)',
-                    color: 'var(--text-secondary)',
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.color = 'var(--accent-hover)';
-                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-primary)';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
-                  }}
+                  className="w-9 h-9 rounded-xs flex items-center justify-center transition-all bg-[#371018] border border-[#C69A4B]/40 text-[#C69A4B] hover:text-[#FFF4DF] hover:bg-[#4A0E18] hover:border-[#E89532]"
                 >
                   {icon}
                 </a>
@@ -111,7 +80,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Col 2: Navigation */}
+          {/* Col 2: Navigation Links */}
           <div>
             <span style={colHeadStyle}>Explore</span>
             <ul className="space-y-2.5 text-sm">
@@ -126,19 +95,12 @@ export const Footer: React.FC = () => {
               ].map(({ to, label, badge }) => (
                 <li key={to}>
                   <Link
-                    to={to}
-                    className="flex items-center gap-1.5 transition-colors text-qc-body hover:text-purple-500"
+                    to={getThemedPath(to)}
+                    className="flex items-center gap-1.5 transition-colors text-[#F8EAD2]/80 hover:text-[#C69A4B]"
                   >
                     <span>{label}</span>
                     {badge && (
-                      <span
-                        className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded"
-                        style={{
-                          background: 'var(--accent-surface)',
-                          color: 'var(--accent-primary)',
-                          border: '1px solid var(--accent-primary)',
-                        }}
-                      >
+                      <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-xs bg-[#E89532]/20 text-[#C69A4B] border border-[#C69A4B]/40">
                         {badge}
                       </span>
                     )}
@@ -146,16 +108,16 @@ export const Footer: React.FC = () => {
                 </li>
               ))}
 
-              {/* Separated CMS Demo & Staff Login Access Link */}
-              <li className="pt-3 border-t border-border-default/40 mt-3">
+              {/* Staff Access / CMS Demo Link */}
+              <li className="pt-3 border-t border-[#C69A4B]/20 mt-3">
                 <Link
                   to="/admin/login"
-                  className="group inline-flex items-center gap-2 transition-colors text-qc-body hover:text-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded py-0.5"
+                  className="group inline-flex items-center gap-2 transition-colors text-[#F8EAD2]/80 hover:text-[#C69A4B] focus:outline-none rounded py-0.5"
                   title="CMS Demo & Staff Access Gate"
                 >
-                  <Lock className="w-3.5 h-3.5 text-purple-400 group-hover:text-purple-300 transition-colors shrink-0" />
+                  <Lock className="w-3.5 h-3.5 text-[#C69A4B] group-hover:text-[#E89532] transition-colors shrink-0" />
                   <span className="font-medium text-xs">CMS Demo</span>
-                  <span className="text-[9px] uppercase font-mono tracking-wider px-1.5 py-0.5 rounded bg-purple-950/40 text-purple-300 border border-purple-600/30">
+                  <span className="text-[9px] uppercase font-mono tracking-wider px-1.5 py-0.5 rounded-xs bg-[#371018] text-[#C69A4B] border border-[#C69A4B]/40">
                     Staff Login
                   </span>
                 </Link>
@@ -166,37 +128,37 @@ export const Footer: React.FC = () => {
           {/* Col 3: Hours & Contact */}
           <div>
             <span style={colHeadStyle}>Hours & Contact</span>
-            <div className="space-y-3.5 text-xs text-qc-body">
+            <div className="space-y-3.5 text-xs text-[#F8EAD2]/80">
               <div className="flex items-start gap-2.5">
-                <Clock className="w-4 h-4 shrink-0 mt-0.5 text-purple-500" />
+                <Clock className="w-4 h-4 shrink-0 mt-0.5 text-[#C69A4B]" />
                 <div>
-                  <p className="font-medium text-qc-primary">Daily: 12:00 PM to 12:00 AM</p>
-                  <p className="text-[11px] mt-0.5">Kitchen closes 10:30 PM (Sun–Thu) / 11:30 PM (Fri–Sat)</p>
+                  <p className="font-medium text-[#FFF4DF]">{settings.openingHoursDisplay || 'Daily: 12:00 PM to 12:00 AM'}</p>
+                  <p className="text-[11px] mt-0.5 text-[#F8EAD2]/60">Kitchen closes 10:30 PM (Sun–Thu) / 11:30 PM (Fri–Sat)</p>
                 </div>
               </div>
               {settings.addressLine1 && (
                 <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-purple-500" />
+                  <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-[#C69A4B]" />
                   <div>
-                    <p className="font-medium text-qc-primary">{settings.addressLine1}</p>
-                    <p className="text-[11px]">{settings.city}{settings.postcode ? `, ${settings.postcode}` : ''}</p>
+                    <p className="font-medium text-[#FFF4DF]">{settings.addressLine1}</p>
+                    <p className="text-[11px] text-[#F8EAD2]/60">{settings.city}{settings.postcode ? `, ${settings.postcode}` : ''}</p>
                   </div>
                 </div>
               )}
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 shrink-0 text-purple-500" />
+                <Phone className="w-4 h-4 shrink-0 text-[#C69A4B]" />
                 <a
                   href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`}
-                  className="transition-colors text-qc-body hover:text-purple-500"
+                  className="transition-colors text-[#F8EAD2]/80 hover:text-[#C69A4B]"
                 >
                   {settings.phone}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 shrink-0 text-purple-500" />
+                <Mail className="w-4 h-4 shrink-0 text-[#C69A4B]" />
                 <a
                   href={`mailto:${settings.email}`}
-                  className="transition-colors text-qc-body hover:text-purple-500"
+                  className="transition-colors text-[#F8EAD2]/80 hover:text-[#C69A4B]"
                 >
                   {settings.email}
                 </a>
@@ -207,8 +169,8 @@ export const Footer: React.FC = () => {
           {/* Col 4: Newsletter */}
           <div>
             <span style={colHeadStyle}>Private Invitations</span>
-            <p className="text-xs mb-4 leading-relaxed font-light text-qc-body">
-              Receive private tasting event notifications, seasonal chef menu previews, and weekend brunch updates.
+            <p className="text-xs mb-4 leading-relaxed font-light text-[#F8EAD2]/80">
+              Receive invitations to private seasonal tasting menus, heirloom recipe unveilings, and weekend dining highlights.
             </p>
             <form onSubmit={handleNewsletterSubmit} className="space-y-2">
               <div className="relative">
@@ -217,68 +179,48 @@ export const Footer: React.FC = () => {
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Enter your email address"
-                  className="w-full px-3.5 py-2.5 text-xs rounded pr-10"
-                  style={{
-                    backgroundColor: 'var(--input-bg)',
-                    border: '1px solid var(--input-border)',
-                    color: 'var(--input-text)',
-                  }}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xs pr-10 bg-[#371018] border border-[#C69A4B]/40 text-[#FFF4DF] placeholder-[#F8EAD2]/40 focus:outline-none focus:border-[#C69A4B]"
                   required
                 />
                 <button
                   type="submit"
-                  className="absolute right-1 top-1 bottom-1 px-2.5 rounded flex items-center justify-center transition-all"
-                  style={{
-                    backgroundColor: 'var(--button-primary-bg)',
-                    color: 'var(--button-primary-text)',
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--button-hover-bg)';
-                    (e.currentTarget as HTMLElement).style.color = 'var(--button-hover-text)';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--button-primary-bg)';
-                    (e.currentTarget as HTMLElement).style.color = 'var(--button-primary-text)';
-                  }}
+                  className="absolute right-1 top-1 bottom-1 px-2.5 rounded-xs flex items-center justify-center transition-all bg-[#C69A4B] text-[#2B080E] hover:bg-[#E89532] hover:text-white"
                   aria-label="Subscribe to newsletter"
                 >
                   <Send className="w-3.5 h-3.5" />
                 </button>
               </div>
-              <p className="text-[10px] text-qc-muted">Demonstration newsletter form. No spam.</p>
+              <p className="text-[10px] text-[#F8EAD2]/50">Demonstration newsletter form. No spam.</p>
             </form>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div
-          className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-qc-muted"
-          style={{ borderTop: '1px solid var(--border-default)' }}
-        >
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F8EAD2]/60 border-t border-[#C69A4B]/20">
           <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
             <p>© {new Date().getFullYear()} Q-RESTOBAR. All rights reserved.</p>
             <button
               onClick={() => setPrivacyModalOpen(true)}
-              className="underline transition-colors hover:text-purple-500"
+              className="underline transition-colors hover:text-[#C69A4B]"
             >
               Privacy Policy
             </button>
             <button
               onClick={() => setTermsModalOpen(true)}
-              className="underline transition-colors hover:text-purple-500"
+              className="underline transition-colors hover:text-[#C69A4B]"
             >
               Terms of Service
             </button>
             <Link
               to="/admin/login"
-              className="underline transition-colors hover:text-purple-500"
+              className="underline transition-colors hover:text-[#C69A4B]"
             >
               Staff Login
             </Link>
           </div>
           <div className="flex items-center gap-2">
             <span>Concept Website by </span>
-            <span className="text-purple-500 font-semibold">Quantum Climb</span>
+            <span className="text-[#C69A4B] font-semibold">Quantum Climb</span>
           </div>
         </div>
       </div>

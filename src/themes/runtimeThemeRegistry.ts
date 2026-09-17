@@ -1,6 +1,7 @@
 import { SiteThemeId, SiteThemeDefinition } from './types';
 import { originalThemePreset } from './presets/original';
 import { midnightEmberThemePreset } from './presets/midnightEmber';
+import { heritageSpiceThemePreset } from './presets/heritageSpice';
 
 /**
  * Runtime Theme Registry
@@ -10,6 +11,7 @@ import { midnightEmberThemePreset } from './presets/midnightEmber';
 export const RUNTIME_THEME_REGISTRY: Partial<Record<SiteThemeId, SiteThemeDefinition>> = {
   'original': originalThemePreset,
   'midnight-ember': midnightEmberThemePreset,
+  'heritage-spice': heritageSpiceThemePreset,
 };
 
 /**
@@ -28,9 +30,9 @@ export const isRuntimeThemeAvailable = (
  * Safely falls back to the Original Theme definition if the theme is unavailable or unknown.
  */
 export const getRuntimeThemeDefinition = (themeId: string | null | undefined): SiteThemeDefinition => {
-  if (themeId && isRuntimeThemeAvailable(themeId)) {
-    const found = RUNTIME_THEME_REGISTRY[themeId];
-    if (found) return found;
+  if (themeId && RUNTIME_THEME_REGISTRY[themeId as SiteThemeId]) {
+    return RUNTIME_THEME_REGISTRY[themeId as SiteThemeId]!;
   }
   return RUNTIME_THEME_REGISTRY['original']!;
 };
+

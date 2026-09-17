@@ -1,5 +1,5 @@
 import { SiteThemeId } from './types';
-import { isRuntimeThemeAvailable } from './runtimeThemeRegistry';
+import { RUNTIME_THEME_REGISTRY } from './runtimeThemeRegistry';
 
 /**
  * Generic helper to preserve site theme preview query parameters in DEV mode only.
@@ -14,10 +14,11 @@ export function withSiteThemePreview(
     return path;
   }
 
-  // Validate that the theme is an available runtime theme
-  if (!isRuntimeThemeAvailable(effectiveThemeId)) {
+  // Validate that the theme is a registered runtime theme in this codebase
+  if (!RUNTIME_THEME_REGISTRY[effectiveThemeId as SiteThemeId]) {
     return path;
   }
+
 
   // Preserve hash fragment if present (e.g. /menu#starters)
   const [urlWithoutHash, hash] = path.split('#');
