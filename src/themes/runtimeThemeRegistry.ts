@@ -2,6 +2,7 @@ import { SiteThemeId, SiteThemeDefinition } from './types';
 import { originalThemePreset } from './presets/original';
 import { midnightEmberThemePreset } from './presets/midnightEmber';
 import { heritageSpiceThemePreset } from './presets/heritageSpice';
+import { botanicalBistroThemePreset } from './presets/botanicalBistro';
 
 /**
  * Runtime Theme Registry
@@ -12,6 +13,7 @@ export const RUNTIME_THEME_REGISTRY: Partial<Record<SiteThemeId, SiteThemeDefini
   'original': originalThemePreset,
   'midnight-ember': midnightEmberThemePreset,
   'heritage-spice': heritageSpiceThemePreset,
+  'botanical-bistro': botanicalBistroThemePreset,
 };
 
 /**
@@ -19,7 +21,7 @@ export const RUNTIME_THEME_REGISTRY: Partial<Record<SiteThemeId, SiteThemeDefini
  */
 export const isRuntimeThemeAvailable = (
   themeId: string | null | undefined
-): themeId is 'original' | 'midnight-ember' | 'heritage-spice' => {
+): themeId is 'original' | 'midnight-ember' | 'heritage-spice' | 'botanical-bistro' => {
   if (!themeId) return false;
   const match = RUNTIME_THEME_REGISTRY[themeId as SiteThemeId];
   return Boolean(match && match.metadata.available);

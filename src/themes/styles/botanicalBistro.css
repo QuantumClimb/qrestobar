@@ -1,0 +1,171 @@
+/**
+ * ============================================================================
+ * BOTANICAL BISTRO — Visual Styling & Scoped Design System
+ * ============================================================================
+ * 
+ * Aesthetic Character:
+ * - Fresh upscale garden-restaurant atmosphere
+ * - Sage green (#3F6B4F), Olive, Warm Ivory (#F4F1E8), Natural Wood, Terracotta (#B86B45)
+ * - Typography: Cormorant Garamond for display headings, Inter for clean body readability.
+ * - Structure: Light, airy surfaces with strong readable contrast.
+ * ============================================================================
+ */
+
+/* Scoped Typography */
+html[data-site-theme="botanical-bistro"] .bb-font-display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+html[data-site-theme="botanical-bistro"] .bb-font-body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Primary Button (Sage Green -> Forest Green Hover) */
+.bb-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background-color: #3F6B4F;
+  color: #FFFFFF;
+  border: 1px solid #3F6B4F;
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(63, 107, 79, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.bb-btn-primary:hover {
+  background-color: #2F533C;
+  border-color: #2F533C;
+  color: #FFFFFF;
+  box-shadow: 0 5px 15px rgba(63, 107, 79, 0.35);
+  transform: translateY(-1px);
+}
+
+.bb-btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Outline Button */
+.bb-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background-color: transparent;
+  color: #3F6B4F;
+  border: 1px solid rgba(63, 107, 79, 0.45);
+  border-radius: 4px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.bb-btn-outline:hover {
+  background-color: rgba(63, 107, 79, 0.08);
+  border-color: #3F6B4F;
+  color: #24352A;
+}
+
+/* Terracotta Accent Button */
+.bb-btn-terracotta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background-color: #B86B45;
+  color: #FFFFFF;
+  border: 1px solid #B86B45;
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(184, 107, 69, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.bb-btn-terracotta:hover {
+  background-color: #A05733;
+  border-color: #A05733;
+  box-shadow: 0 5px 15px rgba(184, 107, 69, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Card Styling */
+.bb-card {
+  background-color: #FCFAF4;
+  border: 1px solid rgba(63, 107, 79, 0.20);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(36, 53, 42, 0.06);
+  transition: all 0.3s ease;
+}
+
+.bb-card:hover {
+  border-color: rgba(63, 107, 79, 0.45);
+  box-shadow: 0 8px 24px rgba(36, 53, 42, 0.12);
+}
+
+/* Badge Styling */
+.bb-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  background-color: rgba(63, 107, 79, 0.12);
+  color: #3F6B4F;
+  border: 1px solid rgba(63, 107, 79, 0.30);
+}
+
+.bb-badge-terracotta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  background-color: rgba(184, 107, 69, 0.12);
+  color: #B86B45;
+  border: 1px solid rgba(184, 107, 69, 0.30);
+}
+
+/* Scoped Overrides when data-site-theme="botanical-bistro" */
+html[data-site-theme="botanical-bistro"] {
+  --bg-primary: #F4F1E8;
+  --bg-secondary: #E7E3D6;
+  --text-primary: #24352A;
+  --accent-color: #3F6B4F;
+}
+
+html[data-site-theme="botanical-bistro"] body {
+  background-color: #F4F1E8;
+  color: #24352A;
+}
+
+/* Focus Ring Customization */
+html[data-site-theme="botanical-bistro"] *:focus-visible {
+  outline: 2px solid #3F6B4F;
+  outline-offset: 2px;
+}

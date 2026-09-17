@@ -13,6 +13,12 @@ const HeritageSpiceFooter = React.lazy(() =>
   }))
 );
 
+const BotanicalBistroFooter = React.lazy(() =>
+  import('../../themes/components/botanicalBistro/BotanicalBistroFooter').then((m) => ({
+    default: m.BotanicalBistroFooter,
+  }))
+);
+
 export const Footer: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
 
@@ -26,6 +32,15 @@ export const Footer: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="h-24 bg-[#2B080E]" />}>
         <HeritageSpiceFooter />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: render theme-specific footer for Botanical Bistro
+  if (effectiveThemeId === 'botanical-bistro') {
+    return (
+      <React.Suspense fallback={<div className="h-24 bg-[#E7E3D6]" />}>
+        <BotanicalBistroFooter />
       </React.Suspense>
     );
   }

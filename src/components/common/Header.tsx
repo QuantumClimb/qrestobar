@@ -12,6 +12,12 @@ const HeritageSpiceHeader = React.lazy(() =>
   }))
 );
 
+const BotanicalBistroHeader = React.lazy(() =>
+  import('../../themes/components/botanicalBistro/BotanicalBistroHeader').then((m) => ({
+    default: m.BotanicalBistroHeader,
+  }))
+);
+
 export const Header: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
 
@@ -25,6 +31,15 @@ export const Header: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="h-20 bg-[#2B080E]" />}>
         <HeritageSpiceHeader />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: render theme-specific header for Botanical Bistro
+  if (effectiveThemeId === 'botanical-bistro') {
+    return (
+      <React.Suspense fallback={<div className="h-20 bg-[#F4F1E8]" />}>
+        <BotanicalBistroHeader />
       </React.Suspense>
     );
   }
