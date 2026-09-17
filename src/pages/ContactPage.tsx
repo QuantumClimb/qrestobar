@@ -7,6 +7,9 @@ import { useSiteTheme } from '../context/SiteThemeContext';
 const MidnightEmberContact = React.lazy(
   () => import('../themes/components/midnightEmber/MidnightEmberContact')
 );
+const HeritageSpiceContact = React.lazy(
+  () => import('../themes/components/heritageSpice/HeritageSpiceContact')
+);
 
 export const ContactPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
@@ -16,6 +19,15 @@ export const ContactPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
         <MidnightEmberContact />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Heritage Spice presentation
+  if (effectiveThemeId === 'heritage-spice') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#2B080E]" />}>
+        <HeritageSpiceContact />
       </React.Suspense>
     );
   }

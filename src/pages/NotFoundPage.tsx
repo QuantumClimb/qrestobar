@@ -7,8 +7,21 @@ const MidnightEmberNotFound = React.lazy(
   () => import('../themes/components/midnightEmber/MidnightEmberNotFound')
 );
 
+const HeritageSpiceNotFound = React.lazy(
+  () => import('../themes/components/heritageSpice/HeritageSpiceNotFound')
+);
+
 export const NotFoundPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
+
+  // Early branch: Heritage Spice presentation
+  if (effectiveThemeId === 'heritage-spice') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#1F070B]" />}>
+        <HeritageSpiceNotFound />
+      </React.Suspense>
+    );
+  }
 
   // Early branch: Midnight Ember presentation
   if (effectiveThemeId === 'midnight-ember') {

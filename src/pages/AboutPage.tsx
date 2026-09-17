@@ -7,6 +7,9 @@ import { useSiteTheme } from '../context/SiteThemeContext';
 const MidnightEmberAbout = React.lazy(
   () => import('../themes/components/midnightEmber/MidnightEmberAbout')
 );
+const HeritageSpiceAbout = React.lazy(
+  () => import('../themes/components/heritageSpice/HeritageSpiceAbout')
+);
 
 export const AboutPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
@@ -16,6 +19,15 @@ export const AboutPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
         <MidnightEmberAbout />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Heritage Spice presentation
+  if (effectiveThemeId === 'heritage-spice') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#2B080E]" />}>
+        <HeritageSpiceAbout />
       </React.Suspense>
     );
   }
