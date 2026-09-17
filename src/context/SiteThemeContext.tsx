@@ -27,7 +27,7 @@ const getInitialPreviewTheme = (): SiteThemeId | null => {
     try {
       const params = new URLSearchParams(window.location.search);
       const urlPreview = params.get('siteThemePreview') as SiteThemeId;
-      if (urlPreview && (isRuntimeThemeAvailable(urlPreview) || urlPreview === 'heritage-spice')) {
+      if (urlPreview && isRuntimeThemeAvailable(urlPreview)) {
         return urlPreview;
       }
     } catch {}

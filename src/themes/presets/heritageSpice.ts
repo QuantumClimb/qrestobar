@@ -12,7 +12,7 @@ import { THEME_CATALOG } from '../themeCatalog';
 export const heritageSpiceThemePreset: SiteThemeDefinition = {
   metadata: {
     ...THEME_CATALOG['heritage-spice'],
-    available: false, // Protected: Remains Coming Soon in Theme Studio
+    available: true,
   },
 
   typography: {

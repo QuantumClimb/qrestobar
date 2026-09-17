@@ -44,7 +44,7 @@ export const THEME_CATALOG: Record<SiteThemeId, ThemeMetadata> = {
     access: 'premium',
     colorModePolicy: 'fixed-warm',
     previewImage: '/images/themes/heritage-spice.png',
-    available: false,
+    available: true,
     accentColor: '#D97706',
     secondaryAccent: '#9A3412',
     tags: ['Malaysian Roots', 'Terracotta', 'Warm Spice'],

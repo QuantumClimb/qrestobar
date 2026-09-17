@@ -19,7 +19,7 @@ export const RUNTIME_THEME_REGISTRY: Partial<Record<SiteThemeId, SiteThemeDefini
  */
 export const isRuntimeThemeAvailable = (
   themeId: string | null | undefined
-): themeId is 'original' | 'midnight-ember' => {
+): themeId is 'original' | 'midnight-ember' | 'heritage-spice' => {
   if (!themeId) return false;
   const match = RUNTIME_THEME_REGISTRY[themeId as SiteThemeId];
   return Boolean(match && match.metadata.available);

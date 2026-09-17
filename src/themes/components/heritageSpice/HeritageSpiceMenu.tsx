@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Search, 
@@ -28,23 +28,70 @@ export const HeritageSpiceMenu: React.FC = () => {
   const [isChefsPickOnly, setIsChefsPickOnly] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
+  const openerRef = useRef<HTMLElement | null>(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
   const getThemedReservationLink = () => withSiteThemePreview('/reservations', 'heritage-spice');
 
-  // Handle escape key to close modal
+  const openModal = (item: MenuItem, triggerElement: HTMLElement | null) => {
+    openerRef.current = triggerElement;
+    setSelectedItem(item);
+  };
+
+  const closeModal = () => {
+    setSelectedItem(null);
+    if (openerRef.current) {
+      openerRef.current.focus();
+    }
+  };
+
+  // Focus trap, Escape key, and body-scroll locking for modal
   useEffect(() => {
+    if (!selectedItem) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const timer = setTimeout(() => {
+      closeButtonRef.current?.focus();
+    }, 50);
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && selectedItem) {
-        setSelectedItem(null);
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+        return;
+      }
+
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (!firstElement || !lastElement) return;
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
-    if (selectedItem) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = '';
-    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
-      document.body.style.overflow = '';
+      clearTimeout(timer);
+      document.body.style.overflow = originalOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [selectedItem]);
@@ -269,11 +316,11 @@ export const HeritageSpiceMenu: React.FC = () => {
                 key={item.id}
                 role="button"
                 tabIndex={0}
-                onClick={() => setSelectedItem(item)}
+                onClick={(e) => openModal(item, e.currentTarget)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    setSelectedItem(item);
+                    openModal(item, e.currentTarget);
                   }
                 }}
                 className="hs-menu-card cursor-pointer group text-left focus:outline-none focus:ring-2 focus:ring-[#C69A4B]"
@@ -404,16 +451,20 @@ export const HeritageSpiceMenu: React.FC = () => {
           {/* Backdrop */}
           <div 
             className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
-            onClick={() => setSelectedItem(null)}
+            onClick={closeModal}
             aria-hidden="true"
           />
 
           {/* Dialog Body */}
-          <div className="relative w-full max-w-lg my-8 bg-[#371018] border-2 border-[#C69A4B]/50 rounded-sm shadow-2xl z-10 overflow-hidden transform transition-all animate-slide-up text-[#FFF4DF]">
+          <div 
+            ref={modalRef}
+            className="relative w-full max-w-lg my-8 bg-[#371018] border-2 border-[#C69A4B]/50 rounded-sm shadow-2xl z-10 overflow-hidden transform transition-all animate-slide-up text-[#FFF4DF]"
+          >
             {/* Close Button */}
             <button
-              onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 z-20 text-[#C2AFA6] hover:text-[#FFF4DF] p-1.5 bg-[#2B080E]/80 rounded-full border border-[#C69A4B]/30 hover:border-[#C69A4B] transition-colors"
+              ref={closeButtonRef}
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-20 text-[#C2AFA6] hover:text-[#FFF4DF] p-1.5 bg-[#2B080E]/80 rounded-full border border-[#C69A4B]/30 hover:border-[#C69A4B] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C69A4B]"
               aria-label="Close dish details"
             >
               <X className="w-5 h-5" />
@@ -509,7 +560,7 @@ export const HeritageSpiceMenu: React.FC = () => {
               {/* Actions Footer */}
               <div className="pt-4 border-t border-[#C69A4B]/20 flex items-center justify-between">
                 <button
-                  onClick={() => setSelectedItem(null)}
+                  onClick={closeModal}
                   className="hs-btn-outline px-5 py-2 text-xs"
                 >
                   Close
