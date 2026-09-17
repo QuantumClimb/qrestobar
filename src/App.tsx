@@ -26,9 +26,9 @@ import { ProtectedAdminRoute } from './components/admin/ProtectedAdminRoute';
 // Public Layout with Header, Footer, and Floating WhatsApp Concierge
 const PublicLayout: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-qc-base text-qc-primary">
+    <div className="flex flex-col min-h-screen w-full max-w-full min-w-0 bg-qc-base text-qc-primary overflow-x-hidden">
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full min-w-0">
         <Outlet />
       </main>
       <WhatsAppButton />

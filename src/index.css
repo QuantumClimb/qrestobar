@@ -148,6 +148,16 @@ html.light {
 }
 
 @layer base {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+
   html {
     font-size: 16px;
     background-color: var(--bg-primary);
@@ -160,6 +170,7 @@ html.light {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.2s ease, color 0.2s ease;
+    overflow-x: hidden;
   }
 
   /* Selection */

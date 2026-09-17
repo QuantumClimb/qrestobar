@@ -21,6 +21,21 @@ export const HeritageSpiceHeader: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Close drawer on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    if (mobileMenuOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   const getThemedPath = (path: string) => withSiteThemePreview(path, 'heritage-spice');
 
   const navLinks = [
@@ -60,7 +75,7 @@ export const HeritageSpiceHeader: React.FC = () => {
 
       {/* Main Heritage Spice Sticky Header */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 w-full max-w-full box-border min-w-0 overflow-x-clip ${
+        className={`sticky top-0 z-50 relative transition-all duration-300 w-full max-w-full box-border min-w-0 ${
           isScrolled
             ? 'py-3.5 bg-[#2B080E]/95 backdrop-blur-md border-b border-[#C69A4B]/30 shadow-2xl'
             : 'py-4 xl:py-5 bg-gradient-to-b from-[#2B080E]/95 to-transparent'
@@ -71,7 +86,7 @@ export const HeritageSpiceHeader: React.FC = () => {
             {/* Brand Logo */}
             <Link
               to={getThemedPath('/')}
-              className="group flex flex-col focus:outline-none rounded py-1 px-1 min-w-0 shrink max-w-[55%] sm:max-w-none"
+              className="group flex flex-col focus:outline-none rounded py-1 px-1 min-w-0 shrink max-w-[50%] sm:max-w-none"
               aria-label="Q - RESTOBAR Homepage"
             >
               <span className="font-serif text-base sm:text-xl xl:text-2xl font-semibold tracking-[0.14em] sm:tracking-[0.24em] text-[#FFF4DF] group-hover:text-[#C69A4B] transition-colors select-none truncate block">
@@ -152,6 +167,7 @@ export const HeritageSpiceHeader: React.FC = () => {
                 className="p-2 text-[#F8EAD2] hover:text-[#FFF4DF] border border-[#C69A4B]/40 rounded bg-[#371018]/80 focus:outline-none w-[44px] h-[44px] shrink-0 flex items-center justify-center cursor-pointer"
                 aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
                 aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-nav-drawer-hs"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5 text-[#C69A4B]" /> : <MenuIcon className="w-5 h-5" />}
               </button>
@@ -161,22 +177,28 @@ export const HeritageSpiceHeader: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="xl:hidden fixed inset-x-0 top-full bg-[#2B080E]/98 border-b border-[#C69A4B]/40 backdrop-blur-xl px-5 pt-4 pb-8 space-y-4 shadow-2xl animate-fade-in max-h-[calc(100vh-70px)] overflow-y-auto overscroll-contain">
+          <div
+            id="mobile-nav-drawer-hs"
+            className="xl:hidden absolute top-full left-0 right-0 w-full max-w-[100vw] z-[60] bg-[#24060B] border-b border-[#C69A4B]/40 backdrop-blur-xl px-5 pt-4 pb-6 space-y-4 shadow-2xl animate-fade-in max-h-[calc(100vh-75px)] overflow-y-auto box-border"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Menu"
+          >
             <div className="space-y-1">
-
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
                   to={getThemedPath(link.path)}
+                  onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
-                    `block px-4 py-2.5 rounded text-sm uppercase tracking-[0.16em] font-medium transition-colors ${
+                    `block min-h-[44px] px-4 py-2.5 rounded text-sm uppercase tracking-[0.16em] font-medium transition-colors ${
                       isActive
                         ? 'bg-[#C69A4B]/15 text-[#C69A4B] font-bold border-l-2 border-[#C69A4B]'
                         : 'text-[#F8EAD2]/80 hover:text-[#FFF4DF] hover:bg-[#371018]'
                     }`
                   }
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between h-full">
                     <span>{link.name}</span>
                     {link.badge && (
                       <span className="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-[#E89532]/20 text-[#C69A4B] border border-[#C69A4B]/40">
@@ -192,7 +214,8 @@ export const HeritageSpiceHeader: React.FC = () => {
             <div className="pt-3 border-t border-[#C69A4B]/20 flex flex-col gap-2.5">
               <Link
                 to={getThemedPath('/reservations')}
-                className="hs-btn-primary w-full py-3 text-xs flex items-center justify-center gap-2"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hs-btn-primary w-full py-3 min-h-[44px] text-xs flex items-center justify-center gap-2"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Reserve a Table</span>
@@ -204,7 +227,8 @@ export const HeritageSpiceHeader: React.FC = () => {
               <p className="text-[10px] uppercase tracking-widest font-mono text-[#F8EAD2]/60">Staff Access</p>
               <Link
                 to="/admin/login"
-                className="w-full py-2.5 px-4 rounded-xs border border-[#C69A4B]/40 bg-[#371018] hover:bg-[#4A0E18] text-[#FFF4DF] text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full min-h-[44px] py-2.5 px-4 rounded-xs border border-[#C69A4B]/40 bg-[#371018] hover:bg-[#4A0E18] text-[#FFF4DF] text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
               >
                 <Lock className="w-3.5 h-3.5 text-[#C69A4B]" />
                 <span>CMS Demo</span>

@@ -29,13 +29,9 @@ export const BotanicalBistroHeader: React.FC = () => {
       }
     };
     if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = '';
     }
     return () => {
-      document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [mobileMenuOpen]);
@@ -78,7 +74,7 @@ export const BotanicalBistroHeader: React.FC = () => {
 
       {/* Main Botanical Bistro Sticky Header */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 w-full max-w-full box-border min-w-0 overflow-x-clip ${
+        className={`sticky top-0 z-50 relative transition-all duration-300 w-full max-w-full box-border min-w-0 ${
           isScrolled
             ? 'py-3.5 bg-[#F4F1E8]/95 backdrop-blur-md border-b border-[#3F6B4F]/25 shadow-md'
             : 'py-4 xl:py-5 bg-gradient-to-b from-[#F4F1E8]/95 via-[#F4F1E8]/80 to-transparent'
@@ -89,7 +85,7 @@ export const BotanicalBistroHeader: React.FC = () => {
             {/* Brand Logo */}
             <Link
               to={getThemedPath('/')}
-              className="group flex flex-col focus:outline-none rounded py-1 px-1 min-w-0 shrink max-w-[55%] sm:max-w-none"
+              className="group flex flex-col focus:outline-none rounded py-1 px-1 min-w-0 shrink max-w-[50%] sm:max-w-none"
               aria-label="Q - RESTOBAR Homepage"
             >
               <span className="bb-font-display text-base sm:text-2xl xl:text-3xl font-bold tracking-[0.12em] sm:tracking-[0.20em] text-[#24352A] group-hover:text-[#3F6B4F] transition-colors select-none truncate block">
@@ -167,102 +163,84 @@ export const BotanicalBistroHeader: React.FC = () => {
                 className="p-2 rounded-xs border border-[#3F6B4F]/30 bg-[#FCFAF4] text-[#24352A] hover:text-[#3F6B4F] hover:border-[#3F6B4F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#3F6B4F] w-[44px] h-[44px] shrink-0 flex items-center justify-center cursor-pointer"
                 aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
                 aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-nav-drawer-bb"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
               </button>
             </div>
           </div>
         </div>
-      </header>
 
-      {/* Mobile Drawer Menu Overlay */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 xl:hidden">
-          {/* Backdrop */}
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
-
-          {/* Drawer Content Panel */}
-          <div className="fixed right-0 top-0 bottom-0 w-full max-w-xs bg-[#F4F1E8] border-l border-[#3F6B4F]/30 p-6 shadow-2xl flex flex-col justify-between overflow-y-auto z-10 text-[#24352A]">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-[#3F6B4F]/20 pb-4">
-                <div>
-                  <h3 className="bb-font-display text-lg font-bold text-[#24352A] tracking-wider">
-                    Q - RESTOBAR
-                  </h3>
-                  <span className="text-[10px] text-[#3F6B4F] font-mono tracking-widest uppercase">
-                    Botanical Bistro
-                  </span>
-                </div>
-                <button
+            id="mobile-nav-drawer-bb"
+            className="xl:hidden absolute top-full left-0 right-0 w-full max-w-[100vw] z-[60] bg-[#F4F1E8] border-b border-[#3F6B4F]/30 backdrop-blur-xl px-5 pt-4 pb-6 space-y-4 shadow-2xl animate-fade-in max-h-[calc(100vh-75px)] overflow-y-auto box-border text-[#24352A]"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Menu"
+          >
+            <div className="space-y-1">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.path}
+                  to={getThemedPath(link.path)}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-xs bg-[#FCFAF4] border border-[#3F6B4F]/30 text-[#24352A] hover:text-[#3F6B4F] focus:outline-none focus:ring-2 focus:ring-[#3F6B4F]"
-                  aria-label="Close menu"
+                  className={({ isActive }) =>
+                    `block min-h-[44px] px-4 py-2.5 rounded text-sm uppercase tracking-[0.16em] font-medium transition-colors ${
+                      isActive
+                        ? 'bg-[#3F6B4F] text-white font-bold'
+                        : 'text-[#24352A] hover:text-[#3F6B4F] hover:bg-[#FCFAF4]'
+                    }`
+                  }
                 >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Drawer Links */}
-              <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
-                {navLinks.map((link) => (
-                  <NavLink
-                    key={link.path}
-                    to={getThemedPath(link.path)}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `px-4 py-3 rounded-xs text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-between ${
-                        isActive
-                          ? 'bg-[#3F6B4F] text-white font-bold'
-                          : 'bg-[#FCFAF4] text-[#24352A] border border-[#3F6B4F]/15 hover:border-[#3F6B4F]/40'
-                      }`
-                    }
-                  >
+                  <div className="flex items-center justify-between h-full">
                     <span>{link.name}</span>
                     {link.badge && (
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#3F6B4F]/15 text-[#3F6B4F] font-mono">
+                      <span className="text-[9px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-[#3F6B4F]/15 text-[#3F6B4F]">
                         {link.badge}
                       </span>
                     )}
-                  </NavLink>
-                ))}
-              </nav>
-
-              <div className="pt-4 border-t border-[#3F6B4F]/20 space-y-3">
-                <Link
-                  to={getThemedPath('/reservations')}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="bb-btn-primary w-full py-3 text-xs font-bold flex items-center justify-center gap-2"
-                >
-                  <Calendar className="w-4 h-4" />
-                  <span>Reserve a Table</span>
-                </Link>
-
-                <Link
-                  to={getThemedPath('/admin/login')}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="bb-btn-outline w-full py-2.5 text-xs font-mono flex items-center justify-center gap-2"
-                >
-                  <Lock className="w-3.5 h-3.5 text-[#3F6B4F]" />
-                  <span>Staff Access / CMS Demo</span>
-                </Link>
-              </div>
+                  </div>
+                </NavLink>
+              ))}
             </div>
 
-            <div className="pt-6 border-t border-[#3F6B4F]/20 text-center space-y-1">
-              <p className="text-[11px] text-[#7B877E] font-light">
-                Bukit Bintang, Kuala Lumpur
-              </p>
-              <p className="text-[10px] text-[#7B877E]/80 font-mono">
-                {settings.phone}
-              </p>
+            {/* Mobile Drawer Action Buttons */}
+            <div className="pt-3 border-t border-[#3F6B4F]/20 flex flex-col gap-2.5">
+              <Link
+                to={getThemedPath('/reservations')}
+                onClick={() => setMobileMenuOpen(false)}
+                className="bb-btn-primary w-full py-3 min-h-[44px] text-xs font-bold flex items-center justify-center gap-2"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Reserve a Table</span>
+              </Link>
+            </div>
+
+            {/* Staff CMS Demo Access Section */}
+            <div className="pt-3 border-t border-[#3F6B4F]/20 space-y-1.5">
+              <p className="text-[10px] uppercase tracking-widest font-mono text-[#7B877E]">Staff Access</p>
+              <Link
+                to="/admin/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full min-h-[44px] py-2.5 px-4 rounded-xs border border-[#3F6B4F]/40 bg-[#FCFAF4] hover:bg-[#F4F1E8] text-[#24352A] text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+              >
+                <Lock className="w-3.5 h-3.5 text-[#3F6B4F]" />
+                <span>CMS Demo</span>
+              </Link>
+            </div>
+
+            {/* Mobile Footer Meta */}
+            <div className="text-center pt-4 text-xs text-[#7B877E] space-y-1 border-t border-[#3F6B4F]/10">
+              <p className="text-[#3F6B4F] font-medium">{settings.openingHoursDisplay}</p>
+              {(settings.addressLine1 || settings.city) && (
+                <p>{[settings.addressLine1, settings.city].filter(Boolean).join(', ')}</p>
+              )}
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </header>
     </>
   );
 };

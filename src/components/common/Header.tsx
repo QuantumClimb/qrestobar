@@ -58,6 +58,21 @@ export const Header: React.FC = () => {
 
   useEffect(() => { setMobileMenuOpen(false); }, [location.pathname]);
 
+  // Close drawer on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    if (mobileMenuOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
@@ -95,7 +110,7 @@ export const Header: React.FC = () => {
       )}
 
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 w-full max-w-full box-border min-w-0 overflow-x-clip ${isScrolled ? 'py-3 border-b' : 'py-3.5 lg:py-5'}`}
+        className={`sticky top-0 z-50 relative transition-all duration-300 w-full max-w-full box-border min-w-0 ${isScrolled ? 'py-3 border-b' : 'py-3.5 lg:py-5'}`}
         style={{
           backgroundColor: isScrolled ? 'var(--header-bg-scrolled)' : 'var(--header-bg)',
           backdropFilter: 'blur(16px)',
@@ -108,7 +123,7 @@ export const Header: React.FC = () => {
             {/* Classic Serif Text Logo */}
             <Link
               to="/"
-              className="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded py-1 px-1 min-w-0 shrink max-w-[55%] sm:max-w-none"
+              className="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded py-1 px-1 min-w-0 shrink max-w-[50%] sm:max-w-none"
               aria-label="Q - RESTOBAR Homepage"
             >
               <span
@@ -235,96 +250,115 @@ export const Header: React.FC = () => {
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 transition-colors text-qc-secondary hover:text-qc-primary w-[44px] h-[44px] shrink-0 flex items-center justify-center cursor-pointer"
-                aria-label={mobileMenuOpen ? 'Close Navigation' : 'Open Navigation'}
+                aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
                 aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-nav-drawer"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6 text-purple-400" /> : <MenuIcon className="w-6 h-6" />}
               </button>
             </div>
           </div>
         </div>
-      </header>
 
-      {/* Mobile Menu Drawer */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-x-0 top-full z-40 lg:hidden animate-fade-in flex flex-col justify-between pt-6 pb-8 px-5 overflow-y-auto max-h-[calc(100vh-70px)] w-full max-w-full box-border shadow-2xl transition-colors"
-          style={{
-            backgroundColor: 'var(--mobile-menu-bg)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-          }}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="flex flex-col gap-6 text-center">
-            <div className="pb-4" style={{ borderBottom: '1px solid var(--border-default)' }}>
-              <p className="qc-label-purple mb-1">Modern Malaysian Dining</p>
-              <p className="text-sm text-qc-body">Bukit Bintang, Kuala Lumpur</p>
-            </div>
-
-            {/* Primary Mobile Navigation */}
-            <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  className={({ isActive }) => `text-base tracking-wider uppercase font-display font-semibold transition-colors flex items-center justify-center gap-2 ${isActive ? 'text-qc-primary' : 'text-qc-secondary hover:text-qc-primary'}`}
-                >
-                  <span>{link.name}</span>
-                  {link.badge && (
-                    <span
-                      className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded"
-                      style={{
-                        background: 'var(--accent-surface)',
-                        color: 'var(--accent-primary)',
-                        border: '1px solid var(--accent-primary)',
-                      }}
-                    >
-                      {link.badge}
-                    </span>
-                  )}
-                </NavLink>
-              ))}
-            </nav>
-
-            {/* Mobile Drawer Theme Toggle & Action Buttons */}
-            <div className="pt-2 flex flex-col gap-3 max-w-xs mx-auto w-full">
-              <div className="flex items-center justify-center gap-2 pb-1">
-                <ThemeToggle showLabel={true} className="w-full" />
+        {/* Mobile Menu Drawer */}
+        {mobileMenuOpen && (
+          <div
+            id="mobile-nav-drawer"
+            className="absolute top-full left-0 right-0 w-full max-w-[100vw] z-[60] lg:hidden animate-fade-in flex flex-col justify-between pt-4 pb-6 px-5 overflow-y-auto max-h-[calc(100vh-70px)] box-border shadow-2xl border-b border-qc-border"
+            style={{
+              backgroundColor: '#09090C',
+              opacity: 0.99,
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+            }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Menu"
+          >
+            <div className="flex flex-col gap-4 text-center">
+              <div className="pb-3 border-b border-qc-border">
+                <p className="qc-label-purple mb-0.5">Modern Malaysian Dining</p>
+                <p className="text-xs text-qc-body">Bukit Bintang, Kuala Lumpur</p>
               </div>
 
-              <Link to="/reservations" className="btn-gold w-full text-center py-3.5 flex items-center justify-center gap-2">
-                <Calendar className="w-4 h-4" />
-                <span>Book a Table</span>
-              </Link>
-              <a href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`} className="btn-gold-outline w-full text-center py-3 flex items-center justify-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>Call {settings.phone}</span>
-              </a>
+              {/* Primary Mobile Navigation */}
+              <nav className="flex flex-col gap-1" aria-label="Mobile Navigation">
+                {navLinks.map((link) => (
+                  <NavLink
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `min-h-[44px] px-4 py-2.5 rounded text-sm tracking-wider uppercase font-display font-semibold transition-colors flex items-center justify-between ${
+                        isActive
+                          ? 'bg-purple-900/30 text-qc-primary font-bold border-l-2 border-purple-500'
+                          : 'text-qc-secondary hover:text-qc-primary hover:bg-qc-surface'
+                      }`
+                    }
+                  >
+                    <span>{link.name}</span>
+                    {link.badge && (
+                      <span
+                        className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded"
+                        style={{
+                          background: 'var(--accent-surface)',
+                          color: 'var(--accent-primary)',
+                          border: '1px solid var(--accent-primary)',
+                        }}
+                      >
+                        {link.badge}
+                      </span>
+                    )}
+                  </NavLink>
+                ))}
+              </nav>
+
+              {/* Mobile Drawer Theme Toggle & Action Buttons */}
+              <div className="pt-2 flex flex-col gap-2.5 max-w-xs mx-auto w-full">
+                <div className="flex items-center justify-center gap-2 pb-1">
+                  <ThemeToggle showLabel={true} className="w-full min-h-[44px]" />
+                </div>
+
+                <Link
+                  to="/reservations"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn-gold w-full text-center py-3 min-h-[44px] flex items-center justify-center gap-2"
+                >
+                  <Calendar className="w-4 h-4 shrink-0" />
+                  <span>Reserve a Table</span>
+                </Link>
+                <a
+                  href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`}
+                  className="btn-gold-outline w-full text-center py-2.5 min-h-[44px] flex items-center justify-center gap-2 text-xs"
+                >
+                  <Phone className="w-4 h-4 shrink-0" />
+                  <span>Call {settings.phone}</span>
+                </a>
+              </div>
+
+              {/* Staff CMS Demo Access Link */}
+              <div className="pt-3 border-t border-qc-border max-w-xs mx-auto w-full space-y-1.5">
+                <p className="text-[10px] uppercase tracking-widest font-mono text-qc-muted">Staff Access</p>
+                <Link
+                  to="/admin/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full min-h-[44px] py-2.5 px-4 rounded border border-qc-border-strong bg-transparent hover:border-purple-500 hover:bg-purple-600/10 text-qc-primary text-xs font-display font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
+                >
+                  <Lock className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                  <span>CMS DEMO</span>
+                </Link>
+              </div>
             </div>
 
-            {/* Separate Staff Access Section */}
-            <div className="pt-4 border-t border-border-default/60 max-w-xs mx-auto w-full space-y-2">
-              <p className="text-[10px] uppercase tracking-widest font-mono text-qc-muted">Staff Access</p>
-              <Link
-                to="/admin/login"
-                className="w-full py-2.5 px-4 rounded-[4px] border border-border-strong bg-transparent hover:border-purple-500 hover:bg-purple-600/10 text-qc-primary text-xs font-display font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
-              >
-                <Lock className="w-3.5 h-3.5 text-purple-400" />
-                <span>CMS DEMO</span>
-              </Link>
+            <div className="text-center pt-4 text-xs text-qc-muted space-y-1 border-t border-qc-border mt-4">
+              <p className="text-qc-secondary font-medium mb-0.5">{settings.openingHoursDisplay}</p>
+              {(settings.addressLine1 || settings.city) && (
+                <p>{[settings.addressLine1, settings.city].filter(Boolean).join(', ')}</p>
+              )}
             </div>
           </div>
-
-          <div className="text-center pt-6 text-xs text-qc-muted space-y-1" style={{ borderTop: '1px solid var(--border-default)' }}>
-            <p className="text-qc-secondary font-medium mb-1">{settings.openingHoursDisplay}</p>
-            {(settings.addressLine1 || settings.city) && (
-              <p>{[settings.addressLine1, settings.city].filter(Boolean).join(', ')}</p>
-            )}
-          </div>
-        </div>
-      )}
+        )}
+      </header>
     </>
   );
 };
