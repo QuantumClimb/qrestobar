@@ -10,6 +10,9 @@ import { useSiteTheme } from '../context/SiteThemeContext';
 const MidnightEmberExperiences = React.lazy(
   () => import('../themes/components/midnightEmber/MidnightEmberExperiences')
 );
+const HeritageSpiceExperiences = React.lazy(
+  () => import('../themes/components/heritageSpice/HeritageSpiceExperiences')
+);
 
 type ExperienceTab = 'wheel' | 'sommelier' | 'availability' | 'zones';
 
@@ -21,6 +24,15 @@ export const ExperiencesPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
         <MidnightEmberExperiences />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Heritage Spice presentation
+  if (effectiveThemeId === 'heritage-spice') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#2B080E]" />}>
+        <HeritageSpiceExperiences />
       </React.Suspense>
     );
   }

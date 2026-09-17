@@ -11,6 +11,9 @@ import { useSiteTheme } from '../context/SiteThemeContext';
 const MidnightEmberOffers = React.lazy(
   () => import('../themes/components/midnightEmber/MidnightEmberOffers')
 );
+const HeritageSpiceOffers = React.lazy(
+  () => import('../themes/components/heritageSpice/HeritageSpiceOffers')
+);
 
 export const OffersPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
@@ -20,6 +23,15 @@ export const OffersPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
         <MidnightEmberOffers />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Heritage Spice presentation
+  if (effectiveThemeId === 'heritage-spice') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#2B080E]" />}>
+        <HeritageSpiceOffers />
       </React.Suspense>
     );
   }

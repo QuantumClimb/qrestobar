@@ -282,3 +282,156 @@ html[data-site-theme="heritage-spice"] .hs-reservation-form-wrapper input[type="
   accent-color: #C69A4B;
 }
 
+/* ── Experience Tokens for Heritage Spice ────────────────────────── */
+html[data-site-theme="heritage-spice"] {
+  /* Experience Accent Tokens */
+  --experience-accent-primary: #C69A4B;
+  --experience-accent-secondary: #E89532;
+  --experience-accent-deep: #8B1E2D;
+  --experience-accent-surface: rgba(198, 154, 75, 0.16);
+  --experience-accent-glow: rgba(232, 149, 50, 0.28);
+  --experience-pointer-highlight: #FFF4DF;
+
+  /* Golden Perk Wheel Palette (Heritage Warm Spice Hues) */
+  --wheel-color-1: #4A0E18; /* Royal Deep Maroon */
+  --wheel-color-2: #2B080E; /* Dark Cinnamon Charcoal */
+  --wheel-color-3: #8B1E2D; /* Burgundy Terracotta */
+  --wheel-color-4: #371018; /* Toasted Rempah Brown */
+  --wheel-color-5: #C69A4B; /* Antique Gold */
+  --wheel-color-6: #E89532; /* Golden Saffron */
+
+  --wheel-ring-primary: rgba(198, 154, 75, 0.60);
+  --wheel-ring-secondary: rgba(232, 149, 50, 0.35);
+  --wheel-border-color: rgba(198, 154, 75, 0.45);
+  --wheel-pointer-color: #E89532;
+  --wheel-hub-gradient: linear-gradient(135deg, #E89532 0%, #C69A4B 50%, #4A0E18 100%);
+  --wheel-hub-shadow: 0 10px 25px -5px rgba(198, 154, 75, 0.50);
+
+  --experience-card-border: rgba(198, 154, 75, 0.45);
+  --experience-banner-border: rgba(198, 154, 75, 0.50);
+  --experience-badge-border: rgba(198, 154, 75, 0.35);
+  --experience-border-active: #C69A4B;
+  --experience-box-border: rgba(198, 154, 75, 0.35);
+
+  --experience-icon-1: #E89532;
+  --experience-icon-2: #C69A4B;
+  --experience-icon-3: #E89532;
+
+  --experience-low-text: #C69A4B;
+  --experience-low-bg: rgba(55, 16, 24, 0.95);
+  --experience-low-border: rgba(198, 154, 75, 0.45);
+}
+
+/* Scoped Utility Overrides for Interactive Experience Modules in Heritage Spice */
+html[data-site-theme="heritage-spice"] .text-purple-500,
+html[data-site-theme="heritage-spice"] .text-purple-400,
+html[data-site-theme="heritage-spice"] .text-purple-300 {
+  color: #C69A4B !important;
+}
+
+html[data-site-theme="heritage-spice"] .bg-purple-600 {
+  background-color: #C69A4B !important;
+  color: #2B080E !important;
+}
+
+html[data-site-theme="heritage-spice"] .bg-purple-600\/10,
+html[data-site-theme="heritage-spice"] .bg-purple-600\/20,
+html[data-site-theme="heritage-spice"] .bg-purple-500\/20 {
+  background-color: rgba(198, 154, 75, 0.15) !important;
+}
+
+html[data-site-theme="heritage-spice"] .border-purple-600,
+html[data-site-theme="heritage-spice"] .border-purple-500,
+html[data-site-theme="heritage-spice"] .border-purple-600\/40,
+html[data-site-theme="heritage-spice"] .border-purple-600\/50,
+html[data-site-theme="heritage-spice"] .border-purple-600\/60,
+html[data-site-theme="heritage-spice"] .border-purple-600\/80,
+html[data-site-theme="heritage-spice"] .border-purple-500\/40,
+html[data-site-theme="heritage-spice"] .border-purple-500\/20,
+html[data-site-theme="heritage-spice"] .border-purple-600\/30 {
+  border-color: rgba(198, 154, 75, 0.35) !important;
+}
+
+html[data-site-theme="heritage-spice"] .bg-qc-surface {
+  background-color: #371018 !important;
+}
+
+html[data-site-theme="heritage-spice"] .bg-qc-base {
+  background-color: #2B080E !important;
+}
+
+html[data-site-theme="heritage-spice"] .bg-qc-elevated {
+  background-color: #4A0E18 !important;
+}
+
+html[data-site-theme="heritage-spice"] .text-qc-primary {
+  color: #FFF4DF !important;
+}
+
+html[data-site-theme="heritage-spice"] .text-qc-body {
+  color: #F8EAD2 !important;
+}
+
+html[data-site-theme="heritage-spice"] .text-qc-secondary {
+  color: #C69A4B !important;
+}
+
+html[data-site-theme="heritage-spice"] .border-border-base,
+html[data-site-theme="heritage-spice"] .border-border-strong {
+  border-color: rgba(198, 154, 75, 0.25) !important;
+}
+
+html[data-site-theme="heritage-spice"] .btn-gold {
+  background: #C69A4B !important;
+  color: #2B080E !important;
+  border: 1px solid #DDB86C !important;
+  border-radius: 2px !important;
+  box-shadow: 0 4px 14px rgba(198, 154, 75, 0.25) !important;
+  font-family: "Lato", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.16em !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html[data-site-theme="heritage-spice"] .btn-gold:hover {
+  background: #E89532 !important;
+  color: #FFFFFF !important;
+  border-color: #E89532 !important;
+  box-shadow: 0 6px 20px rgba(232, 149, 50, 0.40) !important;
+  transform: translateY(-1px) !important;
+}
+
+html[data-site-theme="heritage-spice"] .btn-gold-outline {
+  background: transparent !important;
+  color: #FFF4DF !important;
+  border: 1px solid rgba(198, 154, 75, 0.45) !important;
+  border-radius: 2px !important;
+  font-family: "Lato", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html[data-site-theme="heritage-spice"] .btn-gold-outline:hover {
+  background: rgba(198, 154, 75, 0.15) !important;
+  color: #C69A4B !important;
+  border-color: #C69A4B !important;
+}
+
+html[data-site-theme="heritage-spice"] .btn-ghost-ivory {
+  background: #2B080E !important;
+  color: #FFF4DF !important;
+  border: 1px solid rgba(198, 154, 75, 0.35) !important;
+  border-radius: 2px !important;
+  font-family: "Lato", system-ui, sans-serif !important;
+}
+
+html[data-site-theme="heritage-spice"] .btn-ghost-ivory:hover {
+  background: rgba(198, 154, 75, 0.15) !important;
+  color: #C69A4B !important;
+  border-color: #C69A4B !important;
+}
+
+
