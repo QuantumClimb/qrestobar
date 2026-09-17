@@ -11,6 +11,10 @@ const HeritageSpiceNotFound = React.lazy(
   () => import('../themes/components/heritageSpice/HeritageSpiceNotFound')
 );
 
+const BotanicalBistroNotFound = React.lazy(
+  () => import('../themes/components/botanicalBistro/BotanicalBistroNotFound')
+);
+
 export const NotFoundPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
 
@@ -28,6 +32,15 @@ export const NotFoundPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#101010]" />}>
         <MidnightEmberNotFound />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Botanical Bistro presentation
+  if (effectiveThemeId === 'botanical-bistro') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#F4F1E8]" />}>
+        <BotanicalBistroNotFound />
       </React.Suspense>
     );
   }
