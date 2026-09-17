@@ -58,7 +58,7 @@ export const THEME_CATALOG: Record<SiteThemeId, ThemeMetadata> = {
     access: 'premium',
     colorModePolicy: 'fixed-light',
     previewImage: '/images/themes/botanical-bistro.png',
-    available: false,
+    available: true,
     accentColor: '#059669',
     secondaryAccent: '#10B981',
     tags: ['Botanical', 'Rainforest', 'Bright Oasis'],
