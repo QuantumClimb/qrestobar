@@ -13,6 +13,9 @@ const MidnightEmberExperiences = React.lazy(
 const HeritageSpiceExperiences = React.lazy(
   () => import('../themes/components/heritageSpice/HeritageSpiceExperiences')
 );
+const BotanicalBistroExperiences = React.lazy(
+  () => import('../themes/components/botanicalBistro/BotanicalBistroExperiences')
+);
 
 type ExperienceTab = 'wheel' | 'sommelier' | 'availability' | 'zones';
 
@@ -33,6 +36,15 @@ export const ExperiencesPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#2B080E]" />}>
         <HeritageSpiceExperiences />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Botanical Bistro presentation
+  if (effectiveThemeId === 'botanical-bistro') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#F4F1E8]" />}>
+        <BotanicalBistroExperiences />
       </React.Suspense>
     );
   }

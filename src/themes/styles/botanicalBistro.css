@@ -218,3 +218,53 @@ html[data-site-theme="botanical-bistro"] .bb-reservation-form-wrapper div.p-4.bg
   border-color: rgba(63, 107, 79, 0.2);
 }
 
+/* Interactive Experiences Scoped Overrides for Botanical Bistro */
+html[data-site-theme="botanical-bistro"] .text-purple-500,
+html[data-site-theme="botanical-bistro"] .text-purple-400 {
+  color: #3F6B4F !important;
+}
+
+html[data-site-theme="botanical-bistro"] .bg-purple-600,
+html[data-site-theme="botanical-bistro"] .bg-purple-500 {
+  background-color: #3F6B4F !important;
+  color: #FFFFFF !important;
+}
+
+html[data-site-theme="botanical-bistro"] .bg-purple-600\/10,
+html[data-site-theme="botanical-bistro"] .bg-purple-500\/10,
+html[data-site-theme="botanical-bistro"] .bg-purple-900\/20 {
+  background-color: rgba(63, 107, 79, 0.1) !important;
+}
+
+html[data-site-theme="botanical-bistro"] .border-purple-600,
+html[data-site-theme="botanical-bistro"] .border-purple-500,
+html[data-site-theme="botanical-bistro"] .border-purple-600\/30,
+html[data-site-theme="botanical-bistro"] .border-purple-600\/60 {
+  border-color: rgba(63, 107, 79, 0.35) !important;
+}
+
+html[data-site-theme="botanical-bistro"] .btn-gold,
+html[data-site-theme="botanical-bistro"] .btn-purple {
+  background-color: #3F6B4F !important;
+  color: #FFFFFF !important;
+  border-color: #3F6B4F !important;
+}
+
+html[data-site-theme="botanical-bistro"] .btn-gold:hover,
+html[data-site-theme="botanical-bistro"] .btn-purple:hover {
+  background-color: #2F533C !important;
+  border-color: #2F533C !important;
+}
+
+html[data-site-theme="botanical-bistro"] .btn-gold-outline {
+  background-color: transparent !important;
+  color: #3F6B4F !important;
+  border-color: rgba(63, 107, 79, 0.45) !important;
+}
+
+html[data-site-theme="botanical-bistro"] .btn-gold-outline:hover {
+  background-color: rgba(63, 107, 79, 0.08) !important;
+  color: #24352A !important;
+}
+
+
