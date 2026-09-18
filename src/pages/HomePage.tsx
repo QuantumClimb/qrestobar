@@ -24,6 +24,12 @@ const BotanicalBistroHome = React.lazy(() =>
   }))
 );
 
+const UrbanNeonHome = React.lazy(() =>
+  import('../themes/components/urbanNeon/UrbanNeonHome').then((m) => ({
+    default: m.UrbanNeonHome,
+  }))
+);
+
 const HeritageHomeFallback: React.FC = () => (
   <div
     className="min-h-screen bg-[#2B080E] text-[#FFF4DF] flex items-center justify-center p-8"
@@ -50,6 +56,19 @@ const BotanicalHomeFallback: React.FC = () => (
   </div>
 );
 
+const UrbanHomeFallback: React.FC = () => (
+  <div
+    className="min-h-screen bg-[#090B18] text-white flex items-center justify-center p-8"
+    role="status"
+    aria-label="Loading Urban Neon theme"
+  >
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-8 h-8 rounded-full border-2 border-[#20E3D2]/30 border-t-[#20E3D2] animate-spin" />
+      <span className="font-sans text-xs tracking-[0.2em] uppercase text-[#20E3D2] font-bold">Q - RESTOBAR</span>
+    </div>
+  </div>
+);
+
 export const HomePage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
 
@@ -72,6 +91,15 @@ export const HomePage: React.FC = () => {
     return (
       <React.Suspense fallback={<BotanicalHomeFallback />}>
         <BotanicalBistroHome />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: render theme-specific homepage for Urban Neon
+  if (effectiveThemeId === 'urban-neon') {
+    return (
+      <React.Suspense fallback={<UrbanHomeFallback />}>
+        <UrbanNeonHome />
       </React.Suspense>
     );
   }

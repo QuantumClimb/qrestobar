@@ -16,6 +16,9 @@ const HeritageSpiceExperiences = React.lazy(
 const BotanicalBistroExperiences = React.lazy(
   () => import('../themes/components/botanicalBistro/BotanicalBistroExperiences')
 );
+const UrbanNeonExperiences = React.lazy(
+  () => import('../themes/components/urbanNeon/UrbanNeonExperiences')
+);
 
 type ExperienceTab = 'wheel' | 'sommelier' | 'availability' | 'zones';
 
@@ -45,6 +48,15 @@ export const ExperiencesPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#F4F1E8]" />}>
         <BotanicalBistroExperiences />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Urban Neon presentation
+  if (effectiveThemeId === 'urban-neon') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#090B18]" />}>
+        <UrbanNeonExperiences />
       </React.Suspense>
     );
   }

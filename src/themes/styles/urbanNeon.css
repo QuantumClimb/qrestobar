@@ -1,0 +1,163 @@
+/**
+ * URBAN NEON — Scoped Design System & Visual Styling
+ * Color System: Obsidian (#090B18), Deep Graphite (#111827), Electric Cyan (#20E3D2), Neon Magenta (#EC4899)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+html[data-site-theme="urban-neon"] .un-font-display {
+  font-family: 'Oswald', 'Bebas Neue', system-ui, sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+html[data-site-theme="urban-neon"] .un-font-body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Scoped Design Tokens & Utility Classes */
+html[data-site-theme="urban-neon"] {
+  color-scheme: dark;
+}
+
+html[data-site-theme="urban-neon"] body {
+  background-color: #090B18;
+  color: #FFFFFF;
+}
+
+/* Neon Glow Utility Classes */
+html[data-site-theme="urban-neon"] .un-glow-cyan {
+  box-shadow: 0 0 25px rgba(32, 227, 210, 0.35);
+}
+
+html[data-site-theme="urban-neon"] .un-glow-magenta {
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.35);
+}
+
+html[data-site-theme="urban-neon"] .un-border-glow-cyan {
+  border-color: rgba(32, 227, 210, 0.5);
+  box-shadow: 0 0 15px rgba(32, 227, 210, 0.25);
+}
+
+html[data-site-theme="urban-neon"] .un-border-glow-magenta {
+  border-color: rgba(236, 72, 153, 0.5);
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.25);
+}
+
+/* Card Styling */
+html[data-site-theme="urban-neon"] .un-card {
+  background-color: #131B2E;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+html[data-site-theme="urban-neon"] .un-card:hover {
+  border-color: rgba(32, 227, 210, 0.5);
+  box-shadow: 0 0 20px rgba(32, 227, 210, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Button Variants */
+html[data-site-theme="urban-neon"] .un-btn-cyan {
+  background-color: #20E3D2;
+  color: #090B18;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 15px rgba(32, 227, 210, 0.4);
+}
+
+html[data-site-theme="urban-neon"] .un-btn-cyan:hover {
+  background-color: #14B8A6;
+  color: #FFFFFF;
+  box-shadow: 0 0 25px rgba(32, 227, 210, 0.6);
+}
+
+html[data-site-theme="urban-neon"] .un-btn-magenta {
+  background-color: #EC4899;
+  color: #FFFFFF;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+}
+
+html[data-site-theme="urban-neon"] .un-btn-magenta:hover {
+  background-color: #DB2777;
+  box-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
+}
+
+html[data-site-theme="urban-neon"] .un-btn-outline {
+  background-color: transparent;
+  color: #20E3D2;
+  border: 1px solid rgba(32, 227, 210, 0.5);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+html[data-site-theme="urban-neon"] .un-btn-outline:hover {
+  background-color: rgba(32, 227, 210, 0.15);
+  border-color: #20E3D2;
+  color: #FFFFFF;
+  box-shadow: 0 0 15px rgba(32, 227, 210, 0.3);
+}
+
+/* Badges */
+html[data-site-theme="urban-neon"] .un-badge-cyan {
+  background-color: rgba(32, 227, 210, 0.15);
+  border: 1px solid rgba(32, 227, 210, 0.4);
+  color: #20E3D2;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+html[data-site-theme="urban-neon"] .un-badge-magenta {
+  background-color: rgba(236, 72, 153, 0.15);
+  border: 1px solid rgba(236, 72, 153, 0.4);
+  color: #EC4899;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Form Styling Scoped Override */
+html[data-site-theme="urban-neon"] .un-reservation-form-wrapper input:not([type="checkbox"]),
+html[data-site-theme="urban-neon"] .un-reservation-form-wrapper select,
+html[data-site-theme="urban-neon"] .un-reservation-form-wrapper textarea {
+  background-color: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+
+html[data-site-theme="urban-neon"] .un-reservation-form-wrapper input:focus,
+html[data-site-theme="urban-neon"] .un-reservation-form-wrapper select:focus,
+html[data-site-theme="urban-neon"] .un-reservation-form-wrapper textarea:focus {
+  border-color: #20E3D2;
+  box-shadow: 0 0 10px rgba(32, 227, 210, 0.3);
+  outline: none;
+}
+
+/* Accessibility - Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html[data-site-theme="urban-neon"] * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

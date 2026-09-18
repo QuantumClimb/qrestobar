@@ -3,6 +3,7 @@ import { originalThemePreset } from './presets/original';
 import { midnightEmberThemePreset } from './presets/midnightEmber';
 import { heritageSpiceThemePreset } from './presets/heritageSpice';
 import { botanicalBistroThemePreset } from './presets/botanicalBistro';
+import { urbanNeonThemePreset } from './presets/urbanNeon';
 
 /**
  * Runtime Theme Registry
@@ -14,17 +15,18 @@ export const RUNTIME_THEME_REGISTRY: Partial<Record<SiteThemeId, SiteThemeDefini
   'midnight-ember': midnightEmberThemePreset,
   'heritage-spice': heritageSpiceThemePreset,
   'botanical-bistro': botanicalBistroThemePreset,
+  'urban-neon': urbanNeonThemePreset,
 };
 
 /**
- * Checks if a theme is fully implemented and available for runtime activation.
+ * Checks if a theme is fully implemented and available for runtime activation/preview.
  */
 export const isRuntimeThemeAvailable = (
   themeId: string | null | undefined
-): themeId is 'original' | 'midnight-ember' | 'heritage-spice' | 'botanical-bistro' => {
+): themeId is 'original' | 'midnight-ember' | 'heritage-spice' | 'botanical-bistro' | 'urban-neon' => {
   if (!themeId) return false;
   const match = RUNTIME_THEME_REGISTRY[themeId as SiteThemeId];
-  return Boolean(match && match.metadata.available);
+  return Boolean(match);
 };
 
 /**

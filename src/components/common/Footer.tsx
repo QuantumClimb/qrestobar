@@ -19,6 +19,12 @@ const BotanicalBistroFooter = React.lazy(() =>
   }))
 );
 
+const UrbanNeonFooter = React.lazy(() =>
+  import('../../themes/components/urbanNeon/UrbanNeonFooter').then((m) => ({
+    default: m.UrbanNeonFooter,
+  }))
+);
+
 export const Footer: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
 
@@ -41,6 +47,15 @@ export const Footer: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="h-24 bg-[#E7E3D6]" />}>
         <BotanicalBistroFooter />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: render theme-specific footer for Urban Neon
+  if (effectiveThemeId === 'urban-neon') {
+    return (
+      <React.Suspense fallback={<div className="h-24 bg-[#090B18]" />}>
+        <UrbanNeonFooter />
       </React.Suspense>
     );
   }

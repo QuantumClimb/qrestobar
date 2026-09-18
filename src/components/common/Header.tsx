@@ -18,6 +18,12 @@ const BotanicalBistroHeader = React.lazy(() =>
   }))
 );
 
+const UrbanNeonHeader = React.lazy(() =>
+  import('../../themes/components/urbanNeon/UrbanNeonHeader').then((m) => ({
+    default: m.UrbanNeonHeader,
+  }))
+);
+
 export const Header: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
 
@@ -40,6 +46,15 @@ export const Header: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="h-20 bg-[#F4F1E8]" />}>
         <BotanicalBistroHeader />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: render theme-specific header for Urban Neon
+  if (effectiveThemeId === 'urban-neon') {
+    return (
+      <React.Suspense fallback={<div className="h-20 bg-[#090B18]" />}>
+        <UrbanNeonHeader />
       </React.Suspense>
     );
   }

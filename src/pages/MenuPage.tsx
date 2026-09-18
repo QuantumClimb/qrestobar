@@ -17,6 +17,9 @@ const HeritageSpiceMenu = React.lazy(
 const BotanicalBistroMenu = React.lazy(
   () => import('../themes/components/botanicalBistro/BotanicalBistroMenu')
 );
+const UrbanNeonMenu = React.lazy(
+  () => import('../themes/components/urbanNeon/UrbanNeonMenu')
+);
 
 export const MenuPage: React.FC = () => {
   const { effectiveThemeId } = useSiteTheme();
@@ -44,6 +47,15 @@ export const MenuPage: React.FC = () => {
     return (
       <React.Suspense fallback={<div className="min-h-screen bg-[#F4F1E8]" />}>
         <BotanicalBistroMenu />
+      </React.Suspense>
+    );
+  }
+
+  // Early branch: Urban Neon presentation
+  if (effectiveThemeId === 'urban-neon') {
+    return (
+      <React.Suspense fallback={<div className="min-h-screen bg-[#090B18]" />}>
+        <UrbanNeonMenu />
       </React.Suspense>
     );
   }
