@@ -11,7 +11,7 @@ import { THEME_CATALOG } from '../themeCatalog';
 export const urbanNeonThemePreset: SiteThemeDefinition = {
   metadata: {
     ...THEME_CATALOG['urban-neon'],
-    available: false,
+    available: true,
   },
 
   typography: {

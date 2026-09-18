@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Utensils, Sparkles, CheckCircle2, Clock } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 
@@ -11,7 +11,7 @@ export const AdminStats: React.FC = () => {
   const activePromos = promotions.filter(p => p.isActive).length;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 w-full max-w-full min-w-0">
       {/* Stat 1: New Requests */}
       <div className="bg-qc-surface border border-border-base p-5 rounded-sm flex items-center justify-between">
         <div>

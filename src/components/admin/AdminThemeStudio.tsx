@@ -30,9 +30,9 @@ export const AdminThemeStudio: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in w-full max-w-full min-w-0">
       {/* Top Banner Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-qc-surface border border-border-base p-6 rounded-sm shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-qc-surface border border-border-base p-6 rounded-sm shadow-sm w-full max-w-full min-w-0 overflow-hidden">
         <div className="space-y-1.5">
           <div className="inline-flex items-center gap-2 text-purple-400 text-xs font-semibold uppercase tracking-widest">
             <Palette className="w-3.5 h-3.5" />
@@ -47,7 +47,7 @@ export const AdminThemeStudio: React.FC = () => {
         </div>
 
         {/* Quick Metrics Bar */}
-        <div className="flex flex-wrap items-center gap-3 pt-2 md:pt-0">
+        <div className="flex flex-wrap items-center gap-3 pt-2 md:pt-0 w-full md:w-auto">
           <div className="bg-qc-base border border-border-default px-3.5 py-2 rounded-xs flex items-center gap-2">
             <div
               className="w-3 h-3 rounded-full"
@@ -78,8 +78,8 @@ export const AdminThemeStudio: React.FC = () => {
       </div>
 
       {/* Theme Cards Grid */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
+      <div className="space-y-4 w-full max-w-full min-w-0">
+        <div className="flex items-center justify-between w-full max-w-full min-w-0">
           <div>
             <h2 className="text-base font-bold text-qc-primary">
               All Themes ({THEME_CATALOG_LIST.length})
@@ -90,7 +90,7 @@ export const AdminThemeStudio: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-full min-w-0">
           {THEME_CATALOG_LIST.map((theme) => (
             <ThemeCard
               key={theme.id}

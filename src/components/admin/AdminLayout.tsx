@@ -76,32 +76,32 @@ export const AdminLayout: React.FC = () => {
   ] as const;
 
   return (
-    <div className="min-h-screen bg-qc-base text-qc-primary flex flex-col transition-colors">
+    <div className="min-h-screen bg-qc-base text-qc-primary flex flex-col w-full max-w-full min-w-0 overflow-x-hidden transition-colors">
       {/* Admin Top Header */}
-      <header className="bg-qc-surface border-b border-border-base sticky top-0 z-40 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/" className="flex flex-col focus:outline-none py-1" aria-label="Q - RESTOBAR Homepage">
+      <header className="bg-qc-surface border-b border-border-base sticky top-0 z-40 w-full max-w-full min-w-0 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between w-full max-w-full min-w-0 gap-2">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0 shrink">
+            <Link to="/" className="flex flex-col focus:outline-none py-1 min-w-0 shrink" aria-label="Q - RESTOBAR Homepage">
               <span
-                className="font-serif text-lg sm:text-xl font-semibold tracking-[0.22em] select-none transition-colors"
+                className="font-serif text-base sm:text-lg lg:text-xl font-semibold tracking-[0.22em] select-none transition-colors truncate"
                 style={{ color: 'var(--logo-text-color)' }}
               >
                 Q - RESTOBAR
               </span>
-              <span className="text-[9px] tracking-[0.25em] text-purple-500 font-semibold uppercase -mt-0.5">
+              <span className="text-[8px] sm:text-[9px] tracking-[0.25em] text-purple-500 font-semibold uppercase -mt-0.5 truncate">
                 CMS Dashboard
               </span>
             </Link>
 
             {/* Database Status Badge */}
-            <div className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 bg-qc-surface border border-emerald-500/40 text-emerald-400 text-[10px] font-semibold uppercase tracking-wider rounded">
+            <div className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 bg-qc-surface border border-emerald-500/40 text-emerald-400 text-[10px] font-semibold uppercase tracking-wider rounded shrink-0">
               <Database className="w-3 h-3 text-emerald-400" />
               <span>Supabase Live Database</span>
             </div>
           </div>
 
           {/* Desktop Right Controls (hidden on small screens < md) */}
-          <div className="hidden md:flex items-center gap-2 sm:gap-3">
+          <div className="hidden md:flex items-center gap-2 sm:gap-3 shrink-0">
             {/* User Profile Pill */}
             {userEmail && (
               <div className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 bg-qc-base border border-border-default rounded text-[11px] text-qc-body">
@@ -159,7 +159,7 @@ export const AdminLayout: React.FC = () => {
           </div>
 
           {/* Mobile Right Controls (< md) */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-2 shrink-0">
             <Link
               to="/"
               className="btn-gold-outline text-xs px-2.5 py-1.5 flex items-center gap-1 min-h-[44px] font-bold uppercase tracking-wider shrink-0"
@@ -182,7 +182,7 @@ export const AdminLayout: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-qc-surface border-b border-border-base px-4 pt-3 pb-5 space-y-4 animate-fade-in shadow-xl">
+          <div className="md:hidden bg-qc-surface border-b border-border-base px-4 pt-3 pb-5 space-y-4 animate-fade-in shadow-xl w-full max-w-full min-w-0">
             {/* User Info & Theme Toggle */}
             <div className="flex items-center justify-between pb-3 border-b border-border-base/60">
               {userEmail ? (
@@ -277,19 +277,19 @@ export const AdminLayout: React.FC = () => {
       </header>
 
       {/* Production Security Notice */}
-      <div className="bg-qc-surface/60 border-b border-border-base/80 px-4 py-2 text-[11px] text-qc-body">
-        <div className="max-w-7xl mx-auto flex items-center gap-2">
+      <div className="bg-qc-surface/60 border-b border-border-base/80 px-4 py-2 text-[11px] text-qc-body w-full max-w-full min-w-0 overflow-hidden">
+        <div className="max-w-7xl mx-auto flex items-center gap-2 w-full max-w-full min-w-0">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-          <span>
-            <strong>Cloud Production Mode:</strong> Connected to Supabase PostgreSQL with active Row Level Security (RLS) policies and authentication.
+          <span className="truncate">
+            <strong>Cloud Production Mode:</strong> Connected to Supabase PostgreSQL with active Row Level Security (RLS) policies.
           </span>
         </div>
       </div>
 
       {/* Main Admin Body */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 w-full max-w-full min-w-0 space-y-6 sm:space-y-8 overflow-x-hidden">
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-2 border-b border-border-base pb-3 overflow-x-auto scrollbar-none">
+        <div className="flex items-center gap-2 border-b border-border-base pb-3 overflow-x-auto scrollbar-none w-full max-w-full min-w-0 shrink-0">
           {navTabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -311,7 +311,7 @@ export const AdminLayout: React.FC = () => {
         </div>
 
         {/* Tab Content Panes */}
-        <div>
+        <div className="w-full max-w-full min-w-0 overflow-x-hidden">
           {activeTab === 'overview' && <AdminStats />}
           {activeTab === 'reservations' && <AdminReservations />}
           {activeTab === 'menu' && <AdminMenu />}

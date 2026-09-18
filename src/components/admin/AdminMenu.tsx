@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Plus, Search, Edit2, Trash2, Sparkles, X } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { MenuItem, MENU_CATEGORIES } from '../../types/menu';
@@ -52,11 +52,11 @@ export const AdminMenu: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-full min-w-0">
       {/* Top Action Bar */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 w-full max-w-full min-w-0">
         {/* Search */}
-        <div className="relative flex-1 max-w-md">
+        <div className="relative flex-1 max-w-md w-full">
           <Search className="w-4 h-4 text-charcoal-600 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
@@ -81,7 +81,7 @@ export const AdminMenu: React.FC = () => {
             setEditingItem(null);
             setIsModalOpen(true);
           }}
-          className="btn-gold text-xs px-4 py-2.5 flex items-center justify-center gap-2"
+          className="btn-gold text-xs px-4 py-2.5 flex items-center justify-center gap-2 w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Add New Menu Item</span>
@@ -89,7 +89,7 @@ export const AdminMenu: React.FC = () => {
       </div>
 
       {/* Category Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none w-full max-w-full min-w-0">
         <button
           onClick={() => setSelectedCategory('all')}
           className={`px-3 py-1.5 text-xs font-medium uppercase tracking-wider rounded-sm shrink-0 transition-all ${
@@ -116,8 +116,8 @@ export const AdminMenu: React.FC = () => {
       </div>
 
       {/* Menu Items Table */}
-      <div className="bg-qc-surface border border-border-base rounded-sm overflow-hidden shadow-xl">
-        <div className="overflow-x-auto">
+      <div className="bg-qc-surface border border-border-base rounded-sm overflow-hidden shadow-xl w-full max-w-full min-w-0">
+        <div className="overflow-x-auto w-full max-w-full min-w-0">
           <table className="w-full text-left text-xs text-qc-body">
             <thead className="bg-qc-base text-purple-500 font-semibold uppercase tracking-wider border-b border-border-base text-[11px]">
               <tr>

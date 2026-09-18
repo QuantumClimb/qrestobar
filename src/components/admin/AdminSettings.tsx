@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Save, RefreshCw, Sparkles, Building, Phone, Clock } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { RestaurantSettings } from '../../types/settings';
@@ -20,7 +20,7 @@ export const AdminSettings: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 max-w-4xl">
+    <div className="space-y-8 max-w-4xl w-full max-w-full min-w-0">
       {/* Top Title */}
       <div>
         <h3 className="text-sm font-semibold uppercase tracking-wider text-purple-500">
@@ -31,7 +31,7 @@ export const AdminSettings: React.FC = () => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6 text-xs">
+      <form onSubmit={handleSubmit} className="space-y-6 text-xs w-full max-w-full min-w-0">
         {/* Section 1: Brand & Headings */}
         <div className="bg-qc-surface border border-border-base p-5 rounded-sm space-y-4">
           <h4 className="text-xs font-semibold uppercase tracking-wider text-qc-primary border-b border-border-base pb-2 flex items-center gap-2">

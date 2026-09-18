@@ -72,7 +72,7 @@ export const THEME_CATALOG: Record<SiteThemeId, ThemeMetadata> = {
     access: 'premium',
     colorModePolicy: 'fixed-dark',
     previewImage: '/images/themes/urban-neon.png',
-    available: false,
+    available: true,
     accentColor: '#06B6D4',
     secondaryAccent: '#EC4899',
     tags: ['Nightlife', 'Electric Cyan', 'Futuristic'],

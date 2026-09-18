@@ -35,8 +35,8 @@ export const AdminPromotions: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 w-full max-w-full min-w-0">
+      <div className="flex items-center justify-between w-full max-w-full min-w-0">
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wider text-purple-500">
             Active Marketing Campaigns &amp; Posters
@@ -48,7 +48,7 @@ export const AdminPromotions: React.FC = () => {
       </div>
 
       {/* Promotions List Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-full min-w-0">
         {promotions.map((promo) => (
           <div
             key={promo.id}
