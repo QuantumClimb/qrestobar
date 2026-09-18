@@ -128,7 +128,7 @@ export const BotanicalBistroHome: React.FC = () => {
 
             <div className="lg:col-span-6 rounded-md overflow-hidden border border-[#3F6B4F]/25 shadow-xl relative group">
               <img
-                src="/images/2ddac553-ec52-4467-9d7b-9c7009405d4b.png"
+                src="/images/7c8ae1ad-de1e-4176-ab36-b029628d76f1.png"
                 alt="Q-RESTOBAR Ambiance"
                 className="w-full h-80 sm:h-96 object-cover group-hover:scale-105 transition-transform duration-700"
               />
